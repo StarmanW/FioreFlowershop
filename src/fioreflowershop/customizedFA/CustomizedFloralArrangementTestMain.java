@@ -1,6 +1,5 @@
-package fioreflowershop;
+package fioreflowershop.customizedFA;
 
-import fioreflowershop.Utility;
 import fioreflowershop.Models.FlowerArrangementStyle;
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class CustomizedFloralArrangementTestMain {
                 choice = Utility.displayFlowerArrangementStyle(fas);
                 if (choice != 9) {
                     // Insert into list
-                    System.out.println(String.format("Selected Arrangement Style:\n%s - %s - RM%.2f\n", fas.get(choice - 1).getFlowerArrangementStyleID(), fas.get(choice - 1).getStyleName(), fas.get(choice - 1).getPrice()));
+                    System.out.println(String.format("Selected Arrangement Style:\n%s - %s - RM%.2f\n", fas.get(choice - 1).getFlowerArrangementStyleID(), fas.get(choice - 1).getFlowerArrangementStyleName(), fas.get(choice - 1).getPrice()));
                 }
             }
         }

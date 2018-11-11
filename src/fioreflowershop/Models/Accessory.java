@@ -17,8 +17,8 @@ public class Accessory {
 
     // Constructor
     public Accessory() {
-        this.accessory = "";
-        this.cost = 0.0;
+        this("", 0.0);
+
     }
 
     // Parameterized constructor

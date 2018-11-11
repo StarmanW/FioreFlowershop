@@ -17,8 +17,7 @@ public class FlowerArrangementSize {
 
     // Constructor
     public FlowerArrangementSize() {
-        this.sizeType = "";
-        this.cost = 0.0;
+        this("", 0.0);
     }
 
     // Parameterized constructor
