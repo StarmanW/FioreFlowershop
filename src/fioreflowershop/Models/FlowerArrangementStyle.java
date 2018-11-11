@@ -8,20 +8,18 @@ public class FlowerArrangementStyle {
 
     // Private properties
     private String flowerArrangementStyleID;
-    private String styleName;
+    private String flowerArrangementStyleName;
     private double price;
 
     // Constructor
     public FlowerArrangementStyle() {
-        this.flowerArrangementStyleID = "";
-        this.styleName = "";
-        this.price = 0.0;
+        this("", "", 0.0);
     }
 
     // Parameterized constructor
     public FlowerArrangementStyle(String flowerArrangementStyleID, String style, double price) {
         this.flowerArrangementStyleID = flowerArrangementStyleID;
-        this.styleName = style;
+        this.flowerArrangementStyleName = style;
         this.price = price;
     }
 
@@ -30,8 +28,8 @@ public class FlowerArrangementStyle {
         return flowerArrangementStyleID;
     }
 
-    public String getStyleName() {
-        return styleName;
+    public String getFlowerArrangementStyleName() {
+        return flowerArrangementStyleName;
     }
 
     public double getPrice() {
@@ -43,8 +41,8 @@ public class FlowerArrangementStyle {
         this.flowerArrangementStyleID = flowerArrangementStyleID;
     }
 
-    public void setStyleName(String styleName) {
-        this.styleName = styleName;
+    public void setFlowerArrangementStyleName(String flowerArrangementStyleName) {
+        this.flowerArrangementStyleName = flowerArrangementStyleName;
     }
 
     public void setPrice(double price) {

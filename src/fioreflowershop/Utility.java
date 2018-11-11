@@ -50,7 +50,7 @@ public class Utility {
         int i = 0;
         
         for (i = 0; i < fas.size(); i++) {
-            output += String.format("%d. %s - RM%.2f\n", i+1, fas.get(i).getStyleName(), fas.get(i).getPrice());
+            output += String.format("%d. %s - RM%.2f\n", i+1, fas.get(i).getFlowerArrangementStyleName(), fas.get(i).getPrice());
         }
 
         output += String.format("%d. Back\nEnter your choice: ", i+1);
