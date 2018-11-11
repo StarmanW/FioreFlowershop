@@ -1,4 +1,4 @@
-package fioreflowershop;
+package fioreflowershop.customizedFA;
 
 import fioreflowershop.Models.FlowerArrangementStyle;
 import java.util.ArrayList;
