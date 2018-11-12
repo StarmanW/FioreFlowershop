@@ -6,12 +6,12 @@ package fioreflowershop.ADT;
 public class PickUpQueue<T> implements QueueInterface<T> {
 
     private T[] pickUpQueue;
-    private final static int frontIndex = 0;
+    private final static int FRONT_INDEX = 0;
     private int totalQueueEntry;
     private static final int DEFAULT_INITIAL_CAPACITY = 25;
 
     public PickUpQueue() {
-        this(DEFAULT_INITIAL_CAPACITY);
+        this(PickUpQueue.DEFAULT_INITIAL_CAPACITY);
     }
 
     public PickUpQueue(int initialCapacity) {
@@ -42,7 +42,7 @@ public class PickUpQueue<T> implements QueueInterface<T> {
         }
 
         // Get the front element of the queue
-        T frontEntry = this.pickUpQueue[this.frontIndex];
+        T frontEntry = this.pickUpQueue[PickUpQueue.FRONT_INDEX];
 
         // Shift the remaining element in the queue to left
         for (int i = 0; i < this.totalQueueEntry; i++) {
@@ -63,7 +63,7 @@ public class PickUpQueue<T> implements QueueInterface<T> {
         }
 
         // Return the front element without removing it
-        return this.pickUpQueue[this.frontIndex];
+        return this.pickUpQueue[PickUpQueue.FRONT_INDEX];
     }
 
     // Method to get the current
@@ -77,7 +77,7 @@ public class PickUpQueue<T> implements QueueInterface<T> {
     @Override
     public boolean isEmpty() {
         // Check if 0 == 0
-        return this.frontIndex == this.totalQueueEntry;
+        return PickUpQueue.FRONT_INDEX == this.totalQueueEntry;
     }
 
     // Method to check if queue is full
