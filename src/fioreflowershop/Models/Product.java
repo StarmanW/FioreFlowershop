@@ -9,27 +9,25 @@ public class Product {
     private String productName;
     private double productPrice;
     private int productQty;
-    private int productType;
-    private int minFlowerQty;
-    private int maxFlowerQty;
+    private ProductType productType;
+    private boolean inStock;
     private FlowerArrangementStyle arrangementStyle;
 
     public Product() {
-        this("", "", 0.0, 0, 0, 0, 0, null);
+        this("", "", 0.0, 0, null, false, null);
     }
 
-    public Product(String productID, String productName, double productPrice, int productQty, int productType, int minFlowerQty, int maxFlowerQty, FlowerArrangementStyle arrangementStyle) {
+    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, boolean inStock, FlowerArrangementStyle arrangementStyle) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQty = productQty;
         this.productType = productType;
-        this.minFlowerQty = minFlowerQty;
-        this.maxFlowerQty = maxFlowerQty;
+        this.inStock = inStock;
         this.arrangementStyle = arrangementStyle;
     }
 
-        public String getProductID() {
+    public String getProductID() {
         return productID;
     }
 
@@ -61,28 +59,20 @@ public class Product {
         this.productQty = productQty;
     }
 
-    public int getProductType() {
+    public ProductType getProductType() {
         return productType;
     }
 
-    public void setProductType(int productType) {
+    public void setProductType(ProductType productType) {
         this.productType = productType;
     }
 
-    public int getMinFlowerQty() {
-        return minFlowerQty;
+    public boolean isInStock() {
+        return inStock;
     }
 
-    public void setMinFlowerQty(int minFlowerQty) {
-        this.minFlowerQty = minFlowerQty;
-    }
-
-    public int getMaxFlowerQty() {
-        return maxFlowerQty;
-    }
-
-    public void setMaxFlowerQty(int maxFlowerQty) {
-        this.maxFlowerQty = maxFlowerQty;
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
     }
 
     public FlowerArrangementStyle getArrangementStyle() {
@@ -92,5 +82,5 @@ public class Product {
     public void setArrangementStyle(FlowerArrangementStyle arrangementStyle) {
         this.arrangementStyle = arrangementStyle;
     }
-        
+         
 }
