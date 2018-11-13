@@ -39,16 +39,32 @@ public class CatalogMaintenanceTestMain {
         
 //        Utility.mainMenu();
 //        System.out.println(Utility.mainMenu());
-//        Utility.generateProductID(catalogue.getTotalEntries());
-//        Utility.enterProductName();
-//        Utility.enterProductPrice();
-//        Utility.enterProductQty();
-//        Utility.enterProductType(productTypeList);
-//        System.out.println(Utility.enterProductType(productTypeList).getProductTypeName());
-//        Utility.enterFlowerType(flowerList);
-        System.out.println(Utility.enterFlowerType(flowerList).getFlowerName());
+        while (Utility.mainMenu()) {
+            //        Utility.generateProductID(catalogue.getTotalEntries());
+            productID = Utility.generateProductID(catalogue.getTotalEntries());
+            //        Utility.enterProductName();
+            productName = Utility.enterProductName();
+            //        Utility.enterProductPrice();
+            productPrice = Utility.enterProductPrice();
+            //        Utility.enterProductQty();
+            productQty = Utility.enterProductQty();
+            //        Utility.enterProductType(productTypeList);
+            //        System.out.println(Utility.enterProductType(productTypeList).getProductTypeName());
+            productType = Utility.enterProductType(productTypeList);
+            //        Utility.enterFlowerType(flowerList);
+            //        System.out.println(Utility.enterFlowerType(flowerList).getFlowerName());
+            productFlower = Utility.enterFlowerType(flowerList);
+            catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productInStock, flowerArrangementStyle));
+            
+            for(int i = 0; i < catalogue.getTotalEntries(); i++){
+                Product tmpProduct = catalogue.get(i);
+                System.out.println(
+                        tmpProduct.getProductID() + "\t" + tmpProduct.getProductName() + "\t" + tmpProduct.getProductPrice() + "\t" + tmpProduct.getProductQty() +
+                        "\t" + tmpProduct.getProductType().getProductTypeName() + "\t" + tmpProduct.getFlowerType().getFlowerName() + "\t" + tmpProduct.isInStock() + "\n\n"
+                );
+            }
+        }
+    
+        System.out.println("System will now exit");
     }
-    
-    
-    
 }
