@@ -25,6 +25,22 @@ public class ArrayList<T> implements ListInterface<T>{
         this.itemArray = (T[]) new Object[capacity];
         this.totalEntries = 0;
     }
+
+    public T[] getItemArray() {
+        return itemArray;
+    }
+
+    public void setItemArray(T[] itemArray) {
+        this.itemArray = itemArray;
+    }
+
+    public int getTotalEntries() {
+        return totalEntries;
+    }
+
+    public void setTotalEntries(int totalEntries) {
+        this.totalEntries = totalEntries;
+    }
     
     @Override
     public boolean add(T item) {
