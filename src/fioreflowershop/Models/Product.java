@@ -10,19 +10,21 @@ public class Product {
     private double productPrice;
     private int productQty;
     private ProductType productType;
+    private Flower flowerType;
     private boolean inStock;
     private FlowerArrangementStyle arrangementStyle;
 
     public Product() {
-        this("", "", 0.0, 0, null, false, null);
+        this("", "", 0.0, 0, null, null, false, null);
     }
 
-    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, boolean inStock, FlowerArrangementStyle arrangementStyle) {
+    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, Flower flowerType, boolean inStock, FlowerArrangementStyle arrangementStyle) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQty = productQty;
         this.productType = productType;
+        this.flowerType = flowerType;
         this.inStock = inStock;
         this.arrangementStyle = arrangementStyle;
     }
@@ -65,6 +67,14 @@ public class Product {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
+    }
+
+    public Flower getFlowerType() {
+        return flowerType;
+    }
+
+    public void setFlowerType(Flower flowerType) {
+        this.flowerType = flowerType;
     }
 
     public boolean isInStock() {

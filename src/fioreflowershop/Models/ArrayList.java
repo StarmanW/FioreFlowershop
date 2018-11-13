@@ -60,7 +60,11 @@ public class ArrayList<T> implements ListInterface<T>{
 
     @Override
     public T get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (index > this.totalEntries) {
+            return null;
+        }
+
+        return this.itemArray[index];
     }
 
     @Override
