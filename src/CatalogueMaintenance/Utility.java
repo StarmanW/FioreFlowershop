@@ -75,14 +75,6 @@ public class Utility {
         return choice;
     }
     
-    public static String generateProductID(int productListEntries) {
-        String productID = "";
-        
-        productID = "PD" + String.format("%03d", productListEntries + 1);
-        
-        return productID;
-    }
-    
     public static String enterProductName() {
         String productName = "";
         
@@ -134,6 +126,7 @@ public class Utility {
     public static ProductType enterProductType(ArrayList<ProductType> producTypeList) {
         ProductType selectedProductType = null;
         String selection = "";
+        int selectionNumber = 0;
         int totalEntries = producTypeList.getTotalEntries();
         
         while (true) {            
@@ -143,10 +136,16 @@ public class Utility {
                 System.out.println(String.format("%d. %s", i + 1, tmpProductType.getProductTypeName()));
             }
             System.out.print("\nChoose a product type: ");
-            
             selection = sc.nextLine();
-            if (selection.matches("^([1-" + totalEntries + "])+$")) {
-                selectedProductType = producTypeList.get(Integer.parseInt(selection) - 1);
+
+//            if (selection.matches("^([1-" + totalEntries + "])+$")) {
+//                selectedProductType = producTypeList.get(Integer.parseInt(selection) - 1);
+//                break;
+//            }
+            
+            selectionNumber = stringToInt(selection);
+            if(selectionNumber != -1 && selectionNumber <= totalEntries){
+                selectedProductType = producTypeList.get(selectionNumber - 1);
                 break;
             }
 
@@ -158,7 +157,8 @@ public class Utility {
     
     public static Flower enterFlowerType(ItemList<Flower> flowerList) {
         Flower selectedFlowerType = null;
-        int selection = 0;
+        String selection = "";
+        int selectionNumber = 0;
         int totalEntries = flowerList.getTotalEntries();
         
         while (true) {            
@@ -168,17 +168,37 @@ public class Utility {
                 System.out.println(String.format("%d. %s", i + 1, tmpFlowertype.getFlowerName()));
             }
             System.out.print("\nChoose a flower type: ");
-            
-            selection = Integer.parseInt(sc.nextLine());
-            
-            if (selection <= totalEntries) {
-                selectedFlowerType = (Flower) flowerList.get(selection - 1);
+            selection = sc.nextLine();
+
+            selectionNumber = stringToInt(selection);
+            if(selectionNumber != -1 && selectionNumber <= totalEntries){
+                selectedFlowerType = (Flower) flowerList.get(selectionNumber - 1);
                 break;
             }
-
+    
             System.out.println("Please enter a valid number. (1 to " + totalEntries + ")\n");
         }
         
         return selectedFlowerType;
+    }
+    
+    public static String generateProductID(int productListEntries) {
+        String productID = "";
+        
+        productID = "PD" + String.format("%03d", productListEntries + 1);
+        
+        return productID;
+    }
+    
+    public static int stringToInt(String str) {
+        int i = 0;
+        
+        try {
+            i = Integer.parseInt(str);
+        } catch (NumberFormatException nfe) {
+            return -1;
+        }
+        
+        return i;
     }
 }
