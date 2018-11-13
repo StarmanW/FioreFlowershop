@@ -137,11 +137,6 @@ public class Utility {
             }
             System.out.print("\nChoose a product type: ");
             selection = sc.nextLine();
-
-//            if (selection.matches("^([1-" + totalEntries + "])+$")) {
-//                selectedProductType = producTypeList.get(Integer.parseInt(selection) - 1);
-//                break;
-//            }
             
             selectionNumber = stringToInt(selection);
             if(selectionNumber != -1 && selectionNumber <= totalEntries){
