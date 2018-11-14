@@ -11,7 +11,7 @@ package fioreflowershop.Models;
  * @param <T>
  */
 public class PromotionCatalogue<T> extends Catalogue{
-    
+
     private String promotionName;
     private int promotionDiscount;
     private int promotionMonth;

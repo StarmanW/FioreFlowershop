@@ -150,7 +150,68 @@ public class Utility {
 
     // Method to perform registration of new corporate
     public static void registerNewCorporate(ArrayList<Corporate> corps) {
+        String corporateName = "", creditLimit = "", address = "", contactNo = "";
+        boolean existingCorporate = false;
 
+        System.out.println("\n==== Register New Corporate ====");
+        // Get corporates name
+        while (true) {
+            System.out.print("Enter corporate name: ");
+            corporateName = sc.nextLine();
+            if (corporateName.matches("^[A-z\\-\\@ ]+$")) {
+                break;
+            }
+            System.out.println("Invalid name format entered, please try again with alphabetic only.\n");
+        }
+
+
+        // Get corporate address
+        while (true) {
+            System.out.print("Enter address: ");
+            address = sc.nextLine();
+            if (address.matches("^[A-z0-9\\,\\@\\-\\. ]+$")) {
+                break;
+            }
+            System.out.println("Invalid address format entered, please try again with alphabetic and symbols only.\n");
+        }
+
+        // Get contact number
+        while (true) {
+            System.out.print("Enter contact number: ");
+            contactNo = sc.nextLine();
+            if (contactNo.matches("^\\d{8,20}$")) {
+                break;
+            }
+            System.out.println("Invalid contact number format entered, please try again with digits only.\n");
+        }
+
+        // Set the corporate credit limit
+        while (true) {
+            System.out.print("Enter credit limit: ");
+            creditLimit = sc.nextLine();
+            if (creditLimit.matches("^\\d+\\.\\d+$")) {
+                break;
+            }
+            System.out.println("Invalid credit limit format entered, please try again with floating digits only.\n");
+        }
+
+        // Creating new corporate object for the new corporate
+        Corporate newCorp = new Corporate(String.format("CO%04d", corps.size() + 1), corporateName, address, contactNo, Double.parseDouble(creditLimit));
+
+        // For loop to check for existing corporate
+        for (int i = 0; i < corps.size(); i++) {
+            if (corps.get(i).getCorporateName().equals(newCorp.getCorporateName()) && corps.get(i).getAddress().equals(newCorp.getAddress())) {
+                existingCorporate = true;
+                break;
+            }
+        }
+
+        if (!existingCorporate) {
+            corps.add(newCorp);
+            System.out.println("New corporate has been successfully registered!\n");
+        } else {
+            System.out.println("Uh oh! The corporate has already exist in the system.\n");
+        }
     }
 
     // Method to show customer list
@@ -160,6 +221,10 @@ public class Utility {
             System.out.println(String.format("%d. %-6s \t %-20s \t %-12s \t %-12s \t %-40s", i + 1, cons.get(i).getConsumerId(), cons.get(i).getConsumerName(), cons.get(i).getContactNo(), cons.get(i).getIcNum(), cons.get(i).getAddress()));
         }
 
+        System.out.println("\n========== Corporate List ==========");
+        for (int i = 0; i < corps.size(); i++) {
+            System.out.println(String.format("%d. %-6s \t %-20s \t %-12s \t %-80s \t %-6.2f", i + 1, corps.get(i).getCorporateId(), corps.get(i).getCorporateName(), corps.get(i).getContactNo(), corps.get(i).getAddress(), corps.get(i).getCreditLimit()));
+        }
         System.out.println("\n");
     }
 }
