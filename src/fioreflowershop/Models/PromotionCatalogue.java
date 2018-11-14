@@ -8,9 +8,10 @@ package fioreflowershop.Models;
 /**
  *
  * @author ChongJH
+ * @param <T>
  */
-public class PromotionCatalogue extends Catalogue{
-    
+public class PromotionCatalogue<T> extends Catalogue{
+
     private String promotionName;
     private int promotionDiscount;
     private int promotionMonth;

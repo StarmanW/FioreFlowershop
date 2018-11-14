@@ -8,8 +8,9 @@ package fioreflowershop.Models;
 /**
  *
  * @author ChongJH
+ * @param <T>
  */
-public class Catalogue {
+public class Catalogue<T> extends ArrayList<Object>{
     private String catalogueID;
     private Product productArray[];
 
