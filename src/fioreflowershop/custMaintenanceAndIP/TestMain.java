@@ -22,7 +22,8 @@ public class TestMain {
             } else if (choice == 2) {
                 Utility.showCustomerList(cons, corps);
             } else if (choice == 5) {
-                System.out.println("System shutting down now...");
+                System.out.println("System shut1"
+                        + "ting down now...");
                 break;
             }
         }
