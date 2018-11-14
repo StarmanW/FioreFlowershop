@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CatalogueMaintenance;
+package fioreflowershop.CatalogueMaintenance;
 
 import fioreflowershop.Models.Flower;
 import fioreflowershop.Models.Product;
@@ -191,7 +191,7 @@ public class Utility {
         try {
             i = Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
-            return -1;
+            return- 1;
         }
         
         return i;
