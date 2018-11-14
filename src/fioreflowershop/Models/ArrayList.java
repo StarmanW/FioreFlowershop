@@ -12,15 +12,16 @@ import fioreflowershop.ADT.ListInterface;
  * @author ChongJH
  * @param <T>
  */
-public class ArrayList<T> implements ListInterface<T>{
+public class ArrayList<T> implements ListInterface<T> {
+
     private T[] itemArray;
     private int totalEntries;
     private static final int DEFAULT_INITIAL_CAPACITY = 25;
-    
+
     public ArrayList() {
         this(DEFAULT_INITIAL_CAPACITY);
     }
-    
+
     public ArrayList(int capacity) {
         this.itemArray = (T[]) new Object[capacity];
         this.totalEntries = 0;
@@ -41,7 +42,7 @@ public class ArrayList<T> implements ListInterface<T>{
     public void setTotalEntries(int totalEntries) {
         this.totalEntries = totalEntries;
     }
-    
+
     @Override
     public boolean add(T item) {
         if (isFull()) {
@@ -71,14 +72,14 @@ public class ArrayList<T> implements ListInterface<T>{
     public int indexOf(T item) {
         int objectIndex = -1;
         boolean found = false;
-        
+
         for (int i = 0; !found && (i < totalEntries); i++) {
             if (item.equals(itemArray[i])) {
                 found = true;
                 objectIndex = i;
             }
         }
-        
+
         return objectIndex;
     }
 
@@ -99,18 +100,18 @@ public class ArrayList<T> implements ListInterface<T>{
 
     @Override
     public boolean isFull() {
-        return size() == itemArray.length; 
+        return size() == itemArray.length;
     }
 
     //Doubles the size of the array of list entries.
     @Override
     public void extendSize() {
         // save reference to array of list entries
-        T[] oldList = itemArray; 
+        T[] oldList = itemArray;
         // save old max size of array
-        int oldSize = oldList.length;     
+        int oldSize = oldList.length;
         // double size of array
-        itemArray = (T[]) new Object[2 * oldSize];    
+        itemArray = (T[]) new Object[2 * oldSize];
 
         // copy entries from old array to new, bigger array
         //System.arraycopy(oldList, 0, itemArray, 0, oldSize);
