@@ -30,11 +30,11 @@ public class Utility {
     public static ArrayList<Corporate> generateCorporateList() {
         ArrayList<Corporate> corps = new ArrayList<>();
 
-        corps.add(new Corporate("CO0006", "Apple Arts Sdn. Bhd.", "144 Lrg Zamrud 3/1 Taman Pekan Baru 08000 Sungai Petani 08000, Malaysia", "03745625", 1400.00));
-        corps.add(new Corporate("CO0007", "Alpinetime Sdn. Bhd.", "288 Lt Avenue, Jalan Petagas, WP, Kuala Lumpur, Malaysia", "03954622", 1800.00));
-        corps.add(new Corporate("CO0008", "Robin Corporation", "350, Jalan Tun Fuad, 82000, WP, Kuala Lumpur, Malaysia", "034557895", 1200.00));
-        corps.add(new Corporate("CO0009", "Moonlit Ltd.", "6812 Murphy Dale, Jalan Penampang, 82000, Wangsa Maju, WP, Kuala Lumpur, Malaysia", "03455688", 1500.00));
-        corps.add(new Corporate("CO0010", "Pixycloud Ltd.", "Lt 280, Jalan Luyang, 25000, WP, Kuala Lumpur, Malaysia", "03467855", 2000.00));
+        corps.add(new Corporate("CO0001", "Apple Arts Sdn. Bhd.", "144 Lrg Zamrud 3/1 Taman Pekan Baru 08000 Sungai Petani 08000, Malaysia", "03745625", 1400.00));
+        corps.add(new Corporate("CO0002", "Alpinetime Sdn. Bhd.", "288 Lt Avenue, Jalan Petagas, WP, Kuala Lumpur, Malaysia", "03954622", 1800.00));
+        corps.add(new Corporate("CO0003", "Robin Corporation", "350, Jalan Tun Fuad, 82000, WP, Kuala Lumpur, Malaysia", "034557895", 1200.00));
+        corps.add(new Corporate("CO0004", "Moonlit Ltd.", "6812 Murphy Dale, Jalan Penampang, 82000, Wangsa Maju, WP, Kuala Lumpur, Malaysia", "03455688", 1500.00));
+        corps.add(new Corporate("CO0005", "Pixycloud Ltd.", "Lt 280, Jalan Luyang, 25000, WP, Kuala Lumpur, Malaysia", "03467855", 2000.00));
 
         return corps;
     }
@@ -158,7 +158,7 @@ public class Utility {
         while (true) {
             System.out.print("Enter corporate name: ");
             corporateName = sc.nextLine();
-            if (corporateName.matches("^[A-z\\-\\@ ]+$")) {
+            if (corporateName.matches("^[A-z0-9\\-\\@\\. ]+$")) {
                 break;
             }
             System.out.println("Invalid name format entered, please try again with alphabetic only.\n");
@@ -189,7 +189,7 @@ public class Utility {
         while (true) {
             System.out.print("Enter credit limit: ");
             creditLimit = sc.nextLine();
-            if (creditLimit.matches("^\\d+\\.\\d+$")) {
+            if (creditLimit.matches("^\\d+\\.?\\d+$")) {
                 break;
             }
             System.out.println("Invalid credit limit format entered, please try again with floating digits only.\n");
