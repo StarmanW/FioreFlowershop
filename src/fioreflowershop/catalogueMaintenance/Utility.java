@@ -8,8 +8,6 @@ package fioreflowershop.CatalogueMaintenance;
 import fioreflowershop.Models.Flower;
 import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
-import fioreflowershop.Models.Catalogue;
-import fioreflowershop.Models.PromotionCatalogue;
 import fioreflowershop.Models.ArrayList;
 import fioreflowershop.Models.ItemList;
 
@@ -22,6 +20,7 @@ public class Utility {
     
     private static Scanner sc = new Scanner(System.in);
     
+    //create and initialize flower list with dummy values
     public static ItemList<Flower> generateFlowerList() {
         ItemList<Flower> flowerList = new ItemList<>();
         
@@ -34,6 +33,7 @@ public class Utility {
         return flowerList;
     }
     
+    //create and initialize product type list with dummy values
     public static ArrayList<ProductType> generateProductTypeList() {
         ArrayList<ProductType> productTypeList = new ArrayList<>();
         
@@ -44,6 +44,7 @@ public class Utility {
         return productTypeList;
     }   
     
+    //create and initialize catalogue(list of products) with dummy values
     public static ArrayList<Product> generateCatalogue() {
         ArrayList<Product> catalogue = new ArrayList<>();
         
@@ -57,6 +58,7 @@ public class Utility {
         String selection = "";
         boolean choice = false;
         
+        //repeat while entered value is invalid
         while (true) {
             System.out.print("Add a product? (y/n): ");
             
@@ -78,6 +80,7 @@ public class Utility {
     public static String enterProductName() {
         String productName = "";
         
+        //repeat while entered value is invalid
         while(true) {
             System.out.print("Enter product name: ");
             productName = sc.nextLine();
@@ -94,6 +97,7 @@ public class Utility {
     public static double enterProductPrice() {
         String productPrice = "";
         
+        //repeat while entered value is invalid
         while (true) {            
             System.out.print("Enter product price: ");
             productPrice = sc.nextLine();
@@ -110,6 +114,7 @@ public class Utility {
     public static int enterProductQty() {
         String productQty = "";
         
+        //repeat while entered value is invalid
         while (true) {            
             System.out.print("Enter product quantity: ");
             productQty = sc.nextLine();
@@ -126,21 +131,26 @@ public class Utility {
     public static ProductType enterProductType(ArrayList<ProductType> producTypeList) {
         ProductType selectedProductType = null;
         String selection = "";
-        int selectionNumber = 0;
+        int selectionInt = 0;
         int totalEntries = producTypeList.getTotalEntries();
         
+        //repeat while entered value is invalid
         while (true) {            
+            //display list of available product types
             System.out.println("=== Product Type ===");
             for (int i = 0; i < producTypeList.getTotalEntries(); i++){
                 ProductType tmpProductType = producTypeList.get(i);
                 System.out.println(String.format("%d. %s", i + 1, tmpProductType.getProductTypeName()));
             }
+            
             System.out.print("\nChoose a product type: ");
             selection = sc.nextLine();
             
-            selectionNumber = stringToInt(selection);
-            if(selectionNumber != -1 && selectionNumber <= totalEntries){
-                selectedProductType = producTypeList.get(selectionNumber - 1);
+            //try parse entered value into int
+            selectionInt = stringToInt(selection);
+            
+            if(selectionInt != -1 && selectionInt <= totalEntries){
+                selectedProductType = producTypeList.get(selectionInt - 1);
                 break;
             }
 
@@ -153,21 +163,25 @@ public class Utility {
     public static Flower enterFlowerType(ItemList<Flower> flowerList) {
         Flower selectedFlowerType = null;
         String selection = "";
-        int selectionNumber = 0;
+        int selectionInt = 0;
         int totalEntries = flowerList.getTotalEntries();
         
+        //repeat while entered value is invalid
         while (true) {            
+            //display list of available flower types
             System.out.println("=== Flower Type ===");
             for (int i = 0; i < flowerList.getTotalEntries(); i++){
                 Flower tmpFlowertype = (Flower) flowerList.get(i);
                 System.out.println(String.format("%d. %s", i + 1, tmpFlowertype.getFlowerName()));
             }
+            
             System.out.print("\nChoose a flower type: ");
             selection = sc.nextLine();
 
-            selectionNumber = stringToInt(selection);
-            if(selectionNumber != -1 && selectionNumber <= totalEntries){
-                selectedFlowerType = (Flower) flowerList.get(selectionNumber - 1);
+            //try parse entered value into int
+            selectionInt = stringToInt(selection);
+            if(selectionInt != -1 && selectionInt <= totalEntries){
+                selectedFlowerType = (Flower) flowerList.get(selectionInt - 1);
                 break;
             }
     
@@ -177,6 +191,7 @@ public class Utility {
         return selectedFlowerType;
     }
     
+    //auto generate product ID
     public static String generateProductID(int productListEntries) {
         String productID = "";
         
@@ -185,6 +200,7 @@ public class Utility {
         return productID;
     }
     
+    //try parse string into int. Returns -1 if not parseble
     public static int stringToInt(String str) {
         int i = 0;
         
