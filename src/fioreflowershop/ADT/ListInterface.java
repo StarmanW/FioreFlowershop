@@ -12,8 +12,9 @@ package fioreflowershop.ADT;
 public interface ListInterface<T> {
     public boolean add(T item);
     public boolean remove(int index);
+    public boolean replace(int index, T item);
     public T get(int index);
-    public int indexOf(T item);
+    public int contains(T item);
     public boolean checkType(T item);
     public int size();
     public boolean isEmpty();
