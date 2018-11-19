@@ -18,7 +18,6 @@ public interface ListInterface<T> {
     public int size();
     public boolean isEmpty();
     public boolean isFull();
-    public void extendSize();
     @Override
     public String toString();
 }
