@@ -10,6 +10,7 @@ import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.ArrayList;
 import fioreflowershop.Models.ItemList;
+import fioreflowershop.Models.Accessory;
 
 import java.util.Scanner;
 /**
@@ -48,8 +49,8 @@ public class Utility {
     public static ArrayList<Product> generateCatalogue() {
         ArrayList<Product> catalogue = new ArrayList<>();
         
-        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, new ProductType("PT001", "Fresh Flower", 1, 1), new Flower("FL001", "Rose", 100, 7.0), true, null));
-        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, new ProductType("PT002", "Flower Bouquet", 25, 50), new Flower("FL003", "Wax Flower", 50, 7.8), true, null));
+        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, new ProductType("PT001", "Fresh Flower", 1, 1), new Flower("FL001", "Rose", 100, 7.0), null, true, null));
+        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, new ProductType("PT002", "Flower Bouquet", 25, 50), new Flower("FL003", "Wax Flower", 50, 7.8), null, true, null));
         
         return catalogue;
     }
@@ -190,6 +191,8 @@ public class Utility {
         
         return selectedFlowerType;
     }
+    
+//    public static Accessory enterProductAccessory()
     
     //auto generate product ID
     public static String generateProductID(int productListEntries) {
