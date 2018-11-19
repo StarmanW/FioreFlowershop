@@ -44,6 +44,11 @@ public class ArrayLList<T> implements ListInterface<T>{
     public boolean remove(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public boolean replace(int index, T item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public T get(int index) {
@@ -97,7 +102,7 @@ public class ArrayLList<T> implements ListInterface<T>{
     public boolean isFull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     //node inner class
     private class Node {
 
