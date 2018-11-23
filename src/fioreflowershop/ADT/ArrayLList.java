@@ -78,9 +78,8 @@ public class ArrayLList<T> implements ListInterface<T>{
         Node currentNode = firstNode;
         
         for (int i = 0; i < totalEntries; i++) {
-            if (item.equals(currentNode.data)) {
+            if (item.equals(currentNode.data))
                 return i;
-            }
             
             currentNode = currentNode.next;
         }
