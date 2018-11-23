@@ -10,7 +10,6 @@ import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.ArrayList;
 import fioreflowershop.Models.ItemList;
-import fioreflowershop.Models.Accessory;
 
 import java.util.Scanner;
 /**
