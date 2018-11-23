@@ -9,7 +9,9 @@ import fioreflowershop.Models.Flower;
 import fioreflowershop.Models.ItemList;
 import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
-import fioreflowershop.Models.ArrayList;
+import fioreflowershop.Models.Accessory;
+import fioreflowershop.ADT.ListInterface;
+import fioreflowershop.ADT.ArrayLList;
 import fioreflowershop.Models.FlowerArrangementStyle;
 
 /**
@@ -23,32 +25,39 @@ public class CatalogMaintenanceTestMain {
     
     public static void main(String[] args) {
         ItemList<Flower> flowerList = Utility.generateFlowerList();
-        ArrayList<ProductType> productTypeList = Utility.generateProductTypeList();
-        ArrayList<Product> catalogue = Utility.generateCatalogue();
+        ListInterface<ProductType> productTypeList = Utility.generateProductTypeList();
+        ListInterface<Accessory> accessoryList = Utility.generateAccessoryList();
+        ListInterface<Product> catalogue = Utility.generateCatalogue();
         
         String productID = "";
         String productName = "";
         double productPrice = 0.0;
         int productQty = 0;
         ProductType productType = null;
+        ListInterface<Accessory> productAccessoryList = new ArrayLList<>();
         Flower productFlower = null;
         boolean productInStock = INITIAL_STOCK_STATUS;
         FlowerArrangementStyle flowerArrangementStyle = INITIAL_FLOWER_ARRANGEMENT_STYLE;
         
         while (Utility.mainMenu()) {
-            productID = Utility.generateProductID(catalogue.getTotalEntries());
+            productID = Utility.generateProductID(catalogue.size());
             productName = Utility.enterProductName();
             productPrice = Utility.enterProductPrice();
             productQty = Utility.enterProductQty();
             productType = Utility.enterProductType(productTypeList);
+            productAccessoryList = Utility.enterProductAccessory(productType, accessoryList);
             productFlower = Utility.enterFlowerType(flowerList);
-            catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productInStock, flowerArrangementStyle));
+            catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productAccessoryList, productInStock, flowerArrangementStyle));
             
-            for(int i = 0; i < catalogue.getTotalEntries(); i++){
+            //=====================================================
+            //=====FOR DEBUGGING ONLY, DELETE LATER======
+            //=====================================================
+            for(int i = 0; i < catalogue.size(); i++){
                 Product tmpProduct = catalogue.get(i);
                 System.out.println(
                         tmpProduct.getProductID() + "\t" + tmpProduct.getProductName() + "\t" + tmpProduct.getProductPrice() + "\t" + tmpProduct.getProductQty() +
-                        "\t" + tmpProduct.getProductType().getProductTypeName() + "\t" + tmpProduct.getFlowerType().getFlowerName() + "\t" + tmpProduct.isInStock() + "\n\n"
+                        "\t" + tmpProduct.getProductType().getProductTypeName() + "\t" + tmpProduct.getFlowerType().getFlowerName() + "\t" +
+                        tmpProduct.getProductAccessoryList() + "\t" + tmpProduct.isInStock() + "\n\n"
                 );
             }
         }

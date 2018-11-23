@@ -8,8 +8,10 @@ package fioreflowershop.CatalogueMaintenance;
 import fioreflowershop.Models.Flower;
 import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
-import fioreflowershop.Models.ArrayList;
+import fioreflowershop.Models.Accessory;
 import fioreflowershop.Models.ItemList;
+import fioreflowershop.ADT.ArrayLList;
+import fioreflowershop.ADT.ListInterface;
 
 import java.util.Scanner;
 /**
@@ -34,24 +36,35 @@ public class Utility {
     }
     
     //create and initialize product type list with dummy values
-    public static ArrayList<ProductType> generateProductTypeList() {
-        ArrayList<ProductType> productTypeList = new ArrayList<>();
+    public static ListInterface<ProductType> generateProductTypeList() {
+        ListInterface<ProductType> productTypeList = new ArrayLList<>();
         
-        productTypeList.add(new ProductType("PT001", "Fresh Flower", 1, 1));
-        productTypeList.add(new ProductType("PT002", "Flower Bouquet", 25, 50));
-        productTypeList.add(new ProductType("PT003", "Flower Arrangement", 50, 100));
+        productTypeList.add(new ProductType("PT001", "Fresh Flower", false, 1, 1));
+        productTypeList.add(new ProductType("PT002", "Flower Bouquet", true, 25, 50));
+        productTypeList.add(new ProductType("PT003", "Flower Arrangement", true, 50, 100));
         
         return productTypeList;
     }   
     
     //create and initialize catalogue(list of products) with dummy values
-    public static ArrayList<Product> generateCatalogue() {
-        ArrayList<Product> catalogue = new ArrayList<>();
+    public static ListInterface<Product> generateCatalogue() {
+        ListInterface<Product> catalogue = new ArrayLList<>();
         
-        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, new ProductType("PT001", "Fresh Flower", 1, 1), new Flower("FL001", "Rose", 100, 7.0), null, true, null));
-        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, new ProductType("PT002", "Flower Bouquet", 25, 50), new Flower("FL003", "Wax Flower", 50, 7.8), null, true, null));
+        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, new ProductType("PT001", "Fresh Flower", false, 1, 1), new Flower("FL001", "Rose", 100, 7.0), null, true, null));
+        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, new ProductType("PT002", "Flower Bouquet", true, 25, 50), new Flower("FL003", "Wax Flower", 50, 7.8), null, true, null));
         
         return catalogue;
+    }
+    
+    //create and initialize accessory list with dummy values
+    public static ListInterface<Accessory> generateAccessoryList() {
+        ListInterface<Accessory> accessoryList = new ArrayLList<>();
+        
+        accessoryList.add(new Accessory("Decorative Red Gems", 8.0));
+        accessoryList.add(new Accessory("Red Stones", 5.0));
+        accessoryList.add(new Accessory("Wrapping Paper", 5.0));
+        
+        return accessoryList;
     }
     
     public static boolean mainMenu() {
@@ -128,17 +141,17 @@ public class Utility {
         return Integer.parseInt(productQty);
     }
     
-    public static ProductType enterProductType(ArrayList<ProductType> producTypeList) {
+    public static ProductType enterProductType(ListInterface<ProductType> producTypeList) {
         ProductType selectedProductType = null;
         String selection = "";
         int selectionInt = 0;
-        int totalEntries = producTypeList.getTotalEntries();
+        int totalEntries = producTypeList.size();
         
         //repeat while entered value is invalid
         while (true) {            
             //display list of available product types
             System.out.println("=== Product Type ===");
-            for (int i = 0; i < producTypeList.getTotalEntries(); i++){
+            for (int i = 0; i < totalEntries; i++){
                 ProductType tmpProductType = producTypeList.get(i);
                 System.out.println(String.format("%d. %s", i + 1, tmpProductType.getProductTypeName()));
             }
@@ -164,13 +177,13 @@ public class Utility {
         Flower selectedFlowerType = null;
         String selection = "";
         int selectionInt = 0;
-        int totalEntries = flowerList.getTotalEntries();
+        int totalEntries = flowerList.size();
         
         //repeat while entered value is invalid
         while (true) {            
             //display list of available flower types
             System.out.println("=== Flower Type ===");
-            for (int i = 0; i < flowerList.getTotalEntries(); i++){
+            for (int i = 0; i < totalEntries; i++){
                 Flower tmpFlowertype = (Flower) flowerList.get(i);
                 System.out.println(String.format("%d. %s", i + 1, tmpFlowertype.getFlowerName()));
             }
@@ -191,7 +204,38 @@ public class Utility {
         return selectedFlowerType;
     }
     
-//    public static Accessory enterProductAccessory()
+    public static ListInterface<Accessory> enterProductAccessory(ProductType productType, ListInterface<Accessory> accessoryList) {
+        ListInterface<Accessory> selectedAccessoryList = new ArrayLList<>();
+        String selection = "";
+        int selectionInt = 0;
+        int totalEntries = accessoryList.size();
+        
+        if (productType.hasAccessory() == true) {
+            //repeat while entered value is invalid
+            while (true) {
+                //display list of available accessory types
+                System.out.println("=== Product Accessory ===");
+                for (int i = 0; i < totalEntries; i++) {
+                    Accessory tmpProductAccessory = accessoryList.get(i);
+                    System.out.println(String.format("%d. %s", i + 1, tmpProductAccessory.getAccessory()));
+                }
+
+                System.out.print("\nChoose a flower type: ");
+                selection = sc.nextLine();
+
+                //try parse entered value into int
+                selectionInt = stringToInt(selection);
+                if (selectionInt != -1 && selectionInt <= totalEntries) {
+                    selectedAccessoryList.add(accessoryList.get(selectionInt - 1));
+                    break;
+                }
+
+                System.out.println("Please enter a valid number. (1 to " + totalEntries + ")\n");
+            }
+        } 
+            
+        return selectedAccessoryList;
+    }
     
     //auto generate product ID
     public static String generateProductID(int productListEntries) {
