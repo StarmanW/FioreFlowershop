@@ -1,5 +1,7 @@
 package fioreflowershop.Models;
 
+import fioreflowershop.ADT.ListInterface;
+
 /**
  *
  * @author ChongJH
@@ -11,7 +13,7 @@ public class Product {
     private int productQty;
     private ProductType productType;
     private Flower flowerType;
-    private Accessory[] productAccessorys;
+    private ListInterface<Accessory> productAccessoryList;
     private boolean inStock;
     private FlowerArrangementStyle arrangementStyle;
 
@@ -19,14 +21,14 @@ public class Product {
         this("", "", 0.0, 0, null, null, null, false, null);
     }
 
-    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, Flower flowerType, Accessory[] productAccessorys, boolean inStock, FlowerArrangementStyle arrangementStyle) {
+    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, Flower flowerType, ListInterface<Accessory> productAccessoryList, boolean inStock, FlowerArrangementStyle arrangementStyle) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQty = productQty;
         this.productType = productType;
         this.flowerType = flowerType;
-        this.productAccessorys = productAccessorys;
+        this.productAccessoryList = productAccessoryList;
         this.inStock = inStock;
         this.arrangementStyle = arrangementStyle;
     }
@@ -79,12 +81,12 @@ public class Product {
         this.flowerType = flowerType;
     }
 
-    public Accessory[] getProductAccessorys() {
-        return productAccessorys;
+    public ListInterface<Accessory> getProductAccessoryList() {
+        return productAccessoryList;
     }
 
-    public void setProductAccessorys(Accessory[] productAccessorys) {
-        this.productAccessorys = productAccessorys;
+    public void setProductAccessoryList(ListInterface<Accessory> productAccessoryList) {
+        this.productAccessoryList = productAccessoryList;
     }
 
     public boolean isInStock() {
@@ -102,5 +104,5 @@ public class Product {
     public void setArrangementStyle(FlowerArrangementStyle arrangementStyle) {
         this.arrangementStyle = arrangementStyle;
     }
-       
+
 }
