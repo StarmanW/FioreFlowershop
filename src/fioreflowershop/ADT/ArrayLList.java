@@ -8,6 +8,7 @@ package fioreflowershop.ADT;
 /**
  *
  * @author ChongJH
+ * @param <T>
  */
 public class ArrayLList<T> implements ListInterface<T>{
 
@@ -15,6 +16,15 @@ public class ArrayLList<T> implements ListInterface<T>{
     private Node firstNode; 
     // number of entries in list
     private int totalEntries = 0;
+
+    public ArrayLList() {
+        this.firstNode = null;
+    }
+
+    public ArrayLList(Node firstNode) {
+        this.firstNode = firstNode;
+        totalEntries++;
+    }
     
     @Override
     public boolean add(T item) {
@@ -90,12 +100,7 @@ public class ArrayLList<T> implements ListInterface<T>{
 
     @Override
     public boolean isEmpty() {
-        boolean result;
-
-        //numberOfEntries returns true/false?
-        result = totalEntries == 0;
-
-        return result;
+        return (this.firstNode == null);
     }
 
     @Override
