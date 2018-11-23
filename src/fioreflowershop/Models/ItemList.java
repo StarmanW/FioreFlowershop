@@ -5,12 +5,14 @@
  */
 package fioreflowershop.Models;
 
+import fioreflowershop.ADT.ArrayLList;
+
 /**
  *
  * @author ChongJH
  * @param <T>
  */
-public class ItemList<T> extends ArrayList<Object>{        
+public class ItemList<T> extends ArrayLList<T>{        
     public int checkStock() {
         return 0;
     }
