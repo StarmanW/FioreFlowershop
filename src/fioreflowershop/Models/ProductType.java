@@ -44,7 +44,7 @@ public class ProductType {
         this.productTypeName = productTypeName;
     }
 
-    public boolean isHasAccessory() {
+    public boolean hasAccessory() {
         return hasAccessory;
     }
 
