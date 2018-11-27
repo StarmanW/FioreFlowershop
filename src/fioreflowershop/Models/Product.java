@@ -92,6 +92,15 @@ public class Product {
     public boolean isInStock() {
         return inStock;
     }
+    
+    public String isInStockToString() {
+        String inStockString = "No";
+        
+        if (inStock)
+            inStockString = "Yes";
+        
+        return inStockString;
+    }
 
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
