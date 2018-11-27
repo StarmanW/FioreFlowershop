@@ -10,10 +10,10 @@ package fioreflowershop.ADT;
  * @author ChongJH
  * @param <T>
  */
-public class ArrayLList<T> implements ListInterface<T>{
+public class ArrayLList<T> implements ListInterface<T> {
 
     // reference(pointer) to first node
-    private Node firstNode; 
+    private Node firstNode;
     // number of entries in list
     private int totalEntries = 0;
 
@@ -25,28 +25,30 @@ public class ArrayLList<T> implements ListInterface<T>{
         this.firstNode = firstNode;
         totalEntries++;
     }
-    
+
     @Override
     public boolean add(T item) {
         Node newNode = new Node(item);
-        
-        if (isEmpty())
+
+        if (isEmpty()) {
             firstNode = newNode;
-        // add to end of nonempty list
-        else {                                      
-            Node currentNode = firstNode;         
-            
-            // traverse linked list with p pointing to the current node
+        } else {
+            // Create new node and add to end of nonempty list
+            Node currentNode = firstNode;
+
+            // Traverse linked list with p pointing to the current node
             // while have not reached the last node
-            while (currentNode.next != null)        
+            while (currentNode.next != null) {
                 currentNode = currentNode.next;
-            
-            // make last node(currentNode.next that contains a null value in next node variable) reference new node
-            currentNode.next = newNode;             
+            }
+
+            // Make last node(currentNode.next that contains a null value in next node variable) reference new node
+            currentNode.next = newNode;
         }
 
+        // Increment counter
         totalEntries++;
-        
+
         return true;
     }
 
@@ -54,7 +56,7 @@ public class ArrayLList<T> implements ListInterface<T>{
     public boolean remove(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public boolean replace(int index, T item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -64,27 +66,29 @@ public class ArrayLList<T> implements ListInterface<T>{
     public T get(int index) {
         Node currentNode = firstNode;
 
-        if (index > this.totalEntries)
+        if (index > this.totalEntries) {
             return null;
+        }
 
-        for (int i = 0; i < index; i++) 
+        for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
-        
+        }
+
         return currentNode.data;
     }
 
     @Override
     public int contains(T item) {
         Node currentNode = firstNode;
-        
+
         for (int i = 0; i < totalEntries; i++) {
             if (item.equals(currentNode.data)) {
                 return i;
             }
-            
+
             currentNode = currentNode.next;
         }
-        
+
         return -1;
     }
 
