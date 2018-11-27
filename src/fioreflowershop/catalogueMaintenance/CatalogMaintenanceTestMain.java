@@ -35,24 +35,12 @@ public class CatalogMaintenanceTestMain {
         boolean productInStock = INITIAL_STOCK_STATUS;
         FlowerArrangementStyle flowerArrangementStyle = INITIAL_FLOWER_ARRANGEMENT_STYLE;
         
-//        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, new ProductType("PT001", "Fresh Flower", 1, 1), new Flower("FL001", "Rose", 100, 7.0), true, null));
-        
-//        Utility.mainMenu();
-//        System.out.println(Utility.mainMenu());
         while (Utility.mainMenu()) {
-            //        Utility.generateProductID(catalogue.getTotalEntries());
             productID = Utility.generateProductID(catalogue.getTotalEntries());
-            //        Utility.enterProductName();
             productName = Utility.enterProductName();
-            //        Utility.enterProductPrice();
             productPrice = Utility.enterProductPrice();
-            //        Utility.enterProductQty();
             productQty = Utility.enterProductQty();
-            //        Utility.enterProductType(productTypeList);
-            //        System.out.println(Utility.enterProductType(productTypeList).getProductTypeName());
             productType = Utility.enterProductType(productTypeList);
-            //        Utility.enterFlowerType(flowerList);
-            //        System.out.println(Utility.enterFlowerType(flowerList).getFlowerName());
             productFlower = Utility.enterFlowerType(flowerList);
             catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productInStock, flowerArrangementStyle));
             

@@ -1,8 +1,9 @@
 package fioreflowershop.catalogueorder;
 
 import Model.CatalogueOrder;
+import fioreflowershop.ADT.ArrayLList;
+import fioreflowershop.ADT.ListInterface;
 import java.util.Scanner;
-import fioreflowershop.Models.ArrayList;
 
 /**
  *
@@ -12,7 +13,7 @@ public class MainMenu {
 
     public static void main(String[] args) {
 
-        ArrayList<CatalogueOrder> co = MainMenu.generateCatalogueOrder();
+        ListInterface<CatalogueOrder> co = MainMenu.generateCatalogueOrder();
 
         while (true) {
             int select = MainMenu.Menu();
@@ -36,9 +37,9 @@ public class MainMenu {
     //display
     private static Scanner input = new Scanner(System.in);
 
-    public static ArrayList<CatalogueOrder> generateCatalogueOrder() {
+    public static ListInterface<CatalogueOrder> generateCatalogueOrder() {
 
-        ArrayList<CatalogueOrder> co = new ArrayList<>();
+        ListInterface<CatalogueOrder> co = new ArrayLList<>();
 
         //Hardcoded Data
         co.add(new CatalogueOrder("ROSE", 2.00, 6, 2));
@@ -74,7 +75,7 @@ public class MainMenu {
 
     }
 
-    public static int showCatalogueOrder(ArrayList<CatalogueOrder> co) {
+    public static int showCatalogueOrder(ListInterface<CatalogueOrder> co) {
 
         String select = "", output = "\n\n\n===== PLACE YOUR ORDER HERE ====\n\n";
         int i = 0;
