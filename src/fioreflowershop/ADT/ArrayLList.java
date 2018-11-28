@@ -60,23 +60,25 @@ public class ArrayLList<T> implements ListInterface<T>{
 
     @Override
     public boolean remove(int index) {
-//        if ((index >= 1) && (index <= totalEntries)) {
-//            if (index == 1) {      // case 1: remove first entry
-//                result = firstNode.data;     // save entry to be removed
-//                firstNode = firstNode.next;
-//            } else {                         // case 2: givenPosition > 1
-//                Node nodeBefore = firstNode;
-//                for (int i = 1; i < index - 1; ++i) {
-//                    nodeBefore = nodeBefore.next;		// advance nodeBefore to its next node
-//                }
-//                result = nodeBefore.next.data;  // save entry to be removed
-//                nodeBefore.next = nodeBefore.next.next;	// make node before point to node after the
-//            } 																// one to be deleted (to disconnect node from chain)
-//
-//            totalEntries--;
-//        }
+        if ((index >= 1) && (index <= totalEntries)) {
+            if (index == 1) {     
+                firstNode = firstNode.next;
+            } else {                         
+                lastNode = lastNode.next.next;
+                
+                Node currentNode = firstNode;					
+                while (currentNode.next != null) {		
+                    currentNode = currentNode.next;
+                }
+                
+                lastNode = currentNode;
+            }
+            
+            totalEntries--;
+        }
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
