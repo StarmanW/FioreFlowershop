@@ -1,6 +1,5 @@
-
-import fioreflowershop.ADT.ListInterface;
-
+package fioreFlowershop.ADT;
+import fioreFlowershop.ADT.ListInterface;
 /**
  *
  * @author Thiban
@@ -20,6 +19,22 @@ public class OrderList<T> implements ListInterface<T> {
         this.totalEntries = 0;
     }
 
+    public T[] getItemArray() {
+        return itemArray;
+    }
+
+    public void setItemArray(T[] itemArray) {
+        this.itemArray = itemArray;
+    }
+
+    public int getTotalEntries() {
+        return totalEntries;
+    }
+
+    public void setTotalEntries(int totalEntries) {
+        this.totalEntries = totalEntries;
+    }
+
     public boolean add(T item) {
         if (isFull()) {
             extendSize();
@@ -28,6 +43,14 @@ public class OrderList<T> implements ListInterface<T> {
         itemArray[totalEntries] = item;
         totalEntries++;
         return true;
+    }
+
+    public T get(int index) {
+        if (index > this.totalEntries) {
+            return null;
+        }
+
+        return this.itemArray[index];
     }
 
     public int indexOf(T item) {
@@ -43,7 +66,6 @@ public class OrderList<T> implements ListInterface<T> {
         return objectIndex;
     }
 
-   
     public boolean checkType(T item) {
         return item.equals(item);
     }
@@ -59,7 +81,7 @@ public class OrderList<T> implements ListInterface<T> {
     public boolean isFull() {
         return size() == itemArray.length;
     }
-    
+
     public void extendSize() {
         // save reference to array of list entries
         T[] oldList = itemArray;
@@ -76,11 +98,6 @@ public class OrderList<T> implements ListInterface<T> {
 
     @Override
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public T get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

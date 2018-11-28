@@ -1,9 +1,14 @@
 package fioreflowershop.catalogueorder;
 
-import Model.CatalogueOrder;
-import fioreflowershop.ADT.ArrayLList;
-import fioreflowershop.ADT.ListInterface;
-import java.util.Scanner;
+import fioreFlowershop.ADT.OrderList;
+import fioreflowershop.Models.CatalogOrder;
+import fioreflowershop.Models.ProductType;
+import fioreflowershop.Models.ArrayList;
+import fioreflowershop.Models.Corporate;
+import fioreflowershop.Models.Flower;
+import fioreflowershop.Models.ItemList;
+
+import fioreflowershop.Models.ProductType;
 
 /**
  *
@@ -11,106 +16,60 @@ import java.util.Scanner;
  */
 public class MainMenu {
 
+    private static final boolean INITIAL_STOCK_STATUS = true;
+
     public static void main(String[] args) {
 
-        ListInterface<CatalogueOrder> co = MainMenu.generateCatalogueOrder();
+        String catalogOrderID = "";
+        ProductType productType = null;
+        Flower flowerType = null;
+        int Qty = 0;
+        boolean productInStock = INITIAL_STOCK_STATUS;
+
+        int flowerQty = 0;
+        
+        ArrayList<ProductType> productTypeList = Utility.generateProductTypeList();
+        ItemList<Flower> flowerList = Utility.generateFlowerList();
+        ArrayList<CatalogOrder> catalogue = Utility.generateCatalogue();
+
+        ArrayList<Corporate> corps = CreditLimitCorporate.generateCorporateList();
 
         while (true) {
-            int select = MainMenu.Menu();
+            // Start main menu
+            int choice = Utility.Menu();
 
-            if (select == 1) {
-                select = MainMenu.showCatalogueOrder(co);
-                if (select != 7) {
-                    System.out.println(String.format("\n========YOUR ORDER========\n\nFlower Name : %s \nFlower Price : RM%.2f "
-                            + "\nTotal Quantity : %s \nTotal Item Selected : %s\n",
-                            co.get(select - 1).getFlowerName(),
-                            co.get(select - 1).getFlowerPrice(),
-                            co.get(select - 1).getTtlQty(),
-                            co.get(select - 1).getTtlItem()));
+            if (choice == 1){
+                productType = Utility.enterProductType(productTypeList);
+                flowerType = Utility.enterFlowerType(flowerList);
+                Qty = Utility.enterttlQty();
+                catalogOrderID = Utility.generateCatalogOrderID(catalogue.getTotalEntries());
+
+                catalogue.add(new CatalogOrder(catalogOrderID, productType, flowerType, Qty, productInStock));
+
+                System.out.print("\n=====YOUR ORDER HAVE BEEN ADDED TO CART====\n");
+                for (int i = 0; i < catalogue.getTotalEntries(); i++) {
+                    CatalogOrder co = catalogue.get(i);
+                    System.out.println(
+                            co.getCatalogOrderID() + "\t"
+                            + "\t" + co.getProductType().getProductTypeName()                                  
+                            + "\t" + co.getFlowerType().getFlowerName()
+                            + "\t" + co.getQty()
+                            + "\t" + co.isInStock() + "\n\n");
                 }
             }
-
-        }
-
-    }
-
-    //display
-    private static Scanner input = new Scanner(System.in);
-
-    public static ListInterface<CatalogueOrder> generateCatalogueOrder() {
-
-        ListInterface<CatalogueOrder> co = new ArrayLList<>();
-
-        //Hardcoded Data
-        co.add(new CatalogueOrder("ROSE", 2.00, 6, 2));
-        co.add(new CatalogueOrder("Daisy family", 2.00, 6, 2));
-        co.add(new CatalogueOrder("Orchids", 2.10, 6, 2));
-        co.add(new CatalogueOrder("Aster", 2.00, 6, 2));
-        co.add(new CatalogueOrder("Iris", 2.00, 6, 2));
-        co.add(new CatalogueOrder("Sun Flower", 2.10, 6, 2));
-
-        return co;
-    }
-
-    public static int Menu() {
-
-        String select = "";
-
-        while (true) {
-            System.out.print("\n===== CATALOG ORDER ====\n\n"
-                    + "1. Please Place Your Order Here\n"
-                    + "2. Check credit limit for corporate customer \n"
-                    + "3. Generate Sales Report \n"
-                    + "\n4. Back\n"
-                    + "\nEnter your choice : ");
-
-            select = input.nextLine();
-
-            if (select.matches("^[1-4]$")) {
+            
+            //to show corporate credit limit
+            else if (choice == 2) {
+                CreditLimitCorporate.showCerditLimit(corps);
+            }
+            
+            //shutdown the system
+            else if (choice == 4) {
+                System.out.println("\n===Thank You for using our system.===\nSystem shut"
+                        + "ting down now...\n");
                 break;
             }
-            System.out.println("\nInvalid selection...Please try again.\n");
         }
-        return Integer.parseInt(select);
-
     }
 
-    public static int showCatalogueOrder(ListInterface<CatalogueOrder> co) {
-
-        String select = "", output = "\n\n\n===== PLACE YOUR ORDER HERE ====\n\n";
-        int i = 0;
-        String qty;
-        String item;
-
-        for (i = 0; i < co.size(); i++) {
-
-            output += String.format("%s  %s    RM%.2f     %s  %s\n", i + 1,
-                    co.get(i).getFlowerName(),
-                    co.get(i).getFlowerPrice(),
-                    co.get(i).getTtlQty(),
-                    co.get(i).getTtlItem());
-        }
-
-        output += String.format("\n%d. Back\n\n"
-                + "Enter your choice of flower : ", i + 1);
-
-        while (true) {
-            System.out.print(output);
-            select = input.nextLine();
-
-            if (select.matches("^[1-6]$")) {
-                System.out.print("\nEnter Quantity : ");
-                qty = input.nextLine();
-
-                System.out.print("\nEnter Number Of Items : ");
-                item = input.nextLine();
-
-                System.out.print("\n========SUMMARY========" + "\nOuantity : " + qty + "\nNo of item selected : " + item + "\n\n");
-            } else {
-                System.out.println("\nInvalid selection...Please try again.\n");
-            }
-
-        }
-
-    }
 }
