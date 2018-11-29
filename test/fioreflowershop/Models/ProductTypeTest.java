@@ -95,48 +95,4 @@ public class ProductTypeTest {
         instance.setHasAccessory(hasAccessory);
     }
 
-    /**
-     * Test of getMinFlowerQty method, of class ProductType.
-     */
-    @Test
-    public void testGetMinFlowerQty() {
-        System.out.println("getMinFlowerQty");
-        instance.setMinFlowerQty(minFlowerQty);
-        int expResult = minFlowerQty;
-        int result = instance.getMinFlowerQty();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setMinFlowerQty method, of class ProductType.
-     */
-    @Test
-    public void testSetMinFlowerQty() {
-        System.out.println("setMinFlowerQty");
-        int minFlowerQty = this.minFlowerQty;
-        instance.setMinFlowerQty(minFlowerQty);
-    }
-
-    /**
-     * Test of getMaxFlowerQty method, of class ProductType.
-     */
-    @Test
-    public void testGetMaxFlowerQty() {
-        System.out.println("getMaxFlowerQty");
-        instance.setMaxFlowerQty(maxFlowerQty);
-        int expResult = maxFlowerQty;
-        int result = instance.getMaxFlowerQty();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setMaxFlowerQty method, of class ProductType.
-     */
-    @Test
-    public void testSetMaxFlowerQty() {
-        System.out.println("setMaxFlowerQty");
-        int maxFlowerQty = this.maxFlowerQty;
-        instance.setMaxFlowerQty(maxFlowerQty);
-    }
-    
 }
