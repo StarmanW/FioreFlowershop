@@ -64,6 +64,7 @@ public class ArrayLList<T> implements ListInterface<T>{
             if (index == 1) {     
                 firstNode = firstNode.next;
             } else {                         
+                //point current last node to null
                 lastNode = lastNode.next.next;
                 
                 Node currentNode = firstNode;					
@@ -71,6 +72,7 @@ public class ArrayLList<T> implements ListInterface<T>{
                     currentNode = currentNode.next;
                 }
                 
+                //new last node
                 lastNode = currentNode;
             }
             
@@ -78,7 +80,6 @@ public class ArrayLList<T> implements ListInterface<T>{
         }
         
         return true;
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
