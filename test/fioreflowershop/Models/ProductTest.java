@@ -5,8 +5,6 @@
  */
 package fioreflowershop.Models;
 
-import fioreflowershop.ADT.ArrayLList;
-import fioreflowershop.ADT.ListInterface;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,7 +20,8 @@ public class ProductTest {
     int quantity = 5;
     ProductType productType = new ProductType();
     Flower flowerType = new Flower();
-    ListInterface<Accessory> productAccessoryList = new ArrayLList<>();
+    Accessory productAccessory = new Accessory();
+    String productDescription = "A buquet of fresh Wax Flowers.";
     boolean inStock = true;
     FlowerArrangementStyle arrangementStyle = new FlowerArrangementStyle();
         
@@ -168,25 +167,47 @@ public class ProductTest {
     }
 
     /**
-     * Test of getProductAccessoryList method, of class Product.
+     * Test of getproductAccessory method, of class Product.
      */
     @Test
-    public void testGetProductAccessoryList() {
-        System.out.println("getProductAccessoryList");
-        instance.setProductAccessoryList(productAccessoryList);
-        ListInterface<Accessory> expResult = productAccessoryList;
-        ListInterface<Accessory> result = instance.getProductAccessoryList();
+    public void testGetProductAccessory() {
+        System.out.println("getproductAccessory");
+        instance.setProductAccessory(productAccessory);
+        Accessory expResult = productAccessory;
+        Accessory result = instance.getProductAccessory();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setProductAccessoryList method, of class Product.
+     * Test of setProductAccessory method, of class Product.
      */
     @Test
-    public void testSetProductAccessoryList() {
-        System.out.println("setProductAccessoryList");
-        ListInterface<Accessory> productAccessoryList = this.productAccessoryList;
-        instance.setProductAccessoryList(productAccessoryList);
+    public void testsetProductAccessory() {
+        System.out.println("setProductAccessory");
+        Accessory productAccessory = this.productAccessory;
+        instance.setProductAccessory(productAccessory);
+    }
+    
+    /**
+     * Test of getproductDescription method, of class Product.
+     */
+    @Test
+    public void testGetProductDescription() {
+        System.out.println("getproductDescription");
+        instance.setProductDescription(productDescription);
+        String expResult = productDescription;
+        String result = instance.getProductDescription();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setProductAccessory method, of class Product.
+     */
+    @Test
+    public void testsetProductDescription() {
+        System.out.println("setProductDescription");
+        String productDescription = this.productDescription;
+        instance.setProductDescription(productDescription);
     }
 
     /**
@@ -221,28 +242,6 @@ public class ProductTest {
         System.out.println("setInStock");
         boolean inStock = this.inStock;
         instance.setInStock(inStock);
-    }
-
-    /**
-     * Test of getArrangementStyle method, of class Product.
-     */
-    @Test
-    public void testGetArrangementStyle() {
-        System.out.println("getArrangementStyle");
-        instance.setArrangementStyle(arrangementStyle);
-        FlowerArrangementStyle expResult = arrangementStyle;
-        FlowerArrangementStyle result = instance.getArrangementStyle();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setArrangementStyle method, of class Product.
-     */
-    @Test
-    public void testSetArrangementStyle() {
-        System.out.println("setArrangementStyle");
-        FlowerArrangementStyle arrangementStyle = this.arrangementStyle;
-        instance.setArrangementStyle(arrangementStyle);
     }
     
 }
