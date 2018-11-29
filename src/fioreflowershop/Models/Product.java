@@ -16,6 +16,7 @@ public class Product {
     private boolean inStock;
 
     public Product() {
+        this("", "", 0.0, 0, null, null, null, "", false);
     }
 
     public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, Flower flowerType, Accessory productAccessory, String productDescription, boolean inStock) {
