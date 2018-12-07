@@ -11,24 +11,28 @@ public class Product {
     private int productQty;
     private ProductType productType;
     private Flower flowerType;
-    private Accessory[] productAccessorys;
+    private Accessory productAccessory;
+    private String productDescription;
     private boolean inStock;
-    private FlowerArrangementStyle arrangementStyle;
 
     public Product() {
-        this("", "", 0.0, 0, null, null, null, false, null);
+        this("", "", 0.0, 0, null, null, null, "", false);
     }
 
-    public Product(String productID, String productName, double productPrice, int productQty, ProductType productType, Flower flowerType, Accessory[] productAccessorys, boolean inStock, FlowerArrangementStyle arrangementStyle) {
+    public Product(
+            String productID, String productName, double productPrice, int productQty, 
+            ProductType productType, Flower flowerType, Accessory productAccessory, 
+            String productDescription, boolean inStock
+    ) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQty = productQty;
         this.productType = productType;
         this.flowerType = flowerType;
-        this.productAccessorys = productAccessorys;
+        this.productAccessory = productAccessory;
+        this.productDescription = productDescription;
         this.inStock = inStock;
-        this.arrangementStyle = arrangementStyle;
     }
 
     public String getProductID() {
@@ -79,28 +83,37 @@ public class Product {
         this.flowerType = flowerType;
     }
 
-    public Accessory[] getProductAccessorys() {
-        return productAccessorys;
+    public Accessory getProductAccessory() {
+        return productAccessory;
     }
 
-    public void setProductAccessorys(Accessory[] productAccessorys) {
-        this.productAccessorys = productAccessorys;
+    public void setProductAccessory(Accessory productAccessory) {
+        this.productAccessory = productAccessory;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public boolean isInStock() {
         return inStock;
     }
 
+    public String isInStockToString() {
+        String isInStockString = "No";
+        
+        if (isInStock())
+            isInStockString = "Yes";
+        
+        return isInStockString;
+    }
+    
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
     }
-
-    public FlowerArrangementStyle getArrangementStyle() {
-        return arrangementStyle;
-    }
-
-    public void setArrangementStyle(FlowerArrangementStyle arrangementStyle) {
-        this.arrangementStyle = arrangementStyle;
-    }
-       
+ 
 }

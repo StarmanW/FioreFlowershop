@@ -10,19 +10,23 @@ package fioreflowershop.ADT;
  * @author ChongJH
  * @param <T>
  */
-public class ArrayLList<T> implements ListInterface<T> {
+public class LList<T> implements ListInterface<T> {
 
     // reference(pointer) to first node
     private Node firstNode;
+    // reference(pointer) to last node
+    private Node lastNode;
     // number of entries in list
     private int totalEntries = 0;
 
-    public ArrayLList() {
+    public LList() {
         this.firstNode = null;
+        this.lastNode = null;
     }
 
-    public ArrayLList(Node firstNode) {
+    public LList(Node firstNode) {
         this.firstNode = firstNode;
+        this.lastNode = firstNode;
         totalEntries++;
     }
 
@@ -32,21 +36,22 @@ public class ArrayLList<T> implements ListInterface<T> {
 
         if (isEmpty()) {
             firstNode = newNode;
-        } else {
-            // Create new node and add to end of nonempty list
-            Node currentNode = firstNode;
-
-            // Traverse linked list with p pointing to the current node
-            // while have not reached the last node
-            while (currentNode.next != null) {
-                currentNode = currentNode.next;
-            }
-
-            // Make last node(currentNode.next that contains a null value in next node variable) reference new node
-            currentNode.next = newNode;
+            lastNode = newNode;
+        } // add to end of nonempty list
+        else {
+//            Node currentNode = firstNode;         
+//            
+//            // traverse linked list with p pointing to the current node
+//            // while have not reached the last node
+//            while (currentNode.next != null)        
+//                currentNode = currentNode.next;
+//            
+//            // make last node(currentNode.next that contains a null value in next node variable) reference new node
+//            currentNode.next = newNode;       
+            lastNode.next = newNode;
+            lastNode = lastNode.next;
         }
 
-        // Increment counter
         totalEntries++;
 
         return true;
@@ -54,7 +59,30 @@ public class ArrayLList<T> implements ListInterface<T> {
 
     @Override
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if ((index >= 0) && (index <= totalEntries - 1)) {
+            if (index == 0) {
+                firstNode = firstNode.next;
+            } else {
+                Node currentNode = firstNode;
+                
+                for (int i = 0; i < index - 1; i++) {
+                    currentNode = currentNode.next;
+                }
+
+                if (index == totalEntries - 1) {
+                    lastNode = currentNode;
+                    lastNode.next = null;
+                } else {
+                    Node tempRemoveNode = currentNode.next;
+                    currentNode.next = currentNode.next.next;
+                    tempRemoveNode.next = null;
+                }
+            }
+
+            totalEntries--;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -93,11 +121,6 @@ public class ArrayLList<T> implements ListInterface<T> {
     }
 
     @Override
-    public boolean checkType(T item) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public int size() {
         return totalEntries;
     }
@@ -105,11 +128,6 @@ public class ArrayLList<T> implements ListInterface<T> {
     @Override
     public boolean isEmpty() {
         return (this.firstNode == null);
-    }
-
-    @Override
-    public boolean isFull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     //node inner class

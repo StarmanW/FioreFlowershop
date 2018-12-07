@@ -3,30 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fioreflowershop.Models;
+package fioreflowershop.ADT;
+
+import fioreflowershop.Models.Product;
 
 /**
  *
  * @author ChongJH
  * @param <T>
  */
-public class PromotionCatalogue<T> extends Catalogue{
+public class PromotionCatalogue<T>{
 
     private String promotionName;
     private int promotionDiscount;
     private int promotionMonth;
+    private Product productArray[];
 
     public PromotionCatalogue() {
-        this("", 0, 0, "", null);
+        this("", 0, 0, null);
     }
 
-    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, String catalogueID, Product[] productArray) {
-        super(catalogueID, productArray);
+    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, Product[] productArray) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
+        this.productArray = productArray;
     }
-    
+
     public String getPromotionName() {
         return promotionName;
     }
@@ -50,5 +53,13 @@ public class PromotionCatalogue<T> extends Catalogue{
     public void setPromotionMonth(int promotionMonth) {
         this.promotionMonth = promotionMonth;
     }
-    
+
+    public Product[] getProductArray() {
+        return productArray;
+    }
+
+    public void setProductArray(Product[] productArray) {
+        this.productArray = productArray;
+    }
+
 }
