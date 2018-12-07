@@ -201,7 +201,6 @@ public class Utility {
         );
 
         displayProductList(catalogue);
-
         promptEnterToContinue();
     }
 
@@ -301,13 +300,18 @@ public class Utility {
             String selection = "";
             int selectionIndex = -1;
 
-            displayProductList(catalogue);
-            System.out.print("Select a product to remove: ");
-            selection = sc.nextLine();
+            for (boolean endLoop = false; !endLoop;) {
+                displayProductList(catalogue);
+                System.out.print("\nSelect a product to remove: ");
+                selection = sc.nextLine();
 
-            selectionIndex = stringToInt(selection) - 1;
-            if (selectionIndex != -1) {
-                removeStatus = catalogue.remove(selectionIndex);
+                selectionIndex = stringToInt(selection) - 1;
+                if (selectionIndex  >= 0) {
+                    removeStatus = catalogue.remove(selectionIndex);
+                    endLoop = true;
+                } else {
+                    System.out.println("\nPlease enter a valid selection (1 - " + catalogue.size() + ")");
+                }
             }
 
             promptDisplayCatalogue(catalogue);
