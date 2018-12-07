@@ -10,7 +10,7 @@ import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.ItemList;
-import fioreflowershop.ADT.ArrayLList;
+import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
 
 import java.util.Scanner;
@@ -38,7 +38,7 @@ public class Utility {
 
     //create and initialize product type list with dummy values
     public static ListInterface<ProductType> generateProductTypeList() {
-        ListInterface<ProductType> productTypeList = new ArrayLList<>();
+        ListInterface<ProductType> productTypeList = new LList<>();
 
         productTypeList.add(new ProductType("PT001", "Fresh Flower", false));
         productTypeList.add(new ProductType("PT002", "Flower Bouquet", true));
@@ -52,7 +52,7 @@ public class Utility {
             ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList
     ) {
-        ListInterface<Product> catalogue = new ArrayLList<>();
+        ListInterface<Product> catalogue = new LList<>();
 
         catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, productTypeList.get(0), flowerList.get(0), null, "Fresh red rose sourced locally.", true));
         catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1), flowerList.get(1), accessoryList.get(1), "A bouquet of fresh wax flowers.", true));
@@ -62,7 +62,7 @@ public class Utility {
 
     //create and initialize accessory list with dummy values
     public static ListInterface<Accessory> generateAccessoryList() {
-        ListInterface<Accessory> accessoryList = new ArrayLList<>();
+        ListInterface<Accessory> accessoryList = new LList<>();
 
         accessoryList.add(new Accessory("Decorative Red Gems", 8.0));
         accessoryList.add(new Accessory("Red Stones", 5.0));
@@ -78,61 +78,61 @@ public class Utility {
     ) {
         for (String tryAgain = ""; !tryAgain.equals("n");) {
             tryAgain = "y";
-            
+
             for (boolean endLoop = false; !endLoop;) {
                 chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, INITIAL_STOCK_STATUS);
 
                 System.out.print("\nWould you like to do anything else? (y/n) ");
                 tryAgain = sc.nextLine().toLowerCase();
 
-                if (tryAgain.matches("([yn])")) 
+                if (tryAgain.matches("([yn])")) {
                     endLoop = true;
-                else
+                } else {
                     System.out.println("\nPlease enter a valid option.");
+                }
             }
         }
 
     }
 
     private static void chooseMainMenuOption(ListInterface<Product> catalogue, ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, boolean INITIAL_STOCK_STATUS) {
-        String selection = "";
+        for (boolean endLoop = false; !endLoop;) {
+            String selection = "";
 
-        System.out.println(
-                "\n=== Catalogue Maintenance ===\n"
-                + "1. Display Catalogue\n"
-                + "2. Edit Catalogue\n"
-                + "3. Display Promotion Catalogue\n"
-                + "4. Edit Promotion Catalogue\n\n"
-                + "Enter 'x' to exit the system.\n"
-        );
-        System.out.print("Please enter a choice: ");
-        selection = sc.nextLine();
-        
-        switch (selection) {
-            case "1":
-                displayCatalogue(catalogue);
-                break;
-            case "2":
-                editCatalogueMenu(
-                        flowerList, productTypeList, accessoryList, catalogue,
-                        INITIAL_STOCK_STATUS
-                );
-                break;
-            case "3":
-                //display Promotional Catalogue
-                break;
-            case "4":
-                //Display edit promo catalogue menu
-                break;
-            case "x":
-                break;
-            default:
-                System.out.println("\n\nPlease enter a valid choice.\n");
-                mainMenu(
-                        flowerList, productTypeList, accessoryList, catalogue,
-                        INITIAL_STOCK_STATUS
-                );
-                break;
+            System.out.println(
+                    "=== Catalogue Maintenance ===\n"
+                    + "1. Display Catalogue\n"
+                    + "2. Edit Catalogue\n"
+                    + "3. Display Promotion Catalogue\n"
+                    + "4. Edit Promotion Catalogue\n\n"
+                    + "Enter 'x' to exit the system.\n"
+            );
+            System.out.print("Please enter a choice: ");
+            selection = sc.nextLine();
+
+            switch (selection) {
+                case "1":
+                    displayCatalogue(catalogue);
+                    break;
+                case "2":
+                    editCatalogueMenu(
+                            flowerList, productTypeList, accessoryList, catalogue,
+                            INITIAL_STOCK_STATUS
+                    );
+                    break;
+                case "3":
+                    //display Promotional Catalogue
+                    break;
+                case "4":
+                    //Display edit promo catalogue menu
+                    break;
+                case "x":
+                    endLoop = true;
+                    break;
+                default:
+                    System.out.println("\n\nPlease enter a valid choice.\n");
+                    break;
+            }
         }
     }
 
@@ -150,49 +150,46 @@ public class Utility {
                 System.out.print("\nWould you like to do anything else? (y/n) ");
                 tryAgain = sc.nextLine().toLowerCase();
 
-                if (tryAgain.matches("([yn])"))
+                if (tryAgain.matches("([yn])")) {
                     endLoop = true;
-                else
+                } else {
                     System.out.println("\nPlease enter a valid option.");
+                }
             }
         }
     }
 
     private static void chooseEditCatalogueOption(ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue, boolean INITIAL_STOCK_STATUS) {
-        String selection = "";
+        for (boolean endLoop = false; !endLoop;) {
+            String selection = "";
 
-        System.out.println(
-                "\n=== Edit Catalogue ===\n"
-                + "1. Add Product\n"
-                + "2. Delete Product\n\n"
-                + "Enter 'x' to go back.\n"
-        );
-        System.out.print("Please enter a choice: ");
+            System.out.println(
+                    "\n=== Edit Catalogue ===\n"
+                    + "1. Add Product\n"
+                    + "2. Delete Product\n\n"
+                    + "Enter 'x' to go back.\n"
+            );
+            System.out.print("Please enter a choice: ");
 
-        selection = sc.nextLine();
-        
-        switch (selection) {
-            case "1":
-                addProduct(
-                        flowerList, productTypeList, accessoryList, catalogue,
-                        INITIAL_STOCK_STATUS
-                );
-                break;
-            case "2":
-                //remove product
-                break;
-            case "3":
-                //mark product
-                break;
-            case "x":
-                break;
-            default:
-                System.out.println("\n\nPlease enter a valid choice.\n");
-                editCatalogueMenu(
-                        flowerList, productTypeList, accessoryList, catalogue,
-                        INITIAL_STOCK_STATUS
-                );
-                break;
+            selection = sc.nextLine();
+
+            switch (selection) {
+                case "1":
+                    addProduct(
+                            flowerList, productTypeList, accessoryList, catalogue,
+                            INITIAL_STOCK_STATUS
+                    );
+                    break;
+                case "2":
+                    removeProduct(catalogue);
+                    break;
+                case "x":
+                    endLoop = true;
+                    break;
+                default:
+                    System.out.println("\n\nPlease enter a valid choice.\n");
+                    break;
+            }
         }
     }
 
@@ -200,51 +197,67 @@ public class Utility {
         System.out.println(
                 "\n===================================\n"
                 + "=== Fiore Flower Shop Catalogue ===\n"
-                + "===================================\n"
-                + String.format(
-                        "| %3s | %-30s | %-30s | %-30s | %-30s | %9s | %-8s | %-80s |",
-                        "No.", "Product Type", "Product Name", "Flower Type", "Product Accessorry", "Price", "In Stock", "Description"
-                )
+                + "==================================="
         );
 
-        for (int i = 0; i < catalogue.size(); i++) {
-            Product tmpProduct = catalogue.get(i);
+        displayProductList(catalogue);
 
-            int productNumber = i + 1;
-            String productName = tmpProduct.getProductName();
-            String productType = tmpProduct.getProductType().getProductTypeName();
-            String productFlower = tmpProduct.getFlowerType().getFlowerName();
-            String productHasStockText = tmpProduct.isInStockToString();
-            double productPrice = tmpProduct.getProductPrice();
-            String productDescription = tmpProduct.getProductDescription();
+        promptEnterToContinue();
+    }
 
-            Accessory productAccessory = tmpProduct.getProductAccessory();
-            //TEMPORARY. NEED TO MAKE ITERATOR
-            String productAccessoryText = "";
-            try {
-                productAccessoryText = productAccessory.getAccessory();
-            } catch (NullPointerException e) {
-                productAccessoryText = "None";
-            }
+    private static void promptEnterToContinue() {
+        System.out.println("\nPress Enter to continue.");
+        sc.nextLine();
+    }
 
+    private static void displayProductList(ListInterface<Product> catalogue) {
+        if (catalogue.isEmpty()) {
+            System.out.println("\nNo products available currently.");
+        } else {
             System.out.println(
                     String.format(
-                            "| %3d | %-30.30s | %-30.30s | %-30.30s | %-30.30s | %9.2f | %-8s | %-80s |",
-                            productNumber, productName, productType,
-                            productFlower, productAccessoryText, productPrice,
-                            productHasStockText, productDescription
+                            "\n| %3s | %-30s | %-30s | %-30s | %-30s | %9s | %-8s | %-80s |",
+                            "No.", "Product Type", "Product Name", "Flower Type", "Product Accessorry", "Price", "In Stock", "Description"
                     )
             );
 
+            for (int i = 0; i < catalogue.size(); i++) {
+                Product tmpProduct = catalogue.get(i);
+
+                int productNumber = i + 1;
+                String productName = tmpProduct.getProductName();
+                String productType = tmpProduct.getProductType().getProductTypeName();
+                String productFlower = tmpProduct.getFlowerType().getFlowerName();
+                String productHasStockText = tmpProduct.isInStockToString();
+                double productPrice = tmpProduct.getProductPrice();
+                String productDescription = tmpProduct.getProductDescription();
+
+                Accessory productAccessory = tmpProduct.getProductAccessory();
+                //TEMPORARY. NEED TO MAKE ITERATOR
+                String productAccessoryText = "";
+                try {
+                    productAccessoryText = productAccessory.getAccessory();
+                } catch (NullPointerException e) {
+                    productAccessoryText = "None";
+                }
+
+                System.out.println(
+                        String.format(
+                                "| %3d | %-30.30s | %-30.30s | %-30.30s | %-30.30s | %9.2f | %-8s | %-80s |",
+                                productNumber, productName, productType,
+                                productFlower, productAccessoryText, productPrice,
+                                productHasStockText, productDescription
+                        )
+                );
+            }
         }
     }
 
-    public static void addProduct(
+    public static boolean addProduct(
             ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
-        String viewCatalogueSelection = "";
         String productID = "";
         String productName = "";
         double productPrice = 0.0;
@@ -254,6 +267,7 @@ public class Utility {
         String productDescription = "";
         Flower productFlower = null;
         boolean productInStock = INITIAL_STOCK_STATUS;
+        boolean addStatus = false;
 
         productID = Utility.generateProductID(catalogue.size());
         productName = Utility.enterProductName();
@@ -261,16 +275,45 @@ public class Utility {
         productQty = Utility.enterProductQty();
         productType = Utility.enterProductType(productTypeList);
         productAccessory = Utility.enterProductAccessory(productType, accessoryList);
-        productDescription = Utility.enterProductDescription();
         productFlower = Utility.enterFlowerType(flowerList);
-        catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productAccessory, productDescription, productInStock));
+        productDescription = Utility.enterProductDescription();
+        addStatus = catalogue.add(new Product(productID, productName, productPrice, productQty, productType, productFlower, productAccessory, productDescription, productInStock));
 
-        System.out.print("Would you like to display catalogue? (y/n)");
+        promptDisplayCatalogue(catalogue);
+
+        return addStatus;
+    }
+
+    private static void promptDisplayCatalogue(ListInterface<Product> catalogue) {
+        String viewCatalogueSelection = "";
+
+        System.out.print("Would you like to display product list? (y/n)");
         viewCatalogueSelection = sc.nextLine().toLowerCase();
-
         if (viewCatalogueSelection.equals("y")) {
             displayCatalogue(catalogue);
         }
+    }
+
+    public static boolean removeProduct(ListInterface<Product> catalogue) {
+        boolean removeStatus = false;
+
+        if (!catalogue.isEmpty()) {
+            String selection = "";
+            int selectionIndex = -1;
+
+            displayProductList(catalogue);
+            System.out.print("Select a product to remove: ");
+            selection = sc.nextLine();
+
+            selectionIndex = stringToInt(selection) - 1;
+            if (selectionIndex != -1) {
+                removeStatus = catalogue.remove(selectionIndex);
+            }
+
+            promptDisplayCatalogue(catalogue);
+        }
+
+        return removeStatus;
     }
 
     public static String enterProductName() {
@@ -426,7 +469,7 @@ public class Utility {
     public static String enterProductDescription() {
         String productDescription = "";
 
-        System.out.print("Enter product description: ");
+        System.out.print("\nEnter product description: ");
         productDescription = sc.nextLine();
 
         return productDescription;

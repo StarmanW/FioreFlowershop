@@ -5,17 +5,14 @@
  */
 package fioreflowershop.ADT;
 
-import fioreflowershop.ADT.ArrayLList;
+import fioreflowershop.ADT.LList;
 
 /**
  *
  * @author ChongJH
  * @param <T>
  */
-public class ItemList<T> extends ArrayLList<T>{        
-    public int checkStock() {
-        return 0;
-    }
+public class ItemList<T> extends LList<T>{        
     
     public Object sortByType(Object T) {
         return null;
