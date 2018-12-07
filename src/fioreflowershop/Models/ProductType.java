@@ -12,18 +12,15 @@ package fioreflowershop.Models;
 public class ProductType {
     private String productTypeID;
     private String productTypeName;
-    private int minFlowerQty;
-    private int maxFlowerQty;
+    private boolean hasAccessory;
 
     public ProductType() {
-        this("", "", 0, 0);
     }
 
-    public ProductType(String productTypeID, String productTypeName, int minFlowerQty, int maxFlowerQty) {
+    public ProductType(String productTypeID, String productTypeName, boolean hasAccessory) {
         this.productTypeID = productTypeID;
         this.productTypeName = productTypeName;
-        this.minFlowerQty = minFlowerQty;
-        this.maxFlowerQty = maxFlowerQty;
+        this.hasAccessory = hasAccessory;
     }
 
     public String getProductTypeID() {
@@ -42,20 +39,12 @@ public class ProductType {
         this.productTypeName = productTypeName;
     }
 
-    public int getMinFlowerQty() {
-        return minFlowerQty;
+    public boolean hasAccessory() {
+        return hasAccessory;
     }
 
-    public void setMinFlowerQty(int minFlowerQty) {
-        this.minFlowerQty = minFlowerQty;
+    public void setHasAccessory(boolean hasAccessory) {
+        this.hasAccessory = hasAccessory;
     }
 
-    public int getMaxFlowerQty() {
-        return maxFlowerQty;
-    }
-
-    public void setMaxFlowerQty(int maxFlowerQty) {
-        this.maxFlowerQty = maxFlowerQty;
-    }
-    
 }

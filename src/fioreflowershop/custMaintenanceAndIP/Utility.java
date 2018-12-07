@@ -1,6 +1,6 @@
 package fioreflowershop.custMaintenanceAndIP;
 
-import fioreflowershop.ADT.ArrayLList;
+import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
 import fioreflowershop.Models.Consumer;
 import fioreflowershop.Models.Corporate;
@@ -16,7 +16,7 @@ public class Utility {
 
     // Method to get hardcoded Consumers
     public static ListInterface<Consumer> generateConsumerList() {
-        ListInterface<Consumer> consumers = new ArrayLList<>();
+        ListInterface<Consumer> consumers = new LList<>();
 
         consumers.add(new Consumer("CN0001", "John Starling", "658874123356", "1590 W San Marcos Blvd #UNT 145, San Marcos, CA, 92078", "0214446598"));
         consumers.add(new Consumer("CN0002", "Derek Bernas", "985546213598", "Cardinal, Climax Springs, MO, 65324", "0153226854"));
@@ -29,7 +29,7 @@ public class Utility {
 
     // Method to get hardcoded Corporates
     public static ListInterface<Corporate> generateCorporateList() {
-        ListInterface<Corporate> corps = new ArrayLList<>();
+        ListInterface<Corporate> corps = new LList<>();
 
         corps.add(new Corporate("CO0001", "Apple Arts Sdn. Bhd.", "144 Lrg Zamrud 3/1 Taman Pekan Baru 08000 Sungai Petani 08000, Malaysia", "03745625", 1400.00));
         corps.add(new Corporate("CO0002", "Alpinetime Sdn. Bhd.", "288 Lt Avenue, Jalan Petagas, WP, Kuala Lumpur, Malaysia", "03954622", 1800.00));

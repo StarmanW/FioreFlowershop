@@ -1,6 +1,7 @@
 build/
 nbproject/
 dist/
+test/
 nbproject/project.properties
 nbproject/private/private.properties
 nbproject/genfiles.properties
