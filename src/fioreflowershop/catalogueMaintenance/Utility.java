@@ -45,7 +45,7 @@ public class Utility {
 
         return productTypeList;
     }
-    
+
     //create and initialize accessory list with dummy values
     public static ListInterface<Accessory> generateAccessoryList() {
         ListInterface<Accessory> accessoryList = new LList<>();
@@ -94,12 +94,17 @@ public class Utility {
 
     }
 
-    private static void chooseMainMenuOption(ListInterface<Product> catalogue, ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, boolean INITIAL_STOCK_STATUS) {
+    private static void chooseMainMenuOption(
+            ListInterface<Product> catalogue, ListInterface<Flower> flowerList,
+            ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList,
+            boolean INITIAL_STOCK_STATUS) {
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
 
             System.out.println(
-                    "=== Catalogue Maintenance ===\n"
+                    "\n=============================\n"
+                    + "=== Catalogue Maintenance ===\n"
+                    + "=============================\n"
                     + "1. Display Catalogue\n"
                     + "2. Edit Catalogue\n"
                     + "3. Display Promotion Catalogue\n"
@@ -159,10 +164,9 @@ public class Utility {
     }
 
     private static void chooseEditCatalogueOption(
-            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList, 
-            ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue, 
-            boolean INITIAL_STOCK_STATUS) 
-    {
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
+            ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
+            boolean INITIAL_STOCK_STATUS) {
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
 
@@ -218,7 +222,7 @@ public class Utility {
         } else {
             System.out.println(
                     String.format(
-                            "\n| %3s | %-30s | %-30s | %-30s | %-30s | %9s | %-8s | %-80s |",
+                            "\n| %3s | %-25s | %-30s | %-25s | %-25s | %9s | %-10s | %-80s |",
                             "No.", "Product Type", "Product Name", "Flower Type", "Product Accessorry", "Price", "In Stock", "Description"
                     )
             );
@@ -231,6 +235,7 @@ public class Utility {
                 String productType = tmpProduct.getProductType().getProductTypeName();
                 String productFlower = tmpProduct.getFlowerType().getFlowerName();
                 String productHasStockText = tmpProduct.isInStockToString();
+                int productStockNum = tmpProduct.getProductQty();
                 double productPrice = tmpProduct.getProductPrice();
                 String productDescription = tmpProduct.getProductDescription();
 
@@ -245,10 +250,45 @@ public class Utility {
 
                 System.out.println(
                         String.format(
-                                "| %3d | %-30.30s | %-30.30s | %-30.30s | %-30.30s | %9.2f | %-8s | %-80s |",
+                                "| %3d | %-25.25s | %-30.30s | %-25.25s | %-25.25s | %9.2f | %s - %-4s | %-80s |",
                                 productNumber, productName, productType,
                                 productFlower, productAccessoryText, productPrice,
-                                productHasStockText, productDescription
+                                productHasStockText, productStockNum, productDescription
+                        )
+                );
+            }
+        }
+    }
+
+    public static void displayProductListShort(ListInterface<Product> catalogue) {
+        if (catalogue.isEmpty()) {
+            System.out.println("\nNo products available currently.");
+        } else {
+            System.out.println(
+                    "\n=====================\n"
+                    + "=== Product Stock ===\n"
+                    + "=====================\n"
+                    + String.format(
+                            "\n| %3s | %-25s | %-30s | %-25s | %-10s |",
+                            "No.", "Product Type", "Product Name", "Flower Type", "In Stock"
+                    )
+            );
+
+            for (int i = 0; i < catalogue.size(); i++) {
+                Product tmpProduct = catalogue.get(i);
+
+                int productNumber = i + 1;
+                String productName = tmpProduct.getProductName();
+                String productType = tmpProduct.getProductType().getProductTypeName();
+                String productFlower = tmpProduct.getFlowerType().getFlowerName();
+                String productHasStockText = tmpProduct.isInStockToString();
+                int productStockNum = tmpProduct.getProductQty();
+
+                System.out.println(
+                        String.format(
+                                "| %3d | %-25.25s | %-30.30s | %-25.25s | %s - %-4s |",
+                                productNumber, productName, productType,
+                                productFlower, productHasStockText, productStockNum
                         )
                 );
             }
@@ -309,7 +349,7 @@ public class Utility {
                 selection = sc.nextLine();
 
                 selectionIndex = stringToInt(selection) - 1;
-                if (selectionIndex  >= 0) {
+                if (selectionIndex >= 0) {
                     removeStatus = catalogue.remove(selectionIndex);
                     endLoop = true;
                 } else {
@@ -440,7 +480,9 @@ public class Utility {
         return selectedFlowerType;
     }
 
-    public static Accessory enterProductAccessory(ProductType productType, ListInterface<Accessory> accessoryList) {
+    public static Accessory enterProductAccessory(
+            ProductType productType, ListInterface<Accessory> accessoryList
+    ) {
         Accessory selectedAccessory = null;
         String selection = "";
         int selectionInt = 0;

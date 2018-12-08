@@ -24,6 +24,7 @@ public class CatalogMaintenanceTestMain {
         ListInterface<Accessory> accessoryList = Utility.generateAccessoryList();
         ListInterface<Product> catalogue = Utility.generateCatalogue(flowerList, productTypeList, accessoryList);
 
+        Utility.displayProductListShort(catalogue);
         Utility.mainMenu(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
     }
 }
