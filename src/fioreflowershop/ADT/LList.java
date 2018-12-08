@@ -37,17 +37,8 @@ public class LList<T> implements ListInterface<T> {
         if (isEmpty()) {
             firstNode = newNode;
             lastNode = newNode;
-        } // add to end of nonempty list
-        else {
-//            Node currentNode = firstNode;         
-//            
-//            // traverse linked list with p pointing to the current node
-//            // while have not reached the last node
-//            while (currentNode.next != null)        
-//                currentNode = currentNode.next;
-//            
-//            // make last node(currentNode.next that contains a null value in next node variable) reference new node
-//            currentNode.next = newNode;       
+        } else {    
+            // add to end of nonempty list
             lastNode.next = newNode;
             lastNode = lastNode.next;
         }
@@ -84,7 +75,10 @@ public class LList<T> implements ListInterface<T> {
         }
         return false;
     }
-
+    
+    //=================================
+    //REMOVE LATER IF UNUSED
+    //=================================
     @Override
     public boolean replace(int index, T item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
