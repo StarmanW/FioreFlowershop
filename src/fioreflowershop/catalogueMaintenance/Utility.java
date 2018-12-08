@@ -9,7 +9,6 @@ import fioreflowershop.Models.Flower;
 import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
-import fioreflowershop.ADT.ItemList;
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
 
@@ -24,8 +23,8 @@ public class Utility {
     private static Scanner sc = new Scanner(System.in);
 
     //create and initialize flower list with dummy values
-    public static ItemList<Flower> generateFlowerList() {
-        ItemList<Flower> flowerList = new ItemList<>();
+    public static ListInterface<Flower> generateFlowerList() {
+        ListInterface<Flower> flowerList = new LList<>();
 
         flowerList.add(new Flower("FL001", "Rose", 100, 7.0));
         flowerList.add(new Flower("FL002", "Baby's Breath", 0, 7.8));
@@ -46,20 +45,7 @@ public class Utility {
 
         return productTypeList;
     }
-
-    //create and initialize catalogue(list of products) with dummy values
-    public static ListInterface<Product> generateCatalogue(
-            ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
-            ListInterface<Accessory> accessoryList
-    ) {
-        ListInterface<Product> catalogue = new LList<>();
-
-        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, productTypeList.get(0), flowerList.get(0), null, "Fresh red rose sourced locally.", true));
-        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1), flowerList.get(1), accessoryList.get(1), "A bouquet of fresh wax flowers.", true));
-
-        return catalogue;
-    }
-
+    
     //create and initialize accessory list with dummy values
     public static ListInterface<Accessory> generateAccessoryList() {
         ListInterface<Accessory> accessoryList = new LList<>();
@@ -71,8 +57,21 @@ public class Utility {
         return accessoryList;
     }
 
+    //create and initialize catalogue(list of products) with dummy values
+    public static ListInterface<Product> generateCatalogue(
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
+            ListInterface<Accessory> accessoryList
+    ) {
+        ListInterface<Product> catalogue = new LList<>();
+
+        catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, productTypeList.get(0), flowerList.get(0), null, "Fresh red rose sourced locally.", true));
+        catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1), flowerList.get(1), accessoryList.get(1), "A bouquet of fresh wax flowers.", true));
+
+        return catalogue;
+    }
+
     public static void mainMenu(
-            ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
@@ -95,7 +94,7 @@ public class Utility {
 
     }
 
-    private static void chooseMainMenuOption(ListInterface<Product> catalogue, ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, boolean INITIAL_STOCK_STATUS) {
+    private static void chooseMainMenuOption(ListInterface<Product> catalogue, ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, boolean INITIAL_STOCK_STATUS) {
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
 
@@ -137,7 +136,7 @@ public class Utility {
     }
 
     public static void editCatalogueMenu(
-            ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
@@ -159,7 +158,11 @@ public class Utility {
         }
     }
 
-    private static void chooseEditCatalogueOption(ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue, boolean INITIAL_STOCK_STATUS) {
+    private static void chooseEditCatalogueOption(
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList, 
+            ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue, 
+            boolean INITIAL_STOCK_STATUS) 
+    {
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
 
@@ -253,7 +256,7 @@ public class Utility {
     }
 
     public static boolean addProduct(
-            ItemList<Flower> flowerList, ListInterface<ProductType> productTypeList,
+            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
@@ -406,7 +409,7 @@ public class Utility {
         return selectedProductType;
     }
 
-    public static Flower enterFlowerType(ItemList<Flower> flowerList) {
+    public static Flower enterFlowerType(ListInterface<Flower> flowerList) {
         Flower selectedFlowerType = null;
         String selection = "";
         int selectionInt = 0;
