@@ -10,7 +10,7 @@ package fioreflowershop.ADT;
  * @author ChongJH
  * @param <T>
  */
-public class LList<T> implements ListInterface<T> {
+public class LList<T extends Comparable<? super T>> implements ListInterface<T> {
 
     // reference(pointer) to first node
     private Node firstNode;
@@ -32,20 +32,40 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public boolean add(T item) {
-        Node newNode = new Node(item);
-
-        if (isEmpty()) {
-            firstNode = newNode;
-            lastNode = newNode;
-        } else {    
-            // add to end of nonempty list
-            lastNode.next = newNode;
+//        Node newNode = new Node(item);
+//
+//        if (isEmpty()) {
+//            firstNode = newNode;
+//            lastNode = newNode;
+//        } else {    
+//            // add to end of nonempty list
+//            lastNode.next = newNode;
+//            lastNode = lastNode.next;
+//        }
+        
+        firstNode = add(item, firstNode);
+        
+        if (lastNode == null) {
+            lastNode = firstNode;
+        } 
+        else if (lastNode.next != null) {
             lastNode = lastNode.next;
         }
-
+        
         totalEntries++;
 
         return true;
+    }
+    
+    private Node add(T item, Node currentNode) {
+        if ((currentNode == null) || item.compareTo(currentNode.data) <= 0) {
+            currentNode = new Node(item, currentNode);
+        } else {
+            Node nodeAfter = add(item, currentNode.next);
+            currentNode.next = nodeAfter;
+        }
+        
+        return currentNode;
     }
 
     @Override

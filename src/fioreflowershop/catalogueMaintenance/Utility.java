@@ -75,22 +75,22 @@ public class Utility {
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
-        for (String tryAgain = ""; !tryAgain.equals("n");) {
-            tryAgain = "y";
-
-            for (boolean endLoop = false; !endLoop;) {
+//        for (String tryAgain = ""; !tryAgain.equals("n");) {
+//            tryAgain = "y";
+//
+//            for (boolean endLoop = false; !endLoop;) {
                 chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, INITIAL_STOCK_STATUS);
 
-                System.out.print("\nWould you like to do anything else? (y/n) ");
-                tryAgain = sc.nextLine().toLowerCase();
-
-                if (tryAgain.matches("([yn])")) {
-                    endLoop = true;
-                } else {
-                    System.out.println("\nPlease enter a valid option.");
-                }
-            }
-        }
+//                System.out.print("\nWould you like to do anything else? (y/n) ");
+//                tryAgain = sc.nextLine().toLowerCase();
+//
+//                if (tryAgain.matches("([yn])")) {
+//                    endLoop = true;
+//                } else {
+//                    System.out.println("\nPlease enter a valid option.");
+//                }
+//            }
+//        }
 
     }
 
@@ -108,8 +108,8 @@ public class Utility {
                     + "1. Display Catalogue\n"
                     + "2. Edit Catalogue\n"
                     + "3. Display Promotion Catalogue\n"
-                    + "4. Edit Promotion Catalogue\n\n"
-                    + "Enter 'x' to exit the system.\n"
+                    + "4. Edit Promotion Catalogue\n"
+                    + "x. Exit system.\n"
             );
             System.out.print("Please enter a choice: ");
             selection = sc.nextLine();
@@ -145,22 +145,22 @@ public class Utility {
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
             boolean INITIAL_STOCK_STATUS
     ) {
-        for (String tryAgain = ""; !tryAgain.equals("n");) {
-            tryAgain = "y";
+//        for (String cont = ""; !cont.equals("x");) {
+//            cont = "c";
 
-            for (boolean endLoop = false; !endLoop;) {
+//            for (boolean endLoop = false; !endLoop;) {
                 chooseEditCatalogueOption(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
 
-                System.out.print("\nWould you like to do anything else? (y/n) ");
-                tryAgain = sc.nextLine().toLowerCase();
-
-                if (tryAgain.matches("([yn])")) {
-                    endLoop = true;
-                } else {
-                    System.out.println("\nPlease enter a valid option.");
-                }
-            }
-        }
+//                System.out.print("\nc - continue\nx - back");
+//                cont = sc.nextLine().toLowerCase();
+//
+//                if (cont.matches("([xn])")) {
+//                    endLoop = true;
+//                } else {
+//                    System.out.println("\nPlease enter a valid option.");
+//                }
+//            }
+//        }
     }
 
     private static void chooseEditCatalogueOption(
@@ -173,8 +173,8 @@ public class Utility {
             System.out.println(
                     "\n=== Edit Catalogue ===\n"
                     + "1. Add Product\n"
-                    + "2. Delete Product\n\n"
-                    + "Enter 'x' to go back.\n"
+                    + "2. Delete Product\n"
+                    + "x. Back\n"
             );
             System.out.print("Please enter a choice: ");
 
@@ -287,7 +287,7 @@ public class Utility {
                 System.out.println(
                         String.format(
                                 "| %3d | %-25.25s | %-30.30s | %-25.25s | %s - %-4s |",
-                                productNumber, productName, productType,
+                                productNumber, productType, productName,
                                 productFlower, productHasStockText, productStockNum
                         )
                 );
