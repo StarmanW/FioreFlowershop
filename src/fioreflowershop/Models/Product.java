@@ -18,6 +18,16 @@ public class Product implements Comparable<Product>{
     public Product() {
         this("", "", 0.0, 0, null, null, null, "", false);
     }
+    
+    public Product(Product originalProduct) {
+        this(
+                originalProduct.getProductID(), originalProduct.getProductName(), 
+                originalProduct.getProductPrice(), originalProduct.getProductQty(), 
+                originalProduct.getProductType(), originalProduct.getFlowerType(),
+                originalProduct.getProductAccessory(), originalProduct.getProductDescription(), 
+                originalProduct.isInStock()
+        );
+    }
 
     public Product(
             String productID, String productName, double productPrice, int productQty, 
@@ -120,5 +130,5 @@ public class Product implements Comparable<Product>{
     public int compareTo(Product other) {
         return this.getProductType().compareTo(other.getProductType());
     }
- 
+
 }
