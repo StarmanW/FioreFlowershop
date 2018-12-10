@@ -1,6 +1,6 @@
 package fioreflowershop.catalogueorder;
 
-import Model.CatalogueOrder;
+import fioreflowershop.Models.CatalogueOrder;
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
 import java.util.Scanner;
