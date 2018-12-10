@@ -12,8 +12,7 @@ import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
 import fioreflowershop.ADT.PromotionCatalogue;
-import java.util.LinkedList;
-
+import java.time.Month;
 import java.util.Scanner;
 
 /**
@@ -75,16 +74,16 @@ public class Utility {
 
     public static PromotionCatalogue generatePromoCatalogue(ListInterface<Product> catalogue) {
         PromotionCatalogue promoCatalogue = new PromotionCatalogue();
-        
+
         promoCatalogue.setPromotionName("Winter Sales");
-        promoCatalogue.setPromotionMonth(12);
+        promoCatalogue.setPromotionMonth(Month.DECEMBER);
         promoCatalogue.setPromotionDiscount(50);
         promoCatalogue.addPromoProduct(catalogue.get(1));
         promoCatalogue.addPromoProduct(catalogue.get(2));
-        
+
         return promoCatalogue;
     }
-    
+
     public static void mainMenu(
             ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
@@ -94,7 +93,7 @@ public class Utility {
 //            tryAgain = "y";
 //
 //            for (boolean endLoop = false; !endLoop;) {
-                chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, promoCatalogue, INITIAL_STOCK_STATUS);
+        chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, promoCatalogue, INITIAL_STOCK_STATUS);
 
 //                System.out.print("\nWould you like to do anything else? (y/n) ");
 //                tryAgain = sc.nextLine().toLowerCase();
@@ -106,7 +105,6 @@ public class Utility {
 //                }
 //            }
 //        }
-
     }
 
     private static void chooseMainMenuOption(
@@ -123,7 +121,7 @@ public class Utility {
                     + "=============================\n"
                     + "1. Display Catalogue\n"
                     + "2. Edit Catalogue\n"
-                    + "3. Display Promotion Catalogue\n"
+                    + "3. Display Promotion Catalogue (" + promoCatalogue.getPromotionName() + ")\n"
                     + "4. Edit Promotion Catalogue\n"
                     + "x. Exit system.\n"
             );
@@ -165,7 +163,7 @@ public class Utility {
 //            cont = "c";
 
 //            for (boolean endLoop = false; !endLoop;) {
-                chooseEditCatalogueOption(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
+        chooseEditCatalogueOption(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
 
 //                System.out.print("\nc - continue\nx - back");
 //                cont = sc.nextLine().toLowerCase();
@@ -226,9 +224,12 @@ public class Utility {
         displayProductList(catalogue);
         promptEnterToContinue();
     }
-    
+
     public static void displayPromoCatalogue(PromotionCatalogue promoCatalogue) {
-        System.out.println("\n=== " + promoCatalogue.getPromotionName() + " Catalogue ===");
+        System.out.println(
+                "\n=== " + promoCatalogue.getPromotionName() + " Catalogue ==="
+                + "\n=== " + promoCatalogue.getPromotionDiscount() + "% Discount ==="
+        );
 
         displayProductList(promoCatalogue.getProductList());
         promptEnterToContinue();
