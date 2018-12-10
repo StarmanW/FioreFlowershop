@@ -10,7 +10,7 @@ package fioreflowershop.ADT;
  * @author ChongJH
  * @param <T>
  */
-public class LList<T> implements ListInterface<T> {
+public class LList<T extends Comparable<? super T>> implements ListInterface<T> {
 
     // reference(pointer) to first node
     private Node firstNode;
@@ -32,29 +32,40 @@ public class LList<T> implements ListInterface<T> {
 
     @Override
     public boolean add(T item) {
-        Node newNode = new Node(item);
-
-        if (isEmpty()) {
-            firstNode = newNode;
-            lastNode = newNode;
-        } // add to end of nonempty list
-        else {
-//            Node currentNode = firstNode;         
-//            
-//            // traverse linked list with p pointing to the current node
-//            // while have not reached the last node
-//            while (currentNode.next != null)        
-//                currentNode = currentNode.next;
-//            
-//            // make last node(currentNode.next that contains a null value in next node variable) reference new node
-//            currentNode.next = newNode;       
-            lastNode.next = newNode;
+//        Node newNode = new Node(item);
+//
+//        if (isEmpty()) {
+//            firstNode = newNode;
+//            lastNode = newNode;
+//        } else {    
+//            // add to end of nonempty list
+//            lastNode.next = newNode;
+//            lastNode = lastNode.next;
+//        }
+        
+        firstNode = add(item, firstNode);
+        
+        if (lastNode == null) {
+            lastNode = firstNode;
+        } 
+        else if (lastNode.next != null) {
             lastNode = lastNode.next;
         }
-
+        
         totalEntries++;
 
         return true;
+    }
+    
+    private Node add(T item, Node currentNode) {
+        if ((currentNode == null) || item.compareTo(currentNode.data) <= 0) {
+            currentNode = new Node(item, currentNode);
+        } else {
+            Node nodeAfter = add(item, currentNode.next);
+            currentNode.next = nodeAfter;
+        }
+        
+        return currentNode;
     }
 
     @Override
@@ -84,7 +95,10 @@ public class LList<T> implements ListInterface<T> {
         }
         return false;
     }
-
+    
+    //=================================
+    //REMOVE LATER IF UNUSED
+    //=================================
     @Override
     public boolean replace(int index, T item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
