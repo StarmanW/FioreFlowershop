@@ -17,17 +17,19 @@ public class PromotionCatalogue<T>{
     private String promotionName;
     private int promotionDiscount;
     private int promotionMonth;
-    private Product productArray[];
+    private ListInterface<Product> productList;
 
     public PromotionCatalogue() {
-        this("", 0, 0, null);
+        this("", 0, 1, null);
+        ListInterface<Product> newProductList = new LList<>();
+        this.setProductList(newProductList);
     }
 
-    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, Product[] productArray) {
+    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, ListInterface<Product> productList) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
-        this.productArray = productArray;
+        this.productList = productList;
     }
 
     public String getPromotionName() {
@@ -54,12 +56,20 @@ public class PromotionCatalogue<T>{
         this.promotionMonth = promotionMonth;
     }
 
-    public Product[] getProductArray() {
-        return productArray;
+    public ListInterface<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductArray(Product[] productArray) {
-        this.productArray = productArray;
+    public void setProductList(ListInterface<Product> productList) {
+        this.productList = productList;
+    }
+    
+    public void addPromoProduct(Product product) {
+        this.productList.add(product);
+    }
+    
+    public void removePromoProduct(int selectedIndex) {
+        this.productList.remove(selectedIndex);
     }
 
 }

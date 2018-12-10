@@ -11,6 +11,8 @@ import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
+import fioreflowershop.ADT.PromotionCatalogue;
+import java.util.LinkedList;
 
 import java.util.Scanner;
 
@@ -66,20 +68,33 @@ public class Utility {
 
         catalogue.add(new Product("PD001", "Fresh Rose", 7.0, 10, productTypeList.get(0), flowerList.get(0), null, "Fresh red rose sourced locally.", true));
         catalogue.add(new Product("PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1), flowerList.get(1), accessoryList.get(1), "A bouquet of fresh wax flowers.", true));
+        catalogue.add(new Product("PD003", "Rose Bouquet", 20.0, 5, productTypeList.get(1), flowerList.get(2), accessoryList.get(1), "A bouquet of fresh rose.", true));
 
         return catalogue;
     }
 
+    public static PromotionCatalogue generatePromoCatalogue(ListInterface<Product> catalogue) {
+        PromotionCatalogue promoCatalogue = new PromotionCatalogue();
+        
+        promoCatalogue.setPromotionName("Winter Sales");
+        promoCatalogue.setPromotionMonth(12);
+        promoCatalogue.setPromotionDiscount(50);
+        promoCatalogue.addPromoProduct(catalogue.get(1));
+        promoCatalogue.addPromoProduct(catalogue.get(2));
+        
+        return promoCatalogue;
+    }
+    
     public static void mainMenu(
             ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
-            boolean INITIAL_STOCK_STATUS
+            PromotionCatalogue promoCatalogue, boolean INITIAL_STOCK_STATUS
     ) {
 //        for (String tryAgain = ""; !tryAgain.equals("n");) {
 //            tryAgain = "y";
 //
 //            for (boolean endLoop = false; !endLoop;) {
-                chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, INITIAL_STOCK_STATUS);
+                chooseMainMenuOption(catalogue, flowerList, productTypeList, accessoryList, promoCatalogue, INITIAL_STOCK_STATUS);
 
 //                System.out.print("\nWould you like to do anything else? (y/n) ");
 //                tryAgain = sc.nextLine().toLowerCase();
@@ -97,7 +112,8 @@ public class Utility {
     private static void chooseMainMenuOption(
             ListInterface<Product> catalogue, ListInterface<Flower> flowerList,
             ListInterface<ProductType> productTypeList, ListInterface<Accessory> accessoryList,
-            boolean INITIAL_STOCK_STATUS) {
+            PromotionCatalogue promoCatalogue, boolean INITIAL_STOCK_STATUS
+    ) {
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
 
@@ -125,7 +141,7 @@ public class Utility {
                     );
                     break;
                 case "3":
-                    //display Promotional Catalogue
+                    displayPromoCatalogue(promoCatalogue);
                     break;
                 case "4":
                     //Display edit promo catalogue menu
@@ -208,6 +224,13 @@ public class Utility {
         );
 
         displayProductList(catalogue);
+        promptEnterToContinue();
+    }
+    
+    public static void displayPromoCatalogue(PromotionCatalogue promoCatalogue) {
+        System.out.println("\n=== " + promoCatalogue.getPromotionName() + " Catalogue ===");
+
+        displayProductList(promoCatalogue.getProductList());
         promptEnterToContinue();
     }
 

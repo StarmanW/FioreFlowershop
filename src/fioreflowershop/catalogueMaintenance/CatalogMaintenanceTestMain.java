@@ -10,6 +10,7 @@ import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.ListInterface;
+import fioreflowershop.ADT.PromotionCatalogue;
 
 /**
  *
@@ -23,8 +24,9 @@ public class CatalogMaintenanceTestMain {
         ListInterface<ProductType> productTypeList = Utility.generateProductTypeList();
         ListInterface<Accessory> accessoryList = Utility.generateAccessoryList();
         ListInterface<Product> catalogue = Utility.generateCatalogue(flowerList, productTypeList, accessoryList);
-
+        PromotionCatalogue promoCatalogue = Utility.generatePromoCatalogue(catalogue);
+        
         Utility.displayProductListShort(catalogue);
-        Utility.mainMenu(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
+        Utility.mainMenu(flowerList, productTypeList, accessoryList, catalogue, promoCatalogue, INITIAL_STOCK_STATUS);
     }
 }
