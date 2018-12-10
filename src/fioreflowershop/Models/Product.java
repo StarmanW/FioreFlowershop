@@ -4,7 +4,7 @@ package fioreflowershop.Models;
  *
  * @author ChongJH
  */
-public class Product {
+public class Product implements Comparable<Product>{
     private String productID;
     private String productName;
     private double productPrice;
@@ -114,6 +114,11 @@ public class Product {
     
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
+    }
+
+    @Override
+    public int compareTo(Product other) {
+        return this.getProductType().compareTo(other.getProductType());
     }
  
 }
