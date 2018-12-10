@@ -15,10 +15,8 @@ public interface ListInterface<T> {
     public boolean replace(int index, T item);
     public T get(int index);
     public int contains(T item);
-    public boolean checkType(T item);
     public int size();
     public boolean isEmpty();
-    public boolean isFull();
     @Override
     public String toString();
 }
