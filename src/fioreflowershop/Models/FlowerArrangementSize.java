@@ -9,7 +9,7 @@ package fioreflowershop.Models;
  *
  * @author StarmanW
  */
-public class FlowerArrangementSize {
+public class FlowerArrangementSize implements Comparable<FlowerArrangementStyle> {
 
     // Private properties
     private String sizeType;
@@ -40,5 +40,10 @@ public class FlowerArrangementSize {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public int compareTo(FlowerArrangementStyle o) {
+        return 0;
     }
 }
