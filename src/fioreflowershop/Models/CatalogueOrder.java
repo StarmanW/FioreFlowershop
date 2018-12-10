@@ -1,10 +1,10 @@
-package Model;
+package fioreflowershop.Models;
 
 /**
  *
  * @author Thiban
  */
-public class CatalogueOrder {
+public class CatalogueOrder implements Comparable<CatalogueOrder> {
 
     private String flowerName;
     private double flowerPrice;
@@ -12,7 +12,7 @@ public class CatalogueOrder {
     private int ttlItem;
 
     public CatalogueOrder() {
-        this("", 0.0, 0,0);
+        this("", 0.0, 0, 0);
     }
 
     public CatalogueOrder(String flowerName, double flowerPrice, int ttlQty, int ttlItem) {
@@ -22,7 +22,6 @@ public class CatalogueOrder {
         this.ttlItem = ttlItem;
     }
 
-    
     public String getFlowerName() {
         return flowerName;
     }
@@ -39,8 +38,6 @@ public class CatalogueOrder {
         return ttlItem;
     }
 
-    
-    
     public void setFlowerName(String flowerName) {
         this.flowerName = flowerName;
     }
@@ -56,5 +53,9 @@ public class CatalogueOrder {
     public void setTtlItem(int ttlItem) {
         this.ttlItem = ttlItem;
     }
-    
+
+    @Override
+    public int compareTo(CatalogueOrder o) {
+        return 0;
+    }
 }
