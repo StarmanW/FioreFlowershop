@@ -6,6 +6,7 @@
 package fioreflowershop.ADT;
 
 import fioreflowershop.Models.Product;
+import java.time.Month;
 
 /**
  *
@@ -16,16 +17,16 @@ public class PromotionCatalogue<T>{
 
     private String promotionName;
     private int promotionDiscount;
-    private int promotionMonth;
+    private Month promotionMonth;
     private ListInterface<Product> productList;
 
     public PromotionCatalogue() {
-        this("", 0, 1, null);
+        this("", 0, Month.JANUARY, null);
         ListInterface<Product> newProductList = new LList<>();
         this.setProductList(newProductList);
     }
 
-    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, ListInterface<Product> productList) {
+    public PromotionCatalogue(String promotionName, int promotionDiscount, Month promotionMonth, ListInterface<Product> productList) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
@@ -48,11 +49,11 @@ public class PromotionCatalogue<T>{
         this.promotionDiscount = promotionDiscount;
     }
 
-    public int getPromotionMonth() {
+    public Month getPromotionMonth() {
         return promotionMonth;
     }
 
-    public void setPromotionMonth(int promotionMonth) {
+    public void setPromotionMonth(Month promotionMonth) {
         this.promotionMonth = promotionMonth;
     }
 
@@ -65,11 +66,17 @@ public class PromotionCatalogue<T>{
     }
     
     public void addPromoProduct(Product product) {
-        this.productList.add(product);
+        Product promoProduct = new Product(product);
+        double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());  
+        promoProduct.setProductPrice(discountedPrice);
+        this.productList.add(promoProduct);
     }
     
     public void removePromoProduct(int selectedIndex) {
         this.productList.remove(selectedIndex);
     }
 
+    private double calcDiscountPrice (double originalPrice) {
+        return originalPrice * (100 - this.promotionDiscount) / 100;
+    }
 }
