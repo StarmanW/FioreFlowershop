@@ -467,7 +467,7 @@ public class Utility {
                     + "\n=== " + promoCatalogue.getPromotionDiscount() + "% Discount ==="
             );
 
-            displayProductList(promoCatalogue.getPromotionCatalogue());
+            displayProductList(promoCatalogue.getPromotionProductList());
         } else {
             System.out.println("\nNo promotional catalogue is set.");
         }
@@ -501,10 +501,10 @@ public class Utility {
                 case "3":
                     if (promoCatalogue.isInitialized()) {
                         System.out.println("\n=== Current Promotion Catalogue ===");
-                        displayProducts(promoCatalogue.getPromotionCatalogue());
+                        displayProductList(promoCatalogue.getPromotionProductList());
 
                         System.out.println("\n=== Products Avaliable For Promotion ===");
-                        addPromoProduct(catalogue, promoCatalogue.getPromotionCatalogue());
+                        addPromoProduct(catalogue, promoCatalogue);
                     } else {
                         System.out.println("\nPlease add a promotion catalogue first.");
                     }
@@ -512,7 +512,7 @@ public class Utility {
                 case "4":
                     if (promoCatalogue.isInitialized()) {
                         System.out.println("\n=== Current Promotion Catalogue ===");
-                        displayProducts(promoCatalogue.getPromotionCatalogue());
+                        displayProductList(promoCatalogue.getPromotionProductList());
                         removePromoProduct(promoCatalogue);
                     } else {
                         System.out.println("\nPlease add a promotion catalogue first.");
@@ -572,7 +572,7 @@ public class Utility {
         promoCatalogue.setPromotionName(promotionName);
         promoCatalogue.setPromotionDiscount(promotionDiscount);
         promoCatalogue.setPromotionMonth(promotionMonth);
-        promoCatalogue.setPromotionCatalogue(promotionCatalogue);
+        promoCatalogue.setPromotionProductList(promotionCatalogue);
         promoCatalogue.setIsInitialized(isInitialized);
     }
 
@@ -632,12 +632,12 @@ public class Utility {
         promoCatalogue.setPromotionName("");
         promoCatalogue.setPromotionDiscount(0);
         promoCatalogue.setPromotionMonth(null);
-        promoCatalogue.setPromotionCatalogue(null);
+        promoCatalogue.setPromotionProductList(null);
         promoCatalogue.setIsInitialized(false);
     }
 
     private static void addPromoProduct(
-            ListInterface<Product> catalogue, ListInterface<Product> promoCatalogue
+            ListInterface<Product> catalogue, PromotionCatalogue promoCatalogue
     ) {
         ListInterface<Product> tmpPromoProductList = new LList<>();
 
@@ -654,7 +654,7 @@ public class Utility {
                 }
             }
 
-            displayProducts(tmpPromoProductList);
+            displayProductList(tmpPromoProductList);
 
             if (!tmpPromoProductList.isEmpty()) {
                 System.out.print("\nPlease enter a selection: ");
@@ -672,7 +672,7 @@ public class Utility {
                         catalogue.get(selectedProductIndex).setInPromotion(true);
                     }
 
-                    promoCatalogue.add(selectedProduct);
+                    promoCatalogue.getPromotionProductList().add(selectedProduct);
                     endLoop = true;
                 }
             } else {
@@ -680,18 +680,19 @@ public class Utility {
             }
         }
 
+        promptDisplayPromoCatalogue(promoCatalogue);
     }
 
     private static void removePromoProduct(PromotionCatalogue promoCatalogue) {
         int selection = 0;
-        int promotionCatalogueSize = promoCatalogue.getPromotionCatalogue().size();
+        int promotionCatalogueSize = promoCatalogue.getPromotionProductList().size();
         
         for (boolean endLoop = false; !endLoop;) {
-            System.out.println("\nPlease select a promotion product to remove: ");
+            System.out.print("\nPlease select a promotion product to remove: ");
             selection = stringToInt(sc.nextLine());
 
             if (selection > 0 || selection < promotionCatalogueSize) {
-                promoCatalogue.getPromotionCatalogue().remove(selection - 1);
+                promoCatalogue.getPromotionProductList().remove(selection - 1);
                 endLoop = true;
             } else {
                 System.out.println(
@@ -699,6 +700,8 @@ public class Utility {
                         promotionCatalogueSize + ")");
             }
         }
+        
+        promptDisplayPromoCatalogue(promoCatalogue);
     }
 
     private static void promptEnterToContinue() {
@@ -707,10 +710,6 @@ public class Utility {
     }
 
     private static void displayProductList(ListInterface<Product> catalogue) {
-        displayProducts(catalogue);
-    }
-
-    private static void displayProducts(ListInterface<Product> catalogue) {
         if (catalogue.isEmpty()) {
             System.out.println("\nNo products available currently.");
         } else {
@@ -792,10 +791,21 @@ public class Utility {
     private static void promptDisplayCatalogue(ListInterface<Product> catalogue) {
         String viewCatalogueSelection = "";
 
-        System.out.print("Would you like to display product list? (y/n)");
+        System.out.print("\nWould you like to display catalogue? (y/n)");
         viewCatalogueSelection = sc.nextLine().toLowerCase();
         if (viewCatalogueSelection.equals("y")) {
             displayCatalogue(catalogue);
+            promptEnterToContinue();
+        }
+    }
+    
+    private static void promptDisplayPromoCatalogue(PromotionCatalogue promotionCatalogue) {
+        String viewCatalogueSelection = "";
+
+        System.out.print("\nWould you like to display promotion catalogue? (y/n)");
+        viewCatalogueSelection = sc.nextLine().toLowerCase();
+        if (viewCatalogueSelection.equals("y")) {
+            displayPromoCatalogue(promotionCatalogue);
         }
     }
 
