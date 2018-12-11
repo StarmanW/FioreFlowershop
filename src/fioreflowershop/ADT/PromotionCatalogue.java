@@ -11,9 +11,9 @@ import java.time.Month;
 /**
  *
  * @author ChongJH
- * @param <T>
  */
-public class PromotionCatalogue<T>{
+public class PromotionCatalogue
+{
 
     private String promotionName;
     private int promotionDiscount;
