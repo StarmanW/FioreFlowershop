@@ -18,20 +18,20 @@ public class PromotionCatalogue
     private String promotionName;
     private int promotionDiscount;
     private Month promotionMonth;
-    private ListInterface<Product> productList;
+    private ListInterface<Product> promotionCatalogue;
     private boolean isInitialized;
 
     public PromotionCatalogue() {
         this("", 0, Month.JANUARY, null, false);
         ListInterface<Product> newProductList = new LList<>();
-        this.setProductList(newProductList);
+        this.setPromotionCatalogue(newProductList);
     }
 
     public PromotionCatalogue(String promotionName, int promotionDiscount, Month promotionMonth, ListInterface<Product> productList, boolean isInitialized) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
-        this.productList = productList;
+        this.promotionCatalogue = productList;
         this.isInitialized = isInitialized;
     }
 
@@ -59,12 +59,12 @@ public class PromotionCatalogue
         this.promotionMonth = promotionMonth;
     }
 
-    public ListInterface<Product> getProductList() {
-        return productList;
+    public ListInterface<Product> getPromotionCatalogue() {
+        return promotionCatalogue;
     }
 
-    public void setProductList(ListInterface<Product> productList) {
-        this.productList = productList;
+    public void setPromotionCatalogue(ListInterface<Product> promotionCatalogue) {
+        this.promotionCatalogue = promotionCatalogue;
     }
 
     public boolean isInitialized() {
@@ -79,11 +79,11 @@ public class PromotionCatalogue
         Product promoProduct = new Product(product);
         double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());  
         promoProduct.setProductPrice(discountedPrice);
-        this.productList.add(promoProduct);
+        this.promotionCatalogue.add(promoProduct);
     }
     
     public void removePromoProduct(int selectedIndex) {
-        this.productList.remove(selectedIndex);
+        this.promotionCatalogue.remove(selectedIndex);
     }
 
     private double calcDiscountPrice (double originalPrice) {
