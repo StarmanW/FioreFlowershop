@@ -510,7 +510,13 @@ public class Utility {
                     }
                     break;
                 case "4":
-//                    removePromoProduct(promoCatalogue);
+                    if (promoCatalogue.isInitialized()) {
+                        System.out.println("\n=== Current Promotion Catalogue ===");
+                        displayProducts(promoCatalogue.getPromotionCatalogue());
+                        removePromoProduct(promoCatalogue);
+                    } else {
+                        System.out.println("\nPlease add a promotion catalogue first.");
+                    }
                     break;
                 case "x":
                     endLoop = true;
@@ -572,53 +578,53 @@ public class Utility {
 
     private static String enterPromotionName() {
         String promotionName = "";
-        
+
         System.out.print("\nPlease enter promotion name: ");
-        
+
         for (boolean endLoop = false; !endLoop;) {
             promotionName = sc.nextLine();
-            
+
             if (!promotionName.isEmpty()) {
                 endLoop = true;
             } else {
                 System.out.println("\nPlease enter a promotion name.");
             }
         }
-        
+
         return promotionName;
     }
 
     private static int enterPromotionDiscount() {
         String promotionDiscount = "";
-        
+
         for (boolean endLoop = false; !endLoop;) {
             System.out.print("\nPlease enter promotion discount percentage: ");
             promotionDiscount = sc.nextLine();
-            
+
             if (promotionDiscount.matches("^[1-9][0-9]?$|^100$")) {
                 endLoop = true;
             } else {
                 System.out.println("\nPlease enter promotion discount percentage. (1 - 100)");
             }
         }
-        
+
         return Integer.parseInt(promotionDiscount);
     }
 
     private static Month enterPromotionMonth() {
         String promotionMonth = "";
-        
+
         for (boolean endLoop = false; !endLoop;) {
             System.out.print("\nPlease enter promotion month: ");
             promotionMonth = sc.nextLine();
-            
+
             if (promotionMonth.matches("^[2-9]|1[0-2]?$")) {
                 endLoop = true;
             } else {
                 System.out.println("\nPlease enter a valid promotion month. (1 - 12)");
             }
         }
-        
+
         return Month.of(Integer.parseInt(promotionMonth));
     }
 
@@ -674,6 +680,25 @@ public class Utility {
             }
         }
 
+    }
+
+    private static void removePromoProduct(PromotionCatalogue promoCatalogue) {
+        int selection = 0;
+        int promotionCatalogueSize = promoCatalogue.getPromotionCatalogue().size();
+        
+        for (boolean endLoop = false; !endLoop;) {
+            System.out.println("\nPlease select a promotion product to remove: ");
+            selection = stringToInt(sc.nextLine());
+
+            if (selection > 0 || selection < promotionCatalogueSize) {
+                promoCatalogue.getPromotionCatalogue().remove(selection - 1);
+                endLoop = true;
+            } else {
+                System.out.println(
+                        "\nPlease enter a valid selection. (1 - " + 
+                        promotionCatalogueSize + ")");
+            }
+        }
     }
 
     private static void promptEnterToContinue() {
