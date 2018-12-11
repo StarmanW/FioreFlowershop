@@ -19,18 +19,20 @@ public class PromotionCatalogue<T>{
     private int promotionDiscount;
     private Month promotionMonth;
     private ListInterface<Product> productList;
+    private boolean isInitialized;
 
     public PromotionCatalogue() {
-        this("", 0, Month.JANUARY, null);
+        this("", 0, Month.JANUARY, null, false);
         ListInterface<Product> newProductList = new LList<>();
         this.setProductList(newProductList);
     }
 
-    public PromotionCatalogue(String promotionName, int promotionDiscount, Month promotionMonth, ListInterface<Product> productList) {
+    public PromotionCatalogue(String promotionName, int promotionDiscount, Month promotionMonth, ListInterface<Product> productList, boolean isInitialized) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
         this.productList = productList;
+        this.isInitialized = isInitialized;
     }
 
     public String getPromotionName() {
@@ -63,6 +65,14 @@ public class PromotionCatalogue<T>{
 
     public void setProductList(ListInterface<Product> productList) {
         this.productList = productList;
+    }
+
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public void setIsInitialized(boolean isInitialized) {
+        this.isInitialized = isInitialized;
     }
     
     public void addPromoProduct(Product product) {

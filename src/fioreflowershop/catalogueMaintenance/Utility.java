@@ -80,6 +80,7 @@ public class Utility {
         promoCatalogue.setPromotionDiscount(50);
         promoCatalogue.addPromoProduct(catalogue.get(1));
         promoCatalogue.addPromoProduct(catalogue.get(2));
+        promoCatalogue.setIsInitialized(true);
 
         return promoCatalogue;
     }
@@ -121,7 +122,7 @@ public class Utility {
                     + "=============================\n"
                     + "1. Display Catalogue\n"
                     + "2. Edit Catalogue\n"
-                    + "3. Display Promotion Catalogue (" + promoCatalogue.getPromotionName() + ")\n"
+                    + "3. Display Promotion Catalogue\n"
                     + "4. Edit Promotion Catalogue\n"
                     + "x. Exit system.\n"
             );
@@ -226,12 +227,17 @@ public class Utility {
     }
 
     public static void displayPromoCatalogue(PromotionCatalogue promoCatalogue) {
-        System.out.println(
-                "\n=== " + promoCatalogue.getPromotionName() + " Catalogue ==="
-                + "\n=== " + promoCatalogue.getPromotionDiscount() + "% Discount ==="
-        );
+        if (promoCatalogue.isInitialized()) {
+            System.out.println(
+                    "\n=== " + promoCatalogue.getPromotionName() + " Catalogue (" + promoCatalogue.getPromotionMonth().toString().toLowerCase()+ ") ==="
+                    + "\n=== " + promoCatalogue.getPromotionDiscount() + "% Discount ==="
+            );
 
-        displayProductList(promoCatalogue.getProductList());
+            displayProductList(promoCatalogue.getProductList());
+        } else {
+            System.out.println("\nNo promotional catalogue is set.");
+        }
+        
         promptEnterToContinue();
     }
 
