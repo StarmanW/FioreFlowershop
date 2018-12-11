@@ -496,7 +496,7 @@ public class Utility {
                     addPromoCatalogue(promoCatalogue);
                     break;
                 case "2":
-//                    removePromoCatalogue();
+                    removePromoCatalogue(promoCatalogue);
                     break;
                 case "3":
                     if (promoCatalogue.isInitialized()) {
@@ -622,8 +622,12 @@ public class Utility {
         return Month.of(Integer.parseInt(promotionMonth));
     }
 
-    private static void removePromoCatalogue() {
-
+    private static void removePromoCatalogue(PromotionCatalogue promoCatalogue) {
+        promoCatalogue.setPromotionName("");
+        promoCatalogue.setPromotionDiscount(0);
+        promoCatalogue.setPromotionMonth(null);
+        promoCatalogue.setPromotionCatalogue(null);
+        promoCatalogue.setIsInitialized(false);
     }
 
     private static void addPromoProduct(
