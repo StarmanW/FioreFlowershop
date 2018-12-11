@@ -12,12 +12,13 @@ import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.ListInterface;
 import fioreflowershop.ADT.PromotionCatalogue;
 
-/**
+/** 
  *
  * @author ChongJH
  */
 public class CatalogMaintenanceTestMain {
     private static final boolean INITIAL_STOCK_STATUS = true;
+    private static final boolean INITIAL_PROMOTION_STATUS = false;
     
     public static void main(String[] args) {
         ListInterface<Flower> flowerList = Utility.generateFlowerList();
@@ -27,6 +28,9 @@ public class CatalogMaintenanceTestMain {
         PromotionCatalogue promoCatalogue = Utility.generatePromoCatalogue(catalogue);
         
         Utility.displayProductListShort(catalogue);
-        Utility.mainMenu(flowerList, productTypeList, accessoryList, catalogue, promoCatalogue, INITIAL_STOCK_STATUS);
+        Utility.mainMenu(
+                flowerList, productTypeList, accessoryList, catalogue, promoCatalogue, 
+                INITIAL_STOCK_STATUS, INITIAL_PROMOTION_STATUS
+        );
     }
 }
