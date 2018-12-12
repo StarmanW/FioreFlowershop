@@ -6,28 +6,33 @@
 package fioreflowershop.ADT;
 
 import fioreflowershop.Models.Product;
+import java.time.Month;
 
 /**
  *
  * @author ChongJH
- * @param <T>
  */
-public class PromotionCatalogue<T>{
+public class PromotionCatalogue
+{
 
     private String promotionName;
     private int promotionDiscount;
-    private int promotionMonth;
-    private Product productArray[];
+    private Month promotionMonth;
+    private ListInterface<Product> promotionProductList;
+    private boolean isInitialized;
 
     public PromotionCatalogue() {
-        this("", 0, 0, null);
+        this("", 0, Month.JANUARY, null, false);
+        ListInterface<Product> newProductList = new LList<>();
+        this.setPromotionProductList(newProductList);
     }
 
-    public PromotionCatalogue(String promotionName, int promotionDiscount, int promotionMonth, Product[] productArray) {
+    public PromotionCatalogue(String promotionName, int promotionDiscount, Month promotionMonth, ListInterface<Product> productList, boolean isInitialized) {
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;
         this.promotionMonth = promotionMonth;
-        this.productArray = productArray;
+        this.promotionProductList = productList;
+        this.isInitialized = isInitialized;
     }
 
     public String getPromotionName() {
@@ -46,20 +51,42 @@ public class PromotionCatalogue<T>{
         this.promotionDiscount = promotionDiscount;
     }
 
-    public int getPromotionMonth() {
+    public Month getPromotionMonth() {
         return promotionMonth;
     }
 
-    public void setPromotionMonth(int promotionMonth) {
+    public void setPromotionMonth(Month promotionMonth) {
         this.promotionMonth = promotionMonth;
     }
 
-    public Product[] getProductArray() {
-        return productArray;
+    public ListInterface<Product> getPromotionProductList() {
+        return promotionProductList;
     }
 
-    public void setProductArray(Product[] productArray) {
-        this.productArray = productArray;
+    public void setPromotionProductList(ListInterface<Product> promotionProductList) {
+        this.promotionProductList = promotionProductList;
     }
 
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public void setIsInitialized(boolean isInitialized) {
+        this.isInitialized = isInitialized;
+    }
+    
+    public void addPromoProduct(Product product) {
+        Product promoProduct = new Product(product);
+        double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());  
+        promoProduct.setProductPrice(discountedPrice);
+        this.promotionProductList.add(promoProduct);
+    }
+    
+    public void removePromoProduct(int selectedIndex) {
+        this.promotionProductList.remove(selectedIndex);
+    }
+
+    private double calcDiscountPrice (double originalPrice) {
+        return originalPrice * (100 - this.promotionDiscount) / 100;
+    }
 }
