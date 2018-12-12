@@ -4,7 +4,7 @@ package fioreflowershop.Models;
  *
  * @author Samuel Wong Kim Foong
  */
-public class ProductOrder {
+public class ProductOrder implements Comparable<ProductOrder> {
 
     private Product product;
     private int quantity;
@@ -36,6 +36,11 @@ public class ProductOrder {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public int compareTo(ProductOrder o) {
+        return 0;
     }
 
 }

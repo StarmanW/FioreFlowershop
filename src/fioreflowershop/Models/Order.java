@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * @author Thiban
  */
-public class Order {
+public class Order implements Comparable<Order> {
 
     private String orderID;
     private Customer customer;
@@ -71,5 +71,10 @@ public class Order {
         if (totalPayment >= 0.0) {
             this.totalPayment = totalPayment;
         }
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return 0;
     }
 }

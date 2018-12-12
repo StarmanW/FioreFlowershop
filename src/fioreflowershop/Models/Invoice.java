@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * @author Samuel Wong Kim Foong
  */
-public class Invoice {
+public class Invoice implements Comparable<Invoice>{
 
     public final static double SALES_TAX = 5;
 
@@ -74,5 +74,10 @@ public class Invoice {
 
     public void setOrders(ListInterface<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public int compareTo(Invoice o) {
+        return 0;
     }
 }
