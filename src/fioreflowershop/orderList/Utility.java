@@ -6,12 +6,10 @@
 package fioreflowershop.orderList;
 
 
-import fioreflowershop.ADT.ArrayLList;
 import fioreflowershop.ADT.ListInterface;
 import fioreflowershop.Models.Consumer;
 import fioreflowershop.Models.Corporate;
 import fioreflowershop.Models.OrderList;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +23,7 @@ public class Utility {
    public static char choices = 'n';
     // Method to get hardcoded Consumers
     public static ListInterface<OrderList> generateConsumerList() {
-        ListInterface<OrderList> consumers = new ArrayLList<>();
+        ListInterface<OrderList> consumers = new LList<>();
 
         consumers.add(new OrderList("OL0001", "John Starling", "965332565225", "12/12/2018", "4:00pm","0214446598"));
         consumers.add(new OrderList("OL0002", "Jack", "652336541202", "12/12/2018", "6:30pm","0153226854"));
