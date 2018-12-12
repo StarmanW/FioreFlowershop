@@ -7,10 +7,10 @@ package fioreflowershop.orderList;
 
 
 import fioreflowershop.ADT.ListInterface;
+import fioreflowershop.ADT.LList;
 import fioreflowershop.Models.Consumer;
 import fioreflowershop.Models.Corporate;
 import fioreflowershop.Models.OrderList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
