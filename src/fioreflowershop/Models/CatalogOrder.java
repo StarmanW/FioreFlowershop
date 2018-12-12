@@ -1,30 +1,30 @@
 package fioreflowershop.Models;
+
 import fioreflowershop.Models.ProductType;
-import fioreflowershop.Models.Flower;
+import fioreflowershop.Models.Product;
 
 /**
  *
  * @author Thiban
  */
-public class CatalogOrder {
-   
+public class CatalogOrder implements Comparable<CatalogOrder> {
+
     private String catalogOrderID;
     private int Qty;
-    private ProductType productType;
-    private Flower flowerType; 
+    private Product product;
     private boolean inStock;
- 
+
     public CatalogOrder() {
-        this("", null,null,0,false);
+
     }
 
-    public CatalogOrder(String catalogOrderID, ProductType productType, Flower flowerType, int Qty, boolean inStock) {
-     
-        this.catalogOrderID = catalogOrderID ; 
-        this.productType = productType ; 
-        this.flowerType = flowerType ;
+    public CatalogOrder(String catalogOrderID, Product product, int Qty) {
+
+        this.catalogOrderID = catalogOrderID;
+
+        this.product = product;
         this.Qty = Qty;
-        this.inStock = inStock;
+
     }
 
     //getter
@@ -32,31 +32,22 @@ public class CatalogOrder {
         return catalogOrderID;
     }
 
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public Flower getFlowerType() {
-        return flowerType;
-    }
-
     public int getQty() {
         return Qty;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    
+
 
     //setter
     public void setCatalogOrderID(String catalogOrderID) {
         this.catalogOrderID = catalogOrderID;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public void setFlowerType(Flower flowerType) {
-        this.flowerType = flowerType;
-    }
-    
     public boolean isInStock() {
         return inStock;
     }
@@ -68,7 +59,16 @@ public class CatalogOrder {
     public void setQty(int Qty) {
         this.Qty = Qty;
     }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
     
     
-    
+
+    @Override
+    public int compareTo(CatalogOrder o) {
+       return this.getCatalogOrderID().compareTo(o.getCatalogOrderID());
+    }
+
 }
