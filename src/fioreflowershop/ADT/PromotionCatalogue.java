@@ -76,17 +76,14 @@ public class PromotionCatalogue
     }
     
     public void addPromoProduct(Product product) {
-        Product promoProduct = new Product(product);
-        double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());  
-        promoProduct.setProductPrice(discountedPrice);
-        this.promotionProductList.add(promoProduct);
+        this.promotionProductList.add(product);
     }
     
     public void removePromoProduct(int selectedIndex) {
         this.promotionProductList.remove(selectedIndex);
     }
 
-    private double calcDiscountPrice (double originalPrice) {
+    public double calcDiscountPrice (double originalPrice) {
         return originalPrice * (100 - this.promotionDiscount) / 100;
     }
 }
