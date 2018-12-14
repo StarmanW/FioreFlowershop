@@ -132,7 +132,7 @@ public class Utility {
                         ok = true;
                     }
 
-                    co1 = new CatalogOrder(id, p1, qty);
+                    co1 = new CatalogOrder(id, qty, p1);
                     co.add(co1);
                     cl1.add(co1);
 
@@ -142,7 +142,6 @@ public class Utility {
 
                         if (p1.getProductID().equals(p2.getProductID())) {
                             catalogue.get(countPlace).setProductQty(p2.getProductQty() - qty);
-
                         }
                         countPlace++;
                     }
@@ -150,11 +149,18 @@ public class Utility {
                     rpo = sc.nextLine().toUpperCase();
 
                 } while ("YES".equals(rpo.toUpperCase()) || "Y".equals(rpo.toUpperCase()));
+
+                displaySummaryOfOrder(cl1, catalogue);
+                promptEnterToContinue();
                 showOrderSummary(id, cl1, catalogue);
+
                 break;
 
             case "2":
                 Corporate corporate = showCerditLimit(corps);
+                id = "";
+                ok = false;
+
                 do {
                     displayCatalogue();
                     displayProductList(catalogue);
@@ -165,7 +171,12 @@ public class Utility {
                     p1 = enterProductType(catalogue);
                     int qty = enterttlQty();
 
-                    co2 = new CorcustOrder(generateCatalogOrderID(cc.size()), p1, corporate, qty);
+                    if (ok == false) {
+                        id = generateCatalogOrderID(co.size());
+                        ok = true;
+                    }
+
+                    co2 = new CorcustOrder(id, qty, p1, corporate);
                     cc.add(co2);
                     ccl.add(co2);
 
@@ -181,7 +192,9 @@ public class Utility {
                     rpo = sc.nextLine().toUpperCase();
 
                 } while ("YES".equals(rpo.toUpperCase()) || "Y".equals(rpo.toUpperCase()));
-                showOrderCorporateSummary(ccl, catalogue);
+                displaySummaryOfOrderCorporate(ccl, catalogue);
+                promptEnterToContinue();
+                showOrderCorporateSummary(id, ccl, catalogue);
 
                 break;
             case "0":
@@ -196,15 +209,10 @@ public class Utility {
     //Catalogue list start from here 
     public static void displayCatalogue() {
         System.out.println(
-                "\n===================================\n"
-                + "=== Fiore Flower Shop Catalogue ===\n"
-                + "==================================="
+                "\n\t\t\t\t\t\t\t\t\t===================================\n"
+                + "\t\t\t\t\t\t\t\t\t=== Fiore Flower Shop Catalogue ===\n"
+                + "\t\t\t\t\t\t\t\t\t===================================\n"
         );
-    }
-
-    private static void promptEnterToContinue() {
-        System.out.println("\nPress Enter to continue.");
-        sc.nextLine();
     }
 
     //Display catalogue list
@@ -215,11 +223,12 @@ public class Utility {
         } else {
             System.out.println(
                     String.format(
-                            "\n| %3s | %-25s | %-30s | %-25s | %-25s | %9s | %-10s | %-80s |",
+                            "\n %3s \t %-25s \t %-30s \t %-25s \t %-25s \t %9s \t %-10s \t %-80s",
                             "No.", "Product Type", "Product Name", "Flower Type", "Product Accessorry", "Price", "In Stock", "Description"
                     )
             );
 
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             for (int i = 0; i < catalogue.size(); i++) {
                 Product tmpProduct = catalogue.get(i);
 
@@ -243,13 +252,14 @@ public class Utility {
 
                 System.out.println(
                         String.format(
-                                "| %3d | %-25.25s | %-30.30s | %-25.25s | %-25.25s | %9.2f | %s - %-4s | %-80s |",
+                                "%3d \t %-25.25s \t %-30.30s \t %-25.25s \t %-25.25s \t %9.2f \t %s - %-4s \t %-80s \n",
                                 productNumber, productName, productType,
                                 productFlower, productAccessoryText, productPrice,
                                 productHasStockText, productStockNum, productDescription
                         )
                 );
             }
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         }
     }
@@ -262,8 +272,7 @@ public class Utility {
         Product selectedProductType = null;
 
         while (true) {
-            System.out.println("\n======Select your product======\n");
-            System.out.print("Choose your product type [1/2] : ");
+            System.out.print("\nChoose your product type [1/2] : ");
             selection = sc.nextLine();
 
             selectionNumber = stringToInt(selection);
@@ -292,85 +301,133 @@ public class Utility {
         return Integer.parseInt(Qty);
     }
 
+    private static void promptEnterToContinue() {
+        System.out.println("\nPlease confirm your order item by press ENTER.");
+        sc.nextLine();
+    }
+
+    private static void pressEnterToContinue() {
+        System.out.println("\nPress ENTER to proceed.");
+        sc.nextLine();
+    }
+
+    //to show a quick summary of ordered item
+    private static void displaySummaryOfOrder(ListInterface<CatalogOrder> cl, ListInterface<Product> p1) {
+        System.out.println("\n===================================================");
+        System.out.println("\tYOUR ORDER HAVE ADDED TO CART");
+        System.out.println("===================================================\n");
+        System.out.println(String.format("%-30s \t %-10s", "Product Name", "Quantity"));
+        System.out.print("---------------------------------------------------\n");
+        for (int i = 0; i < cl.size(); ++i) {
+            System.out.println(
+                    String.format("\n%-30s \t %-10s\n",
+                            cl.get(i).getProduct().getProductName(),
+                            cl.get(i).getQty()));
+        }
+        System.out.print("---------------------------------------------------\n");
+        System.out.println("===================================================\n");
+    }
+
+    private static void displaySummaryOfOrderCorporate(ListInterface<CorcustOrder> coc, ListInterface<Product> p1) {
+        System.out.println("\n===================================================");
+        System.out.println("\tYOUR ORDER HAVE ADDED TO CART");
+        System.out.println("===================================================\n");
+        System.out.println(String.format("%-30s \t %-10s", "Product Name", "Quantity"));
+        System.out.print("---------------------------------------------------\n");
+        for (int i = 0; i < coc.size(); ++i) {
+            System.out.println(
+                    String.format("\n%-30s \t %-10s\n",
+                            coc.get(i).getProduct().getProductName(),
+                            coc.get(i).getQty()));
+        }
+        System.out.print("---------------------------------------------------\n");
+        System.out.println("===================================================\n");
+    }
+
     //order report will shown after customer finish order
     private static void showOrderSummary(
             String id,
             ListInterface<CatalogOrder> cl,
             ListInterface<Product> p1
     ) {
-
-        if (cl.isEmpty()) {//|| coc.isEmpty()) {
+        if (cl.isEmpty()) {
             System.out.println("\nYou dont have any Orders in your cart now.");
         } else {
-            System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
-
-            int countPlace = 0;
             double totalPrice = 0;
+
+            System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
             System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
-            System.out.print("\n-------------------------------------------------------------------------");
+            System.out.print("\n--------------------------------------------------------------------------");
             System.out.println("\nORDER ID : " + id);
-            System.out.print("---------------------------------------------------------------------------\n");
+            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.println(String.format("%-30s \t %-10s \t %-10s\n", "Product Name", "Quantity", "Per Unit(Price)"));
+            System.out.print("--------------------------------------------------------------------------\n");
             for (int i = 0; i < cl.size(); i++) {
                 System.out.println(
-                        String.format("\n" + "%s \t %d \t Unit Price : RM%.2f",
-                                //cl.get(i).getCatalogOrderID(),
+                        String.format("\n%-30s \t %-10s \t RM%.2f\n",
                                 cl.get(i).getProduct().getProductName(),
                                 cl.get(i).getQty(),
-                                (cl.get(i).getProduct().getProductPrice() * cl.get(i).getQty())
-                        )
-                );
+                                (cl.get(i).getProduct().getProductPrice() * cl.get(i).getQty())));
                 totalPrice += (cl.get(i).getProduct().getProductPrice() * cl.get(i).getQty());
             }
-            System.out.print("-----------------------------------------------------------------------------\n");
-            System.out.print("\t\t\tTOTAL AMOUNT TO BE PAID");
-            System.out.print(String.format("\nTotal Price : RM%.2f\n", totalPrice));
+            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.print("***********************************\n");
+            System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
+            System.out.println(String.format("\tTotal Price : RM %.2f\n", totalPrice));
+            System.out.print("***********************************\n");
             DisplyTimeDate();
-            System.out.print("\n-----------------------------------------------------------------------------");
-            System.out.print("\nThank you for using our system...Have a nice day\n");
-            System.out.print("\n=============================================================================\n");
+            System.out.print("===========================================================================");
+            System.out.print("\n\t\tThank you for using our system...Have a nice day\n");
+            System.out.print("===========================================================================\n");
         }
     }
 
     //order report will shown after corporate customer finish order
     private static void showOrderCorporateSummary(
+            String id,
             ListInterface<CorcustOrder> coc,
             ListInterface<Product> p1
     ) {
         if (coc.isEmpty()) {
             System.out.println("\nYou dont have any Orders in your cart now.");
         } else {
+            double totalOtyPrice = 0, creditLimit = 0.0;
 
-            int countPlace = 0;
-            double totalOtyPrice = 0;
-
-            System.out.print("\n===========================TOTAL ORDER=======================================");
-            System.out.print("\n-----------------------------------------------------------------------------");;
-
+            System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
+            System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
+            System.out.print("\n--------------------------------------------------------------------------");
+            System.out.println("\nORDER ID : " + id);
+            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.println(String.format("%-30s \t %-10s \t %-10s\n", "Product Name", "Quantity", "Per Unit(Price)"));
+            System.out.print("--------------------------------------------------------------------------\n");
             for (int i = 0; i < coc.size(); i++) {
-
                 System.out.println(
-                        String.format("\n\n" + "%s \t %s \t %d",
-                                coc.get(i).getCatalogOrderID(),
+                        String.format("\n %s \t %d \t RM%.2f\n",
                                 coc.get(i).getProduct().getProductName(),
                                 coc.get(i).getQty(),
-                                (coc.get(i).getProduct().getProductPrice() * coc.get(i).getQty())
-                        )
-                );
-                totalOtyPrice += (coc.get(i).getProduct().getProductPrice() * coc.get(i).getQty());
+                                (coc.get(i).getProduct().getProductPrice() * coc.get(i).getQty())));
 
-                if ((coc.get(i).getProduct().getProductPrice()
-                        * coc.get(i).getQty()) > coc.get(i).getCorporate().getCurrentCreditLimit()) {
-                    System.out.print("\n YOU HAVE INSUFFICIENT BALANCE...");
+                totalOtyPrice += (coc.get(i).getProduct().getProductPrice() * coc.get(i).getQty());
+                creditLimit = coc.get(i).getCorporate().getCurrentCreditLimit();
+
+                if (totalOtyPrice > coc.get(i).getCorporate().getCurrentCreditLimit()) {
+                    System.out.print("\nINSUFFICIENT BALANCE...PLEASE CONTACT YOUR MANAGEMENT FOR MORE INFO\n\n");
                     System.exit(0);
-                } else {
-                    System.out.print(String.format("\n\nTotal Price : RM%.2f\n ", totalOtyPrice));
-                    System.out.print(String.format("\nAvailable Credit Limit Balance : RM%.2f\n ", coc.get(i).getCorporate().getCurrentCreditLimit() - (coc.get(i).getProduct().getProductPrice()
-                            * coc.get(i).getQty())));
                 }
             }
-            System.out.print("\n------------------------------------------------------------------------------\n");
+            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.print("***********************************\n");
+            System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
+            System.out.println(String.format("Total Price : RM %.2f\n ", totalOtyPrice));
+            System.out.print("***********************************\n");
+            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.println("\n\t\tSUCCESFULLY PAIDED...");
+            System.out.print(String.format("\nCredit Balance : RM%.2f\n ", creditLimit - totalOtyPrice));
+            System.out.print("--------------------------------------------------------------------------\n");
             DisplyTimeDate();
-            System.out.print("\nThank you for using our system...Have a nice day\n");
+            System.out.print("===========================================================================");
+            System.out.print("\n\t\tThank you for using our system...Have a nice day\n");
+            System.out.print("===========================================================================");
 
         }
     }
@@ -394,7 +451,7 @@ public class Utility {
                     System.out.println(String.format("\n %d. %s", i, creditlimit.getCorporateName()
                             + "\nTOTAL CREDIT LIMIT : " + creditlimit.getCurrentCreditLimit()));
                     custFound = true;
-                    promptEnterToContinue();
+                    pressEnterToContinue();
                 }
             }
             if (!custFound) {
