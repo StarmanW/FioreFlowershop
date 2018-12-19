@@ -67,22 +67,22 @@ public class Utility {
 
         catalogue.add(
                 new Product(
-                        "PD001", "Fresh Rose", 7.0, 10, productTypeList.get(0),
-                        flowerList.get(0), null, "Fresh red rose sourced locally.",
+                        "PD001", "Fresh Rose", 7.0, 10, productTypeList.get(2),
+                        flowerList.get(3), null, "Fresh red rose sourced locally.",
                         true, false
                 )
         );
         catalogue.add(
                 new Product(
                         "PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1),
-                        flowerList.get(1), accessoryList.get(1), "A bouquet of fresh wax flowers.",
+                        flowerList.get(4), accessoryList.get(1), "A bouquet of fresh wax flowers.",
                         true, false
                 )
         );
         catalogue.add(
                 new Product(
                         "PD003", "Rose Bouquet", 20.0, 5, productTypeList.get(1),
-                        flowerList.get(2), accessoryList.get(1), "A bouquet of fresh rose.",
+                        flowerList.get(3), accessoryList.get(1), "A bouquet of fresh rose.",
                         true, false)
         );
 
@@ -468,7 +468,9 @@ public class Utility {
 
     public static boolean removeEnteredProduct(ListInterface<Product> catalogue, int selectionIndex) {
         boolean removeStatus;
+        
         removeStatus = catalogue.remove(selectionIndex);
+        
         return removeStatus;
     }
 
@@ -692,7 +694,6 @@ public class Utility {
             tmpPromotionProductList.get(i).setInPromotion(false);
         }
         promoCatalogue.setPromotionProductList(null);
-        
         promoCatalogue.setIsInitialized(false);
     }
 
@@ -732,7 +733,7 @@ public class Utility {
                         catalogue.get(selectedProductIndex).setInPromotion(true);
                     }
 
-                    promoCatalogue.getPromotionProductList().add(selectedProduct);
+                    addEnteredPromoProduct(promoCatalogue, selectedProduct);
                     endLoop = true;
                 }
             } else {
@@ -741,6 +742,10 @@ public class Utility {
         }
 
         promptDisplayPromoCatalogue(promoCatalogue);
+    }
+
+    public static void addEnteredPromoProduct(PromotionCatalogue promoCatalogue, Product selectedProduct) {
+        promoCatalogue.getPromotionProductList().add(selectedProduct);
     }
 
     public static void removePromoProduct(PromotionCatalogue promoCatalogue) {
@@ -752,7 +757,7 @@ public class Utility {
             selection = stringToInt(sc.nextLine());
 
             if (selection > 0 || selection < promotionCatalogueSize) {
-                promoCatalogue.getPromotionProductList().remove(selection - 1);
+                removeEnteredPromoProduct(promoCatalogue, selection);
                 endLoop = true;
             } else {
                 System.out.println(
@@ -762,6 +767,10 @@ public class Utility {
         }
         
         promptDisplayPromoCatalogue(promoCatalogue);
+    }
+
+    public static void removeEnteredPromoProduct(PromotionCatalogue promoCatalogue, int selection) {
+        promoCatalogue.getPromotionProductList().remove(selection - 1);
     }
 
     public static void promptEnterToContinue() {
