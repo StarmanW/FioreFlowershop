@@ -10,7 +10,7 @@ import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.ListInterface;
-import fioreflowershop.ADT.PromotionCatalogue;
+import fioreflowershop.Models.PromotionCatalogue;
 
 /** 
  *

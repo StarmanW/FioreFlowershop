@@ -11,7 +11,7 @@ import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
-import fioreflowershop.ADT.PromotionCatalogue;
+import fioreflowershop.Models.PromotionCatalogue;
 import java.time.Month;
 import java.util.Scanner;
 
