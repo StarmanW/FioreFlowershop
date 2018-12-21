@@ -7,7 +7,6 @@ package fioreflowershop.Models;
 
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
-import fioreflowershop.Models.Product;
 import java.time.Month;
 
 /**
