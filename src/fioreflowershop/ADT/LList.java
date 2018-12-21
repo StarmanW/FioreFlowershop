@@ -93,12 +93,8 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
                     lastNode.next = null;
                 } //if selected node is not last node
                 else {
-                    //store selected node to temporary node
-                    Node tempRemoveNode = currentNode.next;
                     //deleted selected node from list and reconnect list
                     currentNode.next = currentNode.next.next;
-                    //purge selected node
-                    tempRemoveNode.next = null;
                 }
             }
 
