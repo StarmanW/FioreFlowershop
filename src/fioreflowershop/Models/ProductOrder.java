@@ -40,7 +40,7 @@ public class ProductOrder implements Comparable<ProductOrder> {
 
     @Override
     public int compareTo(ProductOrder o) {
-        return 0;
+        return 1;
     }
 
 }

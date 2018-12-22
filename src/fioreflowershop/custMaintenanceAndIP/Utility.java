@@ -11,8 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,15 +26,15 @@ public class Utility {
      */
     // Method to get hardcoded Consumers
     public static ListInterface<Consumer> generateConsumerList() {
-        ListInterface<Consumer> consumerListumers = new LList<>();
+        ListInterface<Consumer> consumerList = new LList<>();
 
-        consumerListumers.add(new Consumer("CN0001", "John Starling", "658874123356", "1590 W San Marcos Blvd #UNT 145, San Marcos, CA, 92078", "0214446598"));
-        consumerListumers.add(new Consumer("CN0002", "Derek Bernas", "985546213598", "Cardinal, Climax Springs, MO, 65324", "0153226854"));
-        consumerListumers.add(new Consumer("CN0003", "Kim Mary", "789952123364", "19 Sheppard Ln, Lee, NH, 03861", "01123265649"));
-        consumerListumers.add(new Consumer("CN0004", "Hank Anderson", "895512302548", "809 W 2nd Ave, Flandreau, SD, 57028", "0015589796"));
-        consumerListumers.add(new Consumer("CN0005", "Michelle Jane", "924456215597", "50 Watertown St, Watertown, MA, 02472", "0125568753"));
+        consumerList.add(new Consumer("CN0001", "John Starling", "658874123356", "1590 W San Marcos Blvd #UNT 145, San Marcos, CA, 92078", "0214446598"));
+        consumerList.add(new Consumer("CN0002", "Derek Bernas", "985546213598", "Cardinal, Climax Springs, MO, 65324", "0153226854"));
+        consumerList.add(new Consumer("CN0003", "Kim Mary", "789952123364", "19 Sheppard Ln, Lee, NH, 03861", "01123265649"));
+        consumerList.add(new Consumer("CN0004", "Hank Anderson", "895512302548", "809 W 2nd Ave, Flandreau, SD, 57028", "0015589796"));
+        consumerList.add(new Consumer("CN0005", "Michelle Jane", "924456215597", "50 Watertown St, Watertown, MA, 02472", "0125568753"));
 
-        return consumerListumers;
+        return consumerList;
     }
 
     // Method to get hardcoded Corporates
@@ -146,17 +144,17 @@ public class Utility {
         }
     }
 
-    // Method to perform registration of new consumerListumer
-    public static void registerNewConsumer(ListInterface<Consumer> consumerListumers) {
-        String consumerListumerName = "", icNum = "", address = "", contactNo = "";
+    // Method to perform registration of new consumerList
+    public static void registerNewConsumer(ListInterface<Consumer> consumerList) {
+        String consumerName = "", icNum = "", address = "", contactNo = "";
         boolean existingConsumer = false;
 
         System.out.println("\n==== Register New Consumer ====");
-        // Get consumerListumer name
+        // Get consumer name
         while (true) {
-            System.out.print("Enter consumerListumer name: ");
-            consumerListumerName = sc.nextLine();
-            if (consumerListumerName.matches("^[A-z\\-\\@ ]+$")) {
+            System.out.print("Enter consumer name: ");
+            consumerName = sc.nextLine();
+            if (consumerName.matches("^[A-z\\-\\@ ]+$")) {
                 break;
             }
             System.out.println("Invalid name format entered, please try again with alphabetic only.\n");
@@ -192,22 +190,22 @@ public class Utility {
             System.out.println("Invalid contact number format entered, please try again with digits only.\n");
         }
 
-        // Creating new consumerListumer object for the new consumerListumer
-        Consumer newCon = new Consumer(String.format("CN%04d", consumerListumers.size() + 1), consumerListumerName, icNum, address, contactNo);
+        // Creating new consumer object for the new consumer
+        Consumer newCon = new Consumer(String.format("CN%04d", consumerList.size() + 1), consumerName, icNum, address, contactNo);
 
-        // For loop to check for existing consumerListumer
-        for (int i = 0; i < consumerListumers.size(); i++) {
-            if (consumerListumers.get(i).getConsumerName().equals(newCon.getConsumerName()) && consumerListumers.get(i).getIcNum().equals(newCon.getIcNum())) {
+        // For loop to check for existing consumer
+        for (int i = 0; i < consumerList.size(); i++) {
+            if (consumerList.get(i).getConsumerName().equals(newCon.getConsumerName()) && consumerList.get(i).getIcNum().equals(newCon.getIcNum())) {
                 existingConsumer = true;
                 break;
             }
         }
 
         if (!existingConsumer) {
-            consumerListumers.add(newCon);
-            System.out.println("New consumerListumers has been successfully registered!\n");
+            consumerList.add(newCon);
+            System.out.println("New consumer has been successfully registered!\n");
         } else {
-            System.out.println("Uh oh! The consumerListumers has already exist in the system.\n");
+            System.out.println("Uh oh! The consumer has already exist in the system.\n");
         }
     }
 
@@ -303,15 +301,15 @@ public class Utility {
         }
     }
 
-    // Method to perform update details of existing consumerListumer
+    // Method to perform update details of existing consumer
     public static void updateConsumer(int custIndex, ListInterface<Consumer> consumerList) {
         String choice = "", cont = "";
 
         do {
             System.out.print(String.format("\n==== Update Consumer (%s) Details ====\n"
-                    + "1. Update consumerListumer name\n"
-                    + "2. Update consumerListumer IC number\n"
-                    + "3. Update consumerListumer home address\n"
+                    + "1. Update consumer name\n"
+                    + "2. Update consumer IC number\n"
+                    + "3. Update consumer home address\n"
                     + "4. Update conusmer contact number\n"
                     + "Enter your choice: ", consumerList.get(custIndex - 1).getConsumerId()));
             choice = sc.nextLine();
@@ -325,20 +323,20 @@ public class Utility {
 
             switch (choice) {
                 case "1":
-                    // Update consumerListumer name
-                    String consumerListumerName = "";
+                    // Update consumer name
+                    String consumerName = "";
                     while (true) {
                         System.out.print("Enter updated name: ");
-                        consumerListumerName = sc.nextLine();
-                        if (consumerListumerName.matches("^[A-z\\-\\@ ]+$")) {
-                            consumerList.get(custIndex - 1).setConsumerName(consumerListumerName);
+                        consumerName = sc.nextLine();
+                        if (consumerName.matches("^[A-z\\-\\@ ]+$")) {
+                            consumerList.get(custIndex - 1).setConsumerName(consumerName);
                             break;
                         }
                         System.out.println("Invalid name format entered, please try again with alphabetic only.\n");
                     }
                     break;
                 case "2":
-                    // Update consumerListumer IC number
+                    // Update consumer IC number
                     String icNum = "";
                     while (true) {
                         System.out.print("Enter updated IC number: ");
@@ -351,7 +349,7 @@ public class Utility {
                     }
                     break;
                 case "3":
-                    // Update consumerListumer home address
+                    // Update consumer home address
                     String address = "";
                     while (true) {
                         System.out.print("Enter updated home address: ");
@@ -364,7 +362,7 @@ public class Utility {
                     }
                     break;
                 case "4":
-                    // Update consumerListumer contact number
+                    // Update consumer contact number
                     String contactNo = "";
                     while (true) {
                         System.out.print("Enter updated contact number: ");
@@ -379,9 +377,9 @@ public class Utility {
                 default:
                     break;
             }
-            System.out.println("The consumerListumer details has been successfully updated!");
+            System.out.println("The consumer details has been successfully updated!");
 
-            // Prompt for continue to update consumerListumer details
+            // Prompt for continue to update consumer details
             while (true) {
                 System.out.print(String.format("Continue to update other details for customer %s? (Y/N): ", consumerList.get(custIndex - 1).getConsumerId()));
                 cont = sc.nextLine();
@@ -595,7 +593,7 @@ public class Utility {
         return corporateInvoiceList;
     }
 
-    // Private method to display consumerListumer list
+    // Private method to display consumer list
     private static void displayConsumerList(ListInterface<Consumer> consumerList) {
         int i = 0;
         displayCustomerHeaderFooter(1);
@@ -609,7 +607,7 @@ public class Utility {
             );
         }
         displayCustomerHeaderFooter(2);
-        System.out.println(String.format("Total %d consumerListumer customer(s).", i));
+        System.out.println(String.format("Total %d consumer(s).", i));
     }
 
     // Private method to display corporate list
