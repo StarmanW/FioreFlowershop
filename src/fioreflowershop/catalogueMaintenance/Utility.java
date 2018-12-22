@@ -609,19 +609,19 @@ public class Utility {
             ListInterface<Product> catalogue, PromotionCatalogue promoCatalogue
     ) {
         ListInterface<Product> tmpPromoProductList = new LList<>();
+        Product tmpPromoProduct = null;
 
+        for (int i = 0; i < catalogue.size(); i++) {
+            tmpPromoProduct = catalogue.get(i);
+
+            if (!tmpPromoProduct.isInPromotion()) {
+                tmpPromoProductList.add(tmpPromoProduct);
+            }
+        }
+        
         for (boolean endLoop = false; !endLoop;) {
             String selection = "";
             int selectionValue = 0;
-            Product tmpPromoProduct = null;
-
-            for (int i = 0; i < catalogue.size(); i++) {
-                tmpPromoProduct = catalogue.get(i);
-
-                if (!tmpPromoProduct.isInPromotion()) {
-                    tmpPromoProductList.add(tmpPromoProduct);
-                }
-            }
 
             displayProductList(tmpPromoProductList);
 
@@ -799,13 +799,13 @@ public class Utility {
         if (selectionNumber > -1) {
             for (int i = 0; i < catalogue.size(); i++) {
                 tmpProduct = catalogue.get(i);
-                
+
                 if (tmpProduct.getProductQty() < selectionNumber) {
                     tmpProductList.add(tmpProduct);
                 }
-            } 
+            }
         }
-        
+
         displayProductListShort(tmpProductList);
         promptEnterToContinue();
     }
