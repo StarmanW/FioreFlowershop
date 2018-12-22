@@ -7,7 +7,6 @@ import fioreflowershop.Models.Corporate;
 import fioreflowershop.Models.Invoice;
 import fioreflowershop.Models.Order;
 import fioreflowershop.Models.ProductOrder;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -20,57 +19,6 @@ public class Utility {
 
     private static Scanner sc = new Scanner(System.in);
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-
-    /**
-     * Generate sample data section
-     */
-    // Method to get hardcoded Consumers
-    public static ListInterface<Consumer> generateConsumerList() {
-        ListInterface<Consumer> consumerList = new LList<>();
-
-        consumerList.add(new Consumer("CN0001", "John Starling", "658874123356", "1590 W San Marcos Blvd #UNT 145, San Marcos, CA, 92078", "0214446598"));
-        consumerList.add(new Consumer("CN0002", "Derek Bernas", "985546213598", "Cardinal, Climax Springs, MO, 65324", "0153226854"));
-        consumerList.add(new Consumer("CN0003", "Kim Mary", "789952123364", "19 Sheppard Ln, Lee, NH, 03861", "01123265649"));
-        consumerList.add(new Consumer("CN0004", "Hank Anderson", "895512302548", "809 W 2nd Ave, Flandreau, SD, 57028", "0015589796"));
-        consumerList.add(new Consumer("CN0005", "Michelle Jane", "924456215597", "50 Watertown St, Watertown, MA, 02472", "0125568753"));
-
-        return consumerList;
-    }
-
-    // Method to get hardcoded Corporates
-    public static ListInterface<Corporate> generateCorporateList() {
-        ListInterface<Corporate> corporateList = new LList<>();
-
-        corporateList.add(new Corporate("CO0001", "Apple Arts Sdn. Bhd.", "144 Lrg Zamrud 3/1 Taman Pekan Baru 08000 Sungai Petani 08000, Malaysia", "03745625", 12500.00, 1200.00));
-        corporateList.add(new Corporate("CO0002", "Alpinetime Sdn. Bhd.", "288 Lt Avenue, Jalan Petagas, WP, Kuala Lumpur, Malaysia", "03954622", 6500.00, 2000.00));
-        corporateList.add(new Corporate("CO0003", "Robin Corporation", "350, Jalan Tun Fuad, 82000, WP, Kuala Lumpur, Malaysia", "03455895", 7000.00, 400.00));
-        corporateList.add(new Corporate("CO0004", "Moonlit Ltd.", "6812 Murphy Dale, Jalan Penampang, 82000, Wangsa Maju, WP, Kuala Lumpur, Malaysia", "03455688", 15000.00, 200.00));
-        corporateList.add(new Corporate("CO0005", "Pixycloud Ltd.", "Lt 280, Jalan Luyang, 25000, WP, Kuala Lumpur, Malaysia", "03467855", 8500.00, 1400.00));
-
-        return corporateList;
-    }
-
-    // Method to get hardcoded Invoice
-    public static ListInterface<Invoice> generateInvoiceList(ListInterface<Order> orderList) {
-        ListInterface<Invoice> invoiceList = new LList<>();
-
-        ListInterface<Order> corporateOrderList1 = new LList<>();
-        corporateOrderList1.add(orderList.get(0));
-        corporateOrderList1.add(orderList.get(1));
-
-        ListInterface<Order> corporateOrderList2 = new LList<>();
-        corporateOrderList2.add(orderList.get(2));
-        corporateOrderList2.add(orderList.get(3));
-
-        try {
-            invoiceList.add(new Invoice("INV0001", orderList.get(0).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-11-2018"), SIMPLE_DATE_FORMAT.parse("7-12-2018"), corporateOrderList1));
-            invoiceList.add(new Invoice("INV0002", orderList.get(2).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-12-2018"), SIMPLE_DATE_FORMAT.parse("7-01-2019"), corporateOrderList2));
-        } catch (ParseException ex) {
-            System.err.println("Unable to parse date.");
-        }
-
-        return invoiceList;
-    }
 
     // Method to display module's main menu
     public static int mainMenu() {

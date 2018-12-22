@@ -132,23 +132,16 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
     @Override
     public int contains(T item) {
         Node currentNode = firstNode;
-        int nodeIndex = -1;
-        boolean endLoop = false;
-        boolean isEqual = false;
 
-        //loop through list if matching node is not found
-        for (int i = 0; i < totalEntries || endLoop == false; i++) {
-            isEqual = item.equals(currentNode.data);
-
-            if (isEqual == true) {
-                nodeIndex = i;
-                endLoop = true;
-            } else if (isEqual == false && endLoop == false && currentNode.next != null) {
-                currentNode = currentNode.next;
+        for (int i = 0; i < totalEntries; i++) {
+            if (item.equals(currentNode.data)) {
+                return i;
             }
+
+            currentNode = currentNode.next;
         }
 
-        return nodeIndex;
+        return -1;
     }
 
     //returns current linked list size

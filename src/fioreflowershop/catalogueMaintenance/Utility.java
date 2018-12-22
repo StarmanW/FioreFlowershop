@@ -23,87 +23,6 @@ public class Utility {
 
     public static Scanner sc = new Scanner(System.in);
 
-    //create and initialize flower list with dummy values
-    public static ListInterface<Flower> generateFlowerList() {
-        ListInterface<Flower> flowerList = new LList<>();
-
-        flowerList.add(new Flower("FL001", "Rose", 100, 7.0));
-        flowerList.add(new Flower("FL002", "Baby's Breath", 0, 7.8));
-        flowerList.add(new Flower("FL003", "Wax Flower", 50, 7.8));
-        flowerList.add(new Flower("FL004", "Lily Asiatic", 67, 7.2));
-        flowerList.add(new Flower("FL005", "Dahlia", 20, 21.0));
-
-        return flowerList;
-    }
-
-    //create and initialize product type list with dummy values
-    public static ListInterface<ProductType> generateProductTypeList() {
-        ListInterface<ProductType> productTypeList = new LList<>();
-
-        productTypeList.add(new ProductType("PT001", "Fresh Flower", false));
-        productTypeList.add(new ProductType("PT002", "Flower Bouquet", true));
-        productTypeList.add(new ProductType("PT003", "Flower Arrangement", true));
-
-        return productTypeList;
-    }
-
-    //create and initialize accessory list with dummy values
-    public static ListInterface<Accessory> generateAccessoryList() {
-        ListInterface<Accessory> accessoryList = new LList<>();
-
-        accessoryList.add(new Accessory("Decorative Red Gems", 8.0));
-        accessoryList.add(new Accessory("Red Stones", 5.0));
-        accessoryList.add(new Accessory("Wrapping Paper", 5.0));
-
-        return accessoryList;
-    }
-
-    //create and initialize catalogue(list of products) with dummy values
-    public static ListInterface<Product> generateCatalogue(
-            ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
-            ListInterface<Accessory> accessoryList
-    ) {
-        ListInterface<Product> catalogue = new LList<>();
-
-        catalogue.add(
-                new Product(
-                        "PD001", "Fresh Rose", 7.0, 10, productTypeList.get(2),
-                        flowerList.get(3), null, "Fresh red rose sourced locally.",
-                        true, false
-                )
-        );
-        catalogue.add(
-                new Product(
-                        "PD002", "Wax Flower Bouquet", 234.0, 5, productTypeList.get(1),
-                        flowerList.get(4), accessoryList.get(1), "A bouquet of fresh wax flowers.",
-                        true, false
-                )
-        );
-        catalogue.add(
-                new Product(
-                        "PD003", "Rose Bouquet", 20.0, 5, productTypeList.get(1),
-                        flowerList.get(3), accessoryList.get(1), "A bouquet of fresh rose.",
-                        true, false)
-        );
-
-        return catalogue;
-    }
-
-    public static PromotionCatalogue generatePromoCatalogue(ListInterface<Product> catalogue) {
-        PromotionCatalogue promoCatalogue = new PromotionCatalogue();
-
-        promoCatalogue.setPromotionName("Winter Sales");
-        promoCatalogue.setPromotionMonth(Month.DECEMBER);
-        promoCatalogue.setPromotionDiscount(50);
-        promoCatalogue.addPromoProduct(catalogue.get(1));
-        catalogue.get(1).setInPromotion(true);
-        promoCatalogue.addPromoProduct(catalogue.get(2));
-        catalogue.get(2).setInPromotion(true);
-        promoCatalogue.setIsInitialized(true);
-
-        return promoCatalogue;
-    }
-
     public static void mainMenu(
             ListInterface<Flower> flowerList, ListInterface<ProductType> productTypeList,
             ListInterface<Accessory> accessoryList, ListInterface<Product> catalogue,
@@ -122,7 +41,7 @@ public class Utility {
                     + "3. Display Promotion Catalogue\n"
                     + "4. Edit Promotion Catalogue\n"
                     + "5. Display Product Stock\n"
-                    + "x. Exit system.\n"
+                    + "6. Back\n"
             );
             System.out.print("Please enter a choice: ");
             selection = sc.nextLine();
@@ -148,7 +67,7 @@ public class Utility {
                 case "5":
                     displayProductStock(catalogue);
                     break;
-                case "x":
+                case "6":
                     endLoop = true;
                     break;
                 default:

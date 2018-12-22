@@ -21,53 +21,8 @@ public class Utility {
 
     private static Scanner sc = new Scanner(System.in);
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-//  private final static SimpleDateFormat DELIVERY_DATETIME = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+    private final static SimpleDateFormat DELIVERY_DATETIME = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 
-    //Order added and sent to module B to generate invoice
-    public static ListInterface<Order> generateOrder(ListInterface<Product> productList,
-            ListInterface<Corporate> corporateList) {
-
-        // Create product order list for corporate 1
-        ListInterface<ProductOrder> productOrderList = new LList<>();
-        ListInterface<ProductOrder> productOrderList1 = new LList<>();
-
-        // Create product order list for corporate 2
-        ListInterface<ProductOrder> productOrderList2 = new LList<>();
-        ListInterface<ProductOrder> productOrderList3 = new LList<>();
-
-        // Create new order list
-        ListInterface<Order> orderList = new LList<>();
-
-        // Product Order List for first order of corporate 1
-        productOrderList.add(new ProductOrder(productList.get(0), 1));
-        productOrderList.add(new ProductOrder(productList.get(1), 2));
-
-        // Product Order List for second order of corporate 1
-        productOrderList1.add(new ProductOrder(productList.get(0), 3));
-        productOrderList1.add(new ProductOrder(productList.get(1), 2));
-
-        // Product Order List for first order of corporate 2
-        productOrderList2.add(new ProductOrder(productList.get(0), 4));
-        productOrderList2.add(new ProductOrder(productList.get(1), 5));
-
-        // Product Order List for second order of corporate 2
-        productOrderList3.add(new ProductOrder(productList.get(0), 5));
-        productOrderList3.add(new ProductOrder(productList.get(1), 10));
-
-        try {
-            // Order List for corporate 1
-            orderList.add(new Order("OD0001", corporateList.get(0), productOrderList, SIMPLE_DATE_FORMAT.parse("11-12-2018"), SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 475.00));
-            orderList.add(new Order("OD0002", corporateList.get(0), productOrderList1, SIMPLE_DATE_FORMAT.parse("15-12-2018"), SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 489.00));
-
-            // Order List for corporate 2
-            orderList.add(new Order("OD0003", corporateList.get(2), productOrderList2, SIMPLE_DATE_FORMAT.parse("04-11-2018"), SIMPLE_DATE_FORMAT.parse("10-12-2018"), corporateList.get(2).getAddress(), 1198.00));
-            orderList.add(new Order("OD0004", corporateList.get(2), productOrderList3, SIMPLE_DATE_FORMAT.parse("08-11-2018"), SIMPLE_DATE_FORMAT.parse("15-12-2018"), corporateList.get(2).getAddress(), 2375.00));
-        } catch (ParseException ex) {
-            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return orderList;
-    }
 
     //Main Menu
     public static int mainMenu() {

@@ -10,21 +10,15 @@ import fioreflowershop.Models.Product;
 /**
  * @author Samuel Wong Kim Foong
  */
-public class TestMain {
+public class Main {
 
-    public static void main(String[] args) {
-
-        // Generate sample data
-        ListInterface<Product> productList
-                = fioreflowershop.CatalogueMaintenance.Utility.generateCatalogue(
-                        fioreflowershop.CatalogueMaintenance.Utility.generateFlowerList(),
-                        fioreflowershop.CatalogueMaintenance.Utility.generateProductTypeList(),
-                        fioreflowershop.CatalogueMaintenance.Utility.generateAccessoryList()
-                );
-        ListInterface<Consumer> consumerList = Utility.generateConsumerList();
-        ListInterface<Corporate> corporateList = Utility.generateCorporateList();
-        ListInterface<Order> orderList = fioreflowershop.catalogueOrder.Utility.generateOrder(productList, corporateList);
-        ListInterface<Invoice> invoiceList = Utility.generateInvoiceList(orderList);
+    public static void mainMethod(
+            ListInterface<Product> productList,
+            ListInterface<Consumer> consumerList,
+            ListInterface<Corporate> corporateList,
+            ListInterface<Order> orderList,
+            ListInterface<Invoice> invoiceList
+    ) {
 
         // Run module
         while (true) {
@@ -47,8 +41,7 @@ public class TestMain {
                     Utility.generateInvoice(invoiceList);
                     break;
                 case 5:
-                    System.out.println("System shutting down now...");
-                    System.exit(0);
+                    return;
             }
         }
     }
