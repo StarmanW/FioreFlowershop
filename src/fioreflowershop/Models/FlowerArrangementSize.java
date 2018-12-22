@@ -44,6 +44,6 @@ public class FlowerArrangementSize implements Comparable<FlowerArrangementStyle>
 
     @Override
     public int compareTo(FlowerArrangementStyle o) {
-        return 0;
+        return 1;
     }
 }
