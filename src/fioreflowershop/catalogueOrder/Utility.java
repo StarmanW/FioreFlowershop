@@ -2,7 +2,7 @@ package fioreflowershop.catalogueOrder;
 
 import fioreflowershop.ADT.LList;
 import fioreflowershop.ADT.ListInterface;
-import fioreflowershop.ADT.PromotionCatalogue;
+import fioreflowershop.Models.PromotionCatalogue;
 import fioreflowershop.Models.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
