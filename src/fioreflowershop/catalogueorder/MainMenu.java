@@ -1,7 +1,7 @@
 package fioreflowershop.catalogueorder;
 
 import fioreflowershop.ADT.ListInterface;
-import fioreflowershop.ADT.PromotionCatalogue;
+import fioreflowershop.Models.PromotionCatalogue;
 import fioreflowershop.Models.Consumer;
 import fioreflowershop.Models.Corporate;
 import fioreflowershop.Models.Invoice;
