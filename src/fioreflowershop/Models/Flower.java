@@ -4,7 +4,7 @@ package fioreflowershop.Models;
  *
  * @author ChongJH
  */
-public class Flower {
+public class Flower implements Comparable<Flower>{
 
     private String flowerID;
     private String flowerName;
@@ -52,6 +52,11 @@ public class Flower {
 
     public void setFlowerPrice(double flowerPrice) {
         this.flowerPrice = flowerPrice;
+    }
+
+    @Override
+    public int compareTo(Flower other) {
+        return this.getFlowerName().compareTo(other.getFlowerName());
     }
 
 }

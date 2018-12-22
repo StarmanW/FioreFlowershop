@@ -6,25 +6,31 @@
 package fioreflowershop.CatalogueMaintenance;
 
 import fioreflowershop.Models.Flower;
-import fioreflowershop.ADT.ItemList;
 import fioreflowershop.Models.Product;
 import fioreflowershop.Models.ProductType;
 import fioreflowershop.Models.Accessory;
 import fioreflowershop.ADT.ListInterface;
+import fioreflowershop.ADT.PromotionCatalogue;
 
-/**
+/** 
  *
  * @author ChongJH
  */
 public class CatalogMaintenanceTestMain {
     private static final boolean INITIAL_STOCK_STATUS = true;
+    private static final boolean INITIAL_PROMOTION_STATUS = false;
     
     public static void main(String[] args) {
-        ItemList<Flower> flowerList = Utility.generateFlowerList();
+        ListInterface<Flower> flowerList = Utility.generateFlowerList();
         ListInterface<ProductType> productTypeList = Utility.generateProductTypeList();
         ListInterface<Accessory> accessoryList = Utility.generateAccessoryList();
         ListInterface<Product> catalogue = Utility.generateCatalogue(flowerList, productTypeList, accessoryList);
-
-        Utility.mainMenu(flowerList, productTypeList, accessoryList, catalogue, INITIAL_STOCK_STATUS);
+        PromotionCatalogue promoCatalogue = Utility.generatePromoCatalogue(catalogue);
+        
+        Utility.displayProductListShort(catalogue);
+        Utility.mainMenu(
+                flowerList, productTypeList, accessoryList, catalogue, promoCatalogue, 
+                INITIAL_STOCK_STATUS, INITIAL_PROMOTION_STATUS
+        );
     }
 }

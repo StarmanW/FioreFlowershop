@@ -56,14 +56,16 @@ public class Utility {
 
         try {
             // Order List for corporate 1
-            orderList.add(new Order("OD0001", corporateList.get(0), productOrderList, SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 475.00));
-            orderList.add(new Order("OD0002", corporateList.get(0), productOrderList1, SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 489.00));
+            orderList.add(new Order("OD0001", corporateList.get(0), productOrderList, SIMPLE_DATE_FORMAT.parse("11-12-2018"), SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 475.00));
+            orderList.add(new Order("OD0002", corporateList.get(0), productOrderList1, SIMPLE_DATE_FORMAT.parse("15-12-2018"), SIMPLE_DATE_FORMAT.parse("20-12-2018"), corporateList.get(0).getAddress(), 489.00));
+
             // Order List for corporate 2
-            orderList.add(new Order("OD0003", corporateList.get(2), productOrderList2, SIMPLE_DATE_FORMAT.parse("10-12-2018"), corporateList.get(2).getAddress(), 1198.00));
-            orderList.add(new Order("OD0004", corporateList.get(2), productOrderList3, SIMPLE_DATE_FORMAT.parse("15-12-2018"), corporateList.get(2).getAddress(), 2375.00));
+            orderList.add(new Order("OD0003", corporateList.get(2), productOrderList2, SIMPLE_DATE_FORMAT.parse("04-11-2018"), SIMPLE_DATE_FORMAT.parse("10-12-2018"), corporateList.get(2).getAddress(), 1198.00));
+            orderList.add(new Order("OD0004", corporateList.get(2), productOrderList3, SIMPLE_DATE_FORMAT.parse("08-11-2018"), SIMPLE_DATE_FORMAT.parse("15-12-2018"), corporateList.get(2).getAddress(), 2375.00));
         } catch (ParseException ex) {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return orderList;
     }
 
@@ -179,13 +181,16 @@ public class Utility {
                 customer = corporateList.get(Integer.parseInt(custIndex) - 1);
             }
 
-            // Create new order object - new order will be add here
-            order = new Order(String.format("OD%04d", orderList.size() + 1),
+            // Create new order object 
+            order = new Order(
+                    String.format("OD%04d", orderList.size() + 1),
                     customer,
                     productOrderList,
                     new Date(),
-                    customer.getAddress(),
-                    totalPayment);
+                    SIMPLE_DATE_FORMAT.parse(deliveryDateTime),
+                    (deliveryAddress.matches("") ? customer.getAddress() : deliveryAddress),
+                    totalPayment
+            );
 
             orderList.add(order);
 

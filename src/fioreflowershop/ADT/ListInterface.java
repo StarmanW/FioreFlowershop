@@ -8,8 +8,9 @@ package fioreflowershop.ADT;
 /**
  *
  * @author ChongJH
+ * @param <T>
  */
-public interface ListInterface<T> {
+public interface ListInterface<T extends Comparable<? super T>> {
     public boolean add(T item);
     public boolean remove(int index);
     public boolean replace(int index, T item);
@@ -17,6 +18,4 @@ public interface ListInterface<T> {
     public int contains(T item);
     public int size();
     public boolean isEmpty();
-    @Override
-    public String toString();
 }

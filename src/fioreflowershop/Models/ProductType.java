@@ -9,7 +9,7 @@ package fioreflowershop.Models;
  *
  * @author ChongJH
  */
-public class ProductType {
+public class ProductType implements Comparable<ProductType>{
     private String productTypeID;
     private String productTypeName;
     private boolean hasAccessory;
@@ -45,6 +45,11 @@ public class ProductType {
 
     public void setHasAccessory(boolean hasAccessory) {
         this.hasAccessory = hasAccessory;
+    }
+
+    @Override
+    public int compareTo(ProductType other) {
+        return this.getProductTypeName().compareTo(other.getProductTypeName());
     }
 
 }

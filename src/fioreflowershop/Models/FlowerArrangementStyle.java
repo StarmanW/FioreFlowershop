@@ -4,7 +4,7 @@ package fioreflowershop.Models;
  *
  * @author Samuel Wong Kim Foong
  */
-public class FlowerArrangementStyle {
+public class FlowerArrangementStyle implements Comparable<FlowerArrangementStyle> {
 
     // Private properties
     private String flowerArrangementStyleID;
@@ -47,5 +47,10 @@ public class FlowerArrangementStyle {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public int compareTo(FlowerArrangementStyle o) {
+        return 1;
     }
 }

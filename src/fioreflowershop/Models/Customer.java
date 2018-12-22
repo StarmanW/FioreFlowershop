@@ -5,7 +5,7 @@ package fioreflowershop.Models;
  *
  * @author Samuel Wong Kim Foong
  */
-public class Customer {
+public class Customer implements Comparable<Customer> {
 
     // Private properties
     private String address;
@@ -40,4 +40,8 @@ public class Customer {
         this.address = address;
     }
 
+    @Override
+    public int compareTo(Customer o) {
+        return 1;
+    }
 }

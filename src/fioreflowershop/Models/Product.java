@@ -4,7 +4,7 @@ package fioreflowershop.Models;
  *
  * @author ChongJH
  */
-public class Product {
+public class Product implements Comparable<Product>{
     private String productID;
     private String productName;
     private double productPrice;
@@ -14,15 +14,17 @@ public class Product {
     private Accessory productAccessory;
     private String productDescription;
     private boolean inStock;
-
+    private boolean inPromotion;
+    
     public Product() {
-        this("", "", 0.0, 0, null, null, null, "", false);
+        this("", "", 0.0, 0, null, null, null, "", false, false);
     }
-
+    
     public Product(
-            String productID, String productName, double productPrice, int productQty, 
-            ProductType productType, Flower flowerType, Accessory productAccessory, 
-            String productDescription, boolean inStock
+            String productID, String productName, double productPrice, 
+            int productQty, ProductType productType, Flower flowerType, 
+            Accessory productAccessory, String productDescription, boolean inStock, 
+            boolean inPromotion
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -33,6 +35,18 @@ public class Product {
         this.productAccessory = productAccessory;
         this.productDescription = productDescription;
         this.inStock = inStock;
+        this.inPromotion = inPromotion;
+    }
+    
+    
+    public Product(Product originalProduct) {
+        this(
+                originalProduct.getProductID(), originalProduct.getProductName(),
+                originalProduct.getProductPrice(), originalProduct.getProductQty(),
+                originalProduct.getProductType(), originalProduct.getFlowerType(),
+                originalProduct.getProductAccessory(), originalProduct.getProductDescription(),
+                originalProduct.isInStock(), originalProduct.isInPromotion()
+        );
     }
 
     public String getProductID() {
@@ -103,6 +117,14 @@ public class Product {
         return inStock;
     }
 
+    public boolean isInPromotion() {
+        return inPromotion;
+    }
+
+    public void setInPromotion(boolean inPromotion) {
+        this.inPromotion = inPromotion;
+    }
+    
     public String isInStockToString() {
         String isInStockString = "No";
         
@@ -115,5 +137,10 @@ public class Product {
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
     }
- 
+
+    @Override
+    public int compareTo(Product other) {
+        return this.getProductType().compareTo(other.getProductType());
+    }
+
 }
