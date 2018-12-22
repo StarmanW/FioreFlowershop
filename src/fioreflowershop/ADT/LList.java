@@ -41,7 +41,8 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
         //if list is currently empty
         if (lastNode == null) {
             lastNode = firstNode;
-        } //if list is currently not empty and the current last node has another 
+        } 
+        //if list is currently not empty and the current last node has another 
         //node behind it
         else if (lastNode.next != null) {
             lastNode = lastNode.next;
