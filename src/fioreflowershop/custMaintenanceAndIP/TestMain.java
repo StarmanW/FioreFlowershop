@@ -13,7 +13,7 @@ import fioreflowershop.Models.Product;
 public class TestMain {
 
     public static void main(String[] args) {
-        
+
         // Generate sample data
         ListInterface<Product> productList
                 = fioreflowershop.CatalogueMaintenance.Utility.generateCatalogue(
@@ -37,6 +37,7 @@ public class TestMain {
                     break;
                 case 2:
                     Utility.registerNewCustomerMenu(consumerList, corporateList);
+                    System.out.println("\n");
                     break;
                 case 3:
                     Utility.updateCustomer(consumerList, corporateList);

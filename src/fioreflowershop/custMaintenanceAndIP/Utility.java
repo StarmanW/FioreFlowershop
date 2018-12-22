@@ -125,7 +125,7 @@ public class Utility {
         String choice = "";
         while (true) {
             System.out.print("\n==== Register New Customer ====\n"
-                    + "1. Register new consumerListumer\n"
+                    + "1. Register new consumer\n"
                     + "2. Register new corporate\n"
                     + "3. Back\n"
                     + "Enter your choice: ");
@@ -136,7 +136,7 @@ public class Utility {
             System.out.println("Invalid choice entered, please try again with only choice 1-5.\n");
         }
 
-        // Register new consumerListumer
+        // Register new consumer
         if (choice.equals("1")) {
             Utility.registerNewConsumer(consumerList);
         } else if (choice.equals("2")) {
