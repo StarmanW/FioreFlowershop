@@ -5,7 +5,7 @@ import fioreflowershop.ADT.ListInterface;
 import java.util.Date;
 
 /**
- * @author Thiban
+ * @author Samuel Wong Kim Foong
  */
 public class Order implements Comparable<Order> {
 
@@ -13,17 +13,21 @@ public class Order implements Comparable<Order> {
     private Customer customer;
     private ListInterface<ProductOrder> productOrders;
     private Date orderedOn;
+    private Date deliveryDateTime;
+    private String deliveryAddress;
     private double totalPayment;
 
     public Order() {
-        this("OD0001", new Customer(), new LList<ProductOrder>(), new Date(), 0.00);
+        this("OD0001", new Customer(), new LList<ProductOrder>(), new Date(), new Date(), "Wangsa Maju", 0.00);
     }
 
-    public Order(String orderID, Customer customer, ListInterface<ProductOrder> productOrders, Date orderedOn, double totalPayment) {
+    public Order(String orderID, Customer customer, ListInterface<ProductOrder> productOrders, Date orderedOn, Date deliveryDateTime, String deliveryAddress, double totalPayment) {
         this.orderID = orderID;
         this.customer = customer;
         this.productOrders = productOrders;
         this.orderedOn = orderedOn;
+        this.deliveryDateTime = deliveryDateTime;
+        this.deliveryAddress = deliveryAddress;
         this.totalPayment = totalPayment;
     }
 
@@ -46,6 +50,14 @@ public class Order implements Comparable<Order> {
 
     public double getTotalPayment() {
         return totalPayment;
+    }
+
+    public Date getDeliveryDateTime() {
+        return deliveryDateTime;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
     }
 
     // Setters
@@ -73,8 +85,16 @@ public class Order implements Comparable<Order> {
         }
     }
 
+    public void setDeliveryDateTime(Date deliveryDateTime) {
+        this.deliveryDateTime = deliveryDateTime;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
     @Override
     public int compareTo(Order o) {
-        return 0;
+        return 1;
     }
 }

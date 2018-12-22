@@ -12,8 +12,7 @@ import java.time.Month;
  *
  * @author ChongJH
  */
-public class PromotionCatalogue
-{
+public class PromotionCatalogue {
 
     private String promotionName;
     private int promotionDiscount;
@@ -74,19 +73,19 @@ public class PromotionCatalogue
     public void setIsInitialized(boolean isInitialized) {
         this.isInitialized = isInitialized;
     }
-    
+
     public void addPromoProduct(Product product) {
         Product promoProduct = new Product(product);
-        double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());  
+        double discountedPrice = calcDiscountPrice(promoProduct.getProductPrice());
         promoProduct.setProductPrice(discountedPrice);
         this.promotionProductList.add(promoProduct);
     }
-    
+
     public void removePromoProduct(int selectedIndex) {
         this.promotionProductList.remove(selectedIndex);
     }
 
-    private double calcDiscountPrice (double originalPrice) {
+    private double calcDiscountPrice(double originalPrice) {
         return originalPrice * (100 - this.promotionDiscount) / 100;
     }
 }

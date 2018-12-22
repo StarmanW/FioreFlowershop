@@ -78,6 +78,6 @@ public class Invoice implements Comparable<Invoice>{
 
     @Override
     public int compareTo(Invoice o) {
-        return 0;
+        return 1;
     }
 }
