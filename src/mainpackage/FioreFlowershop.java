@@ -65,6 +65,7 @@ public class FioreFlowershop {
                         );
                         break;
                     case "4":
+                        orderpickup.Main.mainMethod();
                         break;
                     case "5":
                         System.out.println("System closing down...");

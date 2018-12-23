@@ -5,7 +5,7 @@ import adt.ListInterface;
 import java.util.Date;
 
 /**
- * @author Thiban Kumar
+ * @author Thiban Kumar and Samuel Wong Kim Foong
  */
 public class Order implements Comparable<Order> {
 
