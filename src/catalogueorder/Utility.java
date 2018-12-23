@@ -13,9 +13,8 @@ import model.PromotionCatalogue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +26,17 @@ public class Utility {
 
     private static Scanner sc = new Scanner(System.in);
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-    private final static SimpleDateFormat DELIVERY_DATETIME = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+    private final static SimpleDateFormat PICKUP_DATETIME = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 
+    public static void generateOrderReport(ListInterface<Order> orderList) {
+        int i;
+        for (i = 0; i < orderList.size(); ++i) {
+            System.out.print(String.format("\n%-10s \t %.2f",
+                    orderList.get(i).getOrderID(),
+                    orderList.get(i).getTotalPayment()));
+        }
+        System.out.print(String.format("\n\nTotal %d Orders.\n\n", i));
+    }
 
     //Main Menu
     public static int mainMenu() {
@@ -36,10 +44,11 @@ public class Utility {
         while (true) {
             System.out.print("\n=== WELCOME TO FIORE FLOWERSHOP ===\n\n"
                     + "1. Fiore Flower Shop Catalogue\n"
+                    + "2. Generate Sales Order\n"
                     + "0. Exit\n"
                     + "\nPlease select : ");
             choice = sc.nextLine();
-            if (choice.matches("^[0-1]$")) {
+            if (choice.matches("^[0-2]$")) {
                 break;
             }
             System.out.println("\n\n\tPlease enter a valid choice...\n");
@@ -47,13 +56,6 @@ public class Utility {
         return Integer.parseInt(choice);
     }
 
-//    public static void generateOrderReport(ListInterface<Order> orderList) {
-//
-//        for (int i = 0; i < orderList.size(); ++i) {
-//            System.out.print(String.format("\n%-15s \n %-15s ", orderList.get(i).getOrderID() , orderList.get(i).getTotalPayment()));
-//        }
-//
-//    }
     //Order page will start from here
     public static void makeOrder(
             ListInterface<Consumer> consumerList,
@@ -68,7 +70,7 @@ public class Utility {
 
         // Variables declaration
         double totalPayment = 0.0;
-        String prodListChoice = "", custIndex = "", continueChoice = "", deliveryAddress = "", deliveryDateTime = "";
+        String prodListChoice = "", custIndex = "", continueChoice = "", deliveryAddress = "", pickUpDateTime = "";
 
         // Create product order list
         ListInterface<ProductOrder> productOrderList = new LList<>();
@@ -134,6 +136,18 @@ public class Utility {
             }
         } while (continueChoice.matches("^[Yy]$"));
 
+       
+        while (true) {
+            // Prompt delivery date and time
+            System.out.print("\n\nEnter pickUp date/time (dd-mm-yyyy hh:mm): ");
+            pickUpDateTime = sc.nextLine();
+
+            if (!pickUpDateTime.matches("^[A-z0-9\\,\\@\\-\\. ]+$")) {
+                break;
+            }
+            System.out.println("\n\t\tPlease enter again....");
+        }
+
         try {
             // Get customer who made the order
             if (custType == 1) {
@@ -148,8 +162,8 @@ public class Utility {
                     customer,
                     productOrderList,
                     new Date(),
-                    SIMPLE_DATE_FORMAT.parse(deliveryDateTime),
-                    (deliveryAddress.matches("") ? customer.getAddress() : deliveryAddress),
+                    PICKUP_DATETIME.parse(pickUpDateTime),
+                    customer.getAddress(),
                     totalPayment
             );
 
@@ -207,10 +221,7 @@ public class Utility {
                     System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
                     System.out.print("\n--------------------------------------------------------------------------");
                     System.out.print("\nORDER ID : " + order.getOrderID());
-                    System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
-                    System.out.print("\nCORPORATE NAME : " + corporate.getCorporateName());
-                    System.out.print("\nADDRESS : " + order.getDeliveryAddress());
-                    System.out.print("\n--------------------------------------------------------------------------\n\n");
+                    System.out.print("\n===========================================================================\n\n");
                     System.out.println(String.format("%-15s \t %-15s \t %-10s\n", "Product Name", "Quantity", "Price"));
                     System.out.print("--------------------------------------------------------------------------\n");
                     for (int i = 0; i < productOrderList.size(); i++) {
@@ -221,20 +232,25 @@ public class Utility {
                                         productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
                                 ));
                     }
-
                     System.out.print("--------------------------------------------------------------------------\n");
                     System.out.print("***********************************\n");
                     System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
                     System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
                     System.out.print("***********************************\n");
+
+                    promptEnterAfterPaymentDone();
+
                     System.out.print("--------------------------------------------------------------------------\n");
                     System.out.println("\n\t\tSUCCESFULLY PAIDED...");
                     System.out.print(String.format("\nCredit Balance : RM%.2f\n ", corporate.getCurrentCreditLimit() - totalPayment));
                     System.out.print("--------------------------------------------------------------------------\n");
-                    DisplyTimeDate();
+
+                    System.out.print("\n===========================================================================");
+                    System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
+                    System.out.print("\nCORPORATE NAME : " + corporate.getCorporateName());
+                    System.out.print("\nADDRESS : " + order.getAddress());
+                    System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
                     System.out.print("===========================================================================");
-                    System.out.print("\n\tPLEASE PICK UP YOUR ORDER ON TIME,Thank you...Have a nice day\n");
-                    System.out.print("===========================================================================\n");
                     System.exit(0);
                 }
             }
@@ -243,14 +259,11 @@ public class Utility {
             displaySummaryOfOrder(productOrderList);
             promptEnterToContinue();
 
+            //Sales Order will Generate for each catalog order here
             System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
             System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
             System.out.print("\n--------------------------------------------------------------------------");
             System.out.print("\nORDER ID : " + order.getOrderID());
-            System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
-            System.out.print("\n===========================================================================");
-            System.out.print("\nConatact NO : " + order.getCustomer().getContactNo());
-            System.out.print("\nADDRESS : " + order.getCustomer().getAddress());
             System.out.print("\n===========================================================================\n\n");
             System.out.println(String.format("%-15s \t %-15s \t %-10s\n", "Product Name", "Quantity", "Price"));
             System.out.print("--------------------------------------------------------------------------\n");
@@ -262,19 +275,23 @@ public class Utility {
                                 productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
                         ));
             }
-
             System.out.print("--------------------------------------------------------------------------\n");
             System.out.print("***********************************\n");
             System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
             System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
             System.out.print("***********************************\n");
             System.out.print("--------------------------------------------------------------------------\n");
-            DisplyTimeDate();
+
+            promptEnterAfterPaymentDone();
+
+            System.out.print("\n===========================================================================");
+            System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
+            System.out.print("\nConatact NO : " + order.getCustomer().getContactNo());
+            System.out.print("\nADDRESS : " + order.getCustomer().getAddress());
+            System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
             System.out.print("===========================================================================");
             System.out.print("\n\tPLEASE PICK UP YOUR ORDER ON TIME,Thank you...Have a nice day\n");
             System.out.print("===========================================================================\n");
-//            System.exit(0);
-
         } catch (ParseException ex) {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -360,7 +377,6 @@ public class Utility {
 
         return productOrder;
     }
-//        return productOrder;
 
     //promotion catalogue
     private static ProductOrder purchasePromotionProducts(PromotionCatalogue promotionCatalogue) {
@@ -428,24 +444,13 @@ public class Utility {
         return productOrder;
     }
 
-    public static void DisplyTimeDate() {
-        int day, month, year;
-        int minute, hour;
-
-        GregorianCalendar gc = new GregorianCalendar();
-        day = gc.get(Calendar.DAY_OF_MONTH);
-        month = gc.get(Calendar.MONTH);
-        year = gc.get(Calendar.YEAR);
-
-        minute = gc.get(Calendar.MINUTE);
-        hour = gc.get(Calendar.HOUR);
-
-        System.out.println("\nPLEASE PICK UP YOUR ORDER AS DATE AND TIME SHOWN " + "\nTime : " + hour + ":" + minute
-                + "\nDate : " + day + "-" + month + "-" + year + "\n");
-    }
-
     private static void promptEnterToContinue() {
         System.out.println("\nPlease confirm order item by press ENTER.");
+        sc.nextLine();
+    }
+
+    private static void promptEnterAfterPaymentDone() {
+        System.out.println("\nPlease press ENTER, Once Payment Is Done");
         sc.nextLine();
     }
 }

@@ -7,7 +7,6 @@ import model.Corporate;
 import model.Invoice;
 import model.Order;
 import model.Product;
-import catalogueorder.Utility;
 
 /**
  *
@@ -21,8 +20,7 @@ public class Main {
             ListInterface<Corporate> corporateList,
             ListInterface<Order> orderList,
             ListInterface<Invoice> invoiceList,
-            PromotionCatalogue promotionCatalogue
-    ) {
+            PromotionCatalogue promotionCatalogue){
 
         while (true) {
             int choice = Utility.mainMenu();
@@ -31,6 +29,9 @@ public class Main {
                 case 1:
                     Utility.makeOrder(consumerList, corporateList, invoiceList, productList, orderList, promotionCatalogue);
                     System.out.println("\n");
+                    break;
+                case 2:
+                    Utility.generateOrderReport(orderList);
                     break;
 
                 case 0:

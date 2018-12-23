@@ -5,7 +5,7 @@ import adt.ListInterface;
 import java.util.Date;
 
 /**
- * @author Samuel Wong Kim Foong
+ * @author Thiban Kumar
  */
 public class Order implements Comparable<Order> {
 
@@ -13,21 +13,21 @@ public class Order implements Comparable<Order> {
     private Customer customer;
     private ListInterface<ProductOrder> productOrders;
     private Date orderedOn;
-    private Date deliveryDateTime;
-    private String deliveryAddress;
+    private Date pickUpDateTime;
+    private String Address;
     private double totalPayment;
 
     public Order() {
         this("OD0001", new Customer(), new LList<ProductOrder>(), new Date(), new Date(), "Wangsa Maju", 0.00);
     }
 
-    public Order(String orderID, Customer customer, ListInterface<ProductOrder> productOrders, Date orderedOn, Date deliveryDateTime, String deliveryAddress, double totalPayment) {
+    public Order(String orderID, Customer customer, ListInterface<ProductOrder> productOrders, Date orderedOn, Date pickUpDateTime, String Address, double totalPayment) {
         this.orderID = orderID;
         this.customer = customer;
         this.productOrders = productOrders;
         this.orderedOn = orderedOn;
-        this.deliveryDateTime = deliveryDateTime;
-        this.deliveryAddress = deliveryAddress;
+        this.pickUpDateTime = pickUpDateTime;
+        this.Address = Address;
         this.totalPayment = totalPayment;
     }
 
@@ -52,12 +52,12 @@ public class Order implements Comparable<Order> {
         return totalPayment;
     }
 
-    public Date getDeliveryDateTime() {
-        return deliveryDateTime;
+    public Date getPickUpDateTime() {
+        return pickUpDateTime;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
+    public String getAddress() {
+        return Address;
     }
 
     // Setters
@@ -84,13 +84,13 @@ public class Order implements Comparable<Order> {
             this.totalPayment = totalPayment;
         }
     }
-
-    public void setDeliveryDateTime(Date deliveryDateTime) {
-        this.deliveryDateTime = deliveryDateTime;
+    
+    public void setPickUpDateTime(Date pickUpDateTime) {
+        this.pickUpDateTime = pickUpDateTime;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
+    public void setAddress(String Address) {
+        this.Address = Address;
     }
 
     @Override
