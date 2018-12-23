@@ -594,6 +594,10 @@ public class Utility {
     }
 
     public static void removePromoCatalogue(PromotionCatalogue promoCatalogue) {
+        String promoName = promoCatalogue.getPromotionName();
+        
+        System.out.println("\nRemoving " + promoName + " catalogue.");
+        
         promoCatalogue.setPromotionName("");
         promoCatalogue.setPromotionDiscount(0);
         promoCatalogue.setPromotionMonth(null);
@@ -605,6 +609,8 @@ public class Utility {
 
         promoCatalogue.setPromotionProductList(null);
         promoCatalogue.setIsInitialized(false);
+        
+        System.out.println("\n" + promoName + " catalogue has been successfully removed.");
     }
 
     public static void addPromoProduct(
