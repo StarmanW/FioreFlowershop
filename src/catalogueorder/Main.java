@@ -33,10 +33,8 @@ public class Main {
                 case 2:
                     Utility.generateOrderReport(orderList);
                     break;
-
-                case 0:
-                    System.exit(0);
-                    break;
+                case 3:
+                    return;
             }
         }
     }

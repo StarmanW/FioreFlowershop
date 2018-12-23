@@ -45,10 +45,10 @@ public class Utility {
             System.out.print("\n=== WELCOME TO FIORE FLOWERSHOP ===\n\n"
                     + "1. Fiore Flower Shop Catalogue\n"
                     + "2. Generate Sales Order\n"
-                    + "0. Exit\n"
+                    + "3. Back\n"
                     + "\nPlease select : ");
             choice = sc.nextLine();
-            if (choice.matches("^[0-2]$")) {
+            if (choice.matches("^[1-3]$")) {
                 break;
             }
             System.out.println("\n\n\tPlease enter a valid choice...\n");
@@ -197,7 +197,7 @@ public class Utility {
                             customer,
                             new Date(),
                             SIMPLE_DATE_FORMAT.parse(LocalDate.now().plusMonths(1).toString()),
-                            orders));
+                            orders, 0));
                 }
                 for (int i = 0; i < invoiceList.size(); i++) {
                     if (invoiceList.get(i).getCorporate().getCorporateId().equals(corporateList.get(Integer.parseInt(custIndex) - 1).getCorporateId())) {

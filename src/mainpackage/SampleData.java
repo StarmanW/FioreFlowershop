@@ -156,8 +156,8 @@ public class SampleData {
         corporateOrderList2.add(orderList.get(3));
 
         try {
-            invoiceList.add(new Invoice("INV0001", orderList.get(0).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-11-2018"), SIMPLE_DATE_FORMAT.parse("7-12-2018"), corporateOrderList1));
-            invoiceList.add(new Invoice("INV0002", orderList.get(2).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-12-2018"), SIMPLE_DATE_FORMAT.parse("7-01-2019"), corporateOrderList2));
+            invoiceList.add(new Invoice("INV0001", orderList.get(0).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-11-2018"), SIMPLE_DATE_FORMAT.parse("7-12-2018"), corporateOrderList1, 0));
+            invoiceList.add(new Invoice("INV0002", orderList.get(2).getCustomer(), SIMPLE_DATE_FORMAT.parse("30-12-2018"), SIMPLE_DATE_FORMAT.parse("7-01-2019"), corporateOrderList2, 0));
         } catch (ParseException ex) {
             System.err.println("Unable to parse date.");
         }

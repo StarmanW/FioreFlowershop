@@ -19,6 +19,7 @@ public class Utility {
 
     private static Scanner sc = new Scanner(System.in);
     private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    private final static SimpleDateFormat SIMPLE_DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 
     // Method to display module's main menu
     public static int mainMenu() {
@@ -406,6 +407,9 @@ public class Utility {
                         System.out.print("Enter updated credit limit: ");
                         creditLimit = sc.nextLine();
                         if (creditLimit.matches("^\\d+\\.?\\d+$")) {
+                            if (corporateList.get(corpIndex - 1).getCreditLimit() == corporateList.get(corpIndex - 1).getCurrentCreditLimit()) {
+                                corporateList.get(corpIndex - 1).setCurrentCreditLimit(Double.parseDouble(creditLimit));
+                            }
                             corporateList.get(corpIndex - 1).setCreditLimit(Double.parseDouble(creditLimit));
                             break;
                         }
@@ -436,7 +440,7 @@ public class Utility {
         double totalPrice = 0.0;
 
         // Display corporates with invoice
-        displayCorporateList(filterCorporateInvoiceList(invoiceList));
+        displayCorporateInvoiceList(invoiceList);
 
         // Get user input
         while (true) {
@@ -521,7 +525,7 @@ public class Utility {
         if (choice.matches("^[Yy]$")) {
             Corporate corporate = invoiceList.get(i).getCorporate();
             corporate.setCurrentCreditLimit(corporate.getCurrentCreditLimit() + totalPrice);
-            invoiceList.remove(i);
+            invoiceList.get(i).setStatus(1);
             System.out.println("Invoice has been successfully paid, thank you!\n");
         }
     }
@@ -529,16 +533,35 @@ public class Utility {
     /**
      * Private methods
      */
-    // Private method to filter corporate list for invoice list
-    private static ListInterface<Corporate> filterCorporateInvoiceList(ListInterface<Invoice> invoiceList) {
-        // Add corporate object into list of corporates with invoice
-        ListInterface<Corporate> corporateInvoiceList = new LList<>();
-        for (int i = 0; i < invoiceList.size(); i++) {
-            if (corporateInvoiceList.contains(invoiceList.get(i).getCorporate()) == -1) {
-                corporateInvoiceList.add(invoiceList.get(i).getCorporate());
+    // Private method to display corporate list for invoice list
+    private static void displayCorporateInvoiceList(ListInterface<Invoice> invoiceList) {
+        int i = 0;
+        System.out.println("==================================================================================================================================");
+        System.out.println(
+                String.format("%s %-8s \t %-20s \t %-20s \t %-30s \t %-10s",
+                        "No.", "Invoice ID", "Issued On", "Due Date",
+                        "Corporate Name (ID)", "Invoice Status")
+        );
+        System.out.println("==================================================================================================================================");
+
+        for (i = 0; i < invoiceList.size(); i++) {
+            if (!invoiceList.get(i).getStatus().equals("Paid")) {
+                System.out.println(
+                        String.format("%d. %-8s \t %-10s \t %-10s \t %-20s (%-6s) \t\t %-10s",
+                                i + 1,
+                                invoiceList.get(i).getInvoiceID(),
+                                SIMPLE_DATE_TIME_FORMAT.format(invoiceList.get(i).getIssuedOn()),
+                                SIMPLE_DATE_TIME_FORMAT.format(invoiceList.get(i).getDueDate()),
+                                invoiceList.get(i).getCorporate().getCorporateName(),
+                                invoiceList.get(i).getCorporate().getCorporateId(),
+                                invoiceList.get(i).getStatus()
+                        )
+                );
             }
         }
-        return corporateInvoiceList;
+        System.out.println("==================================================================================================================================");
+
+        System.out.println(String.format("Total %d invoice(s)", i));
     }
 
     // Private method to display consumer list
