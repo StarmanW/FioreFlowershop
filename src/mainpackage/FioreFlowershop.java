@@ -47,25 +47,25 @@ public class FioreFlowershop {
 
                 switch (choice) {
                     case "1":
-                        cataloguemaintenance.Main.mainMethod(
+                        CatalogueProduct_ChongJH.Main.mainMethod(
                                 flowerList, productTypeList, accessoryList, 
                                 productList, promotionCatalogue
                         );
                         break;
                     case "2":
-                        custandinvoice.Main.mainMethod(
+                        CustomerAndInvoice_SamuelWKF.Main.mainMethod(
                                 productList, consumerList, corporateList, 
                                 orderList, invoiceList
                         );
                         break;
                     case "3":
-                        catalogueorder.Main.mainMethod(
+                        Order_ThibanKumar.Main.mainMethod(
                                 productList, consumerList, corporateList, orderList, 
                                 invoiceList, promotionCatalogue
                         );
                         break;
                     case "4":
-                        orderpickup.Main.mainMethod();
+                        OrderPickup_ChengFK.Main.mainMethod();
                         break;
                     case "5":
                         System.out.println("System closing down...");

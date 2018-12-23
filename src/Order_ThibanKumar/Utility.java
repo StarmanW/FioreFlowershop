@@ -1,4 +1,4 @@
-package catalogueorder;
+package Order_ThibanKumar;
 
 import model.Invoice;
 import model.Order;
@@ -66,7 +66,7 @@ public class Utility {
             PromotionCatalogue promotionCatalogue) {
 
         //To get customer and corporate list from module B
-        int custType = custandinvoice.Utility.showCustomerList(consumerList, corporateList);
+        int custType = CustomerAndInvoice_SamuelWKF.Utility.showCustomerList(consumerList, corporateList);
 
         // Variables declaration
         double totalPayment = 0.0;

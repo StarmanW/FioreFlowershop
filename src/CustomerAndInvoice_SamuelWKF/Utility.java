@@ -1,4 +1,4 @@
-package custandinvoice;
+package CustomerAndInvoice_SamuelWKF;
 
 import adt.LList;
 import adt.ListInterface;

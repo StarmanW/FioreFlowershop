@@ -1,6 +1,7 @@
-package custandinvoice;
+package Order_ThibanKumar;
 
 import adt.ListInterface;
+import model.PromotionCatalogue;
 import model.Consumer;
 import model.Corporate;
 import model.Invoice;
@@ -8,7 +9,8 @@ import model.Order;
 import model.Product;
 
 /**
- * @author Samuel Wong Kim Foong
+ *
+ * @author Thiban Kumar
  */
 public class Main {
 
@@ -17,30 +19,21 @@ public class Main {
             ListInterface<Consumer> consumerList,
             ListInterface<Corporate> corporateList,
             ListInterface<Order> orderList,
-            ListInterface<Invoice> invoiceList
-    ) {
+            ListInterface<Invoice> invoiceList,
+            PromotionCatalogue promotionCatalogue){
 
-        // Run module
         while (true) {
             int choice = Utility.mainMenu();
 
             switch (choice) {
                 case 1:
-                    Utility.showCustomerList(consumerList, corporateList);
+                    Utility.makeOrder(consumerList, corporateList, invoiceList, productList, orderList, promotionCatalogue);
                     System.out.println("\n");
                     break;
                 case 2:
-                    Utility.registerNewCustomerMenu(consumerList, corporateList);
-                    System.out.println("\n");
+                    Utility.generateOrderReport(orderList);
                     break;
                 case 3:
-                    Utility.updateCustomer(consumerList, corporateList);
-                    System.out.println("\n");
-                    break;
-                case 4:
-                    Utility.generateInvoice(invoiceList);
-                    break;
-                case 5:
                     return;
             }
         }

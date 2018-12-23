@@ -1,4 +1,4 @@
-package cataloguemaintenance;
+package CatalogueProduct_ChongJH;
 
 import model.Flower;
 import model.Product;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderpickup;
+package OrderPickup_ChengFK;
 
 /**
  * @author Cheng Foong Kian

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package orderpickup;
+package OrderPickup_ChengFK;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +7,7 @@ import java.util.Date;
  * @author Cheng Foong Kian
  * @param <T>
  */
-public class pickupList implements pickupInterface {
+public class orderList implements orderInterface {
 
     private String createdDate;
     private String orderNo;
@@ -23,10 +18,11 @@ public class pickupList implements pickupInterface {
     private String deliveryTimestamp;
     private String status;
 
-    public pickupList(String createdDate, String orderNo, String address, String city, String paymentStatus, double TotalAmount, String deliveryTimestamp, String status) {
+    public orderList(String createdDate, String orderNo, String address, String city, String paymentStatus, double TotalAmount, String deliveryTimestamp, String status) {
         this.createdDate = createdDate;
         this.orderNo = orderNo;
         this.address = address;
+
         this.city = city;
         this.paymentStatus = paymentStatus;
         this.TotalAmount = TotalAmount;
@@ -38,18 +34,6 @@ public class pickupList implements pickupInterface {
         return createdDate;
     }
 
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
     public String getPaymentStatus() {
         return paymentStatus;
     }
@@ -58,28 +42,28 @@ public class pickupList implements pickupInterface {
         return TotalAmount;
     }
 
-    public String getDeliveryTimestamp() {
-        return deliveryTimestamp;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
     }
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public String getCity() {
+        return city;
     }
 
     public void setPaymentStatus(String paymentStatus) {
@@ -90,20 +74,32 @@ public class pickupList implements pickupInterface {
         this.TotalAmount = TotalAmount;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDeliveryTimestamp() {
+        return deliveryTimestamp;
+    }
+
     public void setDeliveryTimestamp(String deliveryTimestamp) {
         this.deliveryTimestamp = deliveryTimestamp;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public int compareTo(pickupInterface other) {
+    public int compareTo(orderInterface other) {
         return this.getCity().compareTo(other.getCity());
     }
 
     public String updateStatus() {
-        this.status = "Picked";
+        this.status = "Delivered";
         return status;
     }
 
@@ -113,6 +109,7 @@ public class pickupList implements pickupInterface {
 
     }
 
+    @Override
     public String updateTimestamp() {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:MM:ss");
@@ -121,6 +118,7 @@ public class pickupList implements pickupInterface {
         return deliveryTimestamp;
     }
 
+    @Override
     public double setTotalAmount() {
         this.TotalAmount = TotalAmount;
         return TotalAmount;
