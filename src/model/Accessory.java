@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author StarmanW
+ * @author Samuel Wong
  */
 public class Accessory implements Comparable<Accessory>{
 
