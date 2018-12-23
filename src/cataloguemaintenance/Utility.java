@@ -494,6 +494,7 @@ public class Utility {
 
                 switch (selection) {
                     case "y":
+                        removePromoCatalogue(promoCatalogue);
                         addPromoCatalogueDetails(promoCatalogue);
                         endLoop = true;
                         break;
@@ -601,6 +602,7 @@ public class Utility {
         for (int i = 0; i < tmpPromotionProductList.size(); i++) {
             tmpPromotionProductList.get(i).setInPromotion(false);
         }
+
         promoCatalogue.setPromotionProductList(null);
         promoCatalogue.setIsInitialized(false);
     }
@@ -670,7 +672,8 @@ public class Utility {
             } else {
                 System.out.println(
                         "\nPlease enter a valid selection. (1 - "
-                        + promotionCatalogueSize + ")");
+                        + promotionCatalogueSize + ")"
+                );
             }
         }
 
@@ -678,6 +681,7 @@ public class Utility {
     }
 
     public static void removeEnteredPromoProduct(PromotionCatalogue promoCatalogue, int selection) {
+        promoCatalogue.getPromotionProductList().get(selection - 1).setInPromotion(false);
         promoCatalogue.getPromotionProductList().remove(selection - 1);
     }
 

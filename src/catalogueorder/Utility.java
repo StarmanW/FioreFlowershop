@@ -44,7 +44,7 @@ public class Utility {
         while (true) {
             System.out.print("\n=== WELCOME TO FIORE FLOWERSHOP ===\n\n"
                     + "1. Fiore Flower Shop Catalogue\n"
-                    + "2. Generate Sales Order\n"
+                    + "2. Generate Sales Report\n"
                     + "3. Back\n"
                     + "\nPlease select : ");
             choice = sc.nextLine();
@@ -217,11 +217,11 @@ public class Utility {
                     System.exit(0);
                 } else {
                     //Sales Order will Generate for each catalog order here
-                    System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
+                    System.out.print("\n\n===========================FIORE FLOWER SHOP=============================");
                     System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
-                    System.out.print("\n--------------------------------------------------------------------------");
+                    System.out.print("\n-------------------------------------------------------------------------");
                     System.out.print("\nORDER ID : " + order.getOrderID());
-                    System.out.print("\n===========================================================================\n\n");
+                    System.out.print("\n=========================================================================\n\n");
                     System.out.println(String.format("%-15s \t %-15s \t %-10s\n", "Product Name", "Quantity", "Price"));
                     System.out.print("--------------------------------------------------------------------------\n");
                     for (int i = 0; i < productOrderList.size(); i++) {
@@ -232,7 +232,7 @@ public class Utility {
                                         productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
                                 ));
                     }
-                    System.out.print("--------------------------------------------------------------------------\n");
+                    System.out.print("-------------------------------------------------------------------------\n");
                     System.out.print("***********************************\n");
                     System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
                     System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
@@ -240,17 +240,17 @@ public class Utility {
 
                     promptEnterAfterPaymentDone();
 
-                    System.out.print("--------------------------------------------------------------------------\n");
+                    System.out.print("-------------------------------------------------------------------------\n");
                     System.out.println("\n\t\tSUCCESFULLY PAIDED...");
                     System.out.print(String.format("\nCredit Balance : RM%.2f\n ", corporate.getCurrentCreditLimit() - totalPayment));
-                    System.out.print("--------------------------------------------------------------------------\n");
+                    System.out.print("-------------------------------------------------------------------------\n");
 
-                    System.out.print("\n===========================================================================");
+                    System.out.print("\n==========================================================================");
                     System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
                     System.out.print("\nCORPORATE NAME : " + corporate.getCorporateName());
                     System.out.print("\nADDRESS : " + order.getAddress());
                     System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
-                    System.out.print("===========================================================================");
+                    System.out.print("==========================================================================\n");
                     System.exit(0);
                 }
             }
@@ -260,13 +260,13 @@ public class Utility {
             promptEnterToContinue();
 
             //Sales Order will Generate for each catalog order here
-            System.out.print("\n\n===========================FIORE FLOWER SHOP==============================");
+            System.out.print("\n\n===========================FIORE FLOWER SHOP=============================");
             System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
-            System.out.print("\n--------------------------------------------------------------------------");
+            System.out.print("\n-------------------------------------------------------------------------");
             System.out.print("\nORDER ID : " + order.getOrderID());
-            System.out.print("\n===========================================================================\n\n");
+            System.out.print("\n=========================================================================\n\n");
             System.out.println(String.format("%-15s \t %-15s \t %-10s\n", "Product Name", "Quantity", "Price"));
-            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.print("-------------------------------------------------------------------------\n");
             for (int i = 0; i < productOrderList.size(); i++) {
                 System.out.println(
                         String.format("%s \t\t %d \t\t RM%.2f\n",
@@ -275,23 +275,23 @@ public class Utility {
                                 productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
                         ));
             }
-            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.print("-------------------------------------------------------------------------\n");
             System.out.print("***********************************\n");
             System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
             System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
             System.out.print("***********************************\n");
-            System.out.print("--------------------------------------------------------------------------\n");
+            System.out.print("-------------------------------------------------------------------------\n");
 
             promptEnterAfterPaymentDone();
 
-            System.out.print("\n===========================================================================");
+            System.out.print("\n==========================================================================");
             System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
             System.out.print("\nConatact NO : " + order.getCustomer().getContactNo());
             System.out.print("\nADDRESS : " + order.getCustomer().getAddress());
             System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
-            System.out.print("===========================================================================");
+            System.out.print("=========================================================================");
             System.out.print("\n\tPLEASE PICK UP YOUR ORDER ON TIME,Thank you...Have a nice day\n");
-            System.out.print("===========================================================================\n");
+            System.out.print("=========================================================================\n");
         } catch (ParseException ex) {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +328,7 @@ public class Utility {
                         "No", "Product ID", "Product Name", "Flower Type", "Description", "Price", "Ouantity", "Stock Available"
                 )
         );
-        System.out.println("----------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (int i = 0; i < productList.size(); i++) {
             System.out.println(
@@ -383,7 +383,7 @@ public class Utility {
 
         String productChoice = "", productQty = "";
 
-        System.out.println("\n\t\t===Promotion product available this month !!!===\n" + "\t\t\t" + promotionCatalogue.getPromotionName() + "\n");
+        System.out.println("\n\t\t\t\t====Promotion product available this month !!!====\n" + "\t\t\t\t\t\t" + promotionCatalogue.getPromotionName() + "\n");
 
         //object for promotion
         ProductOrder productOrder = null;
@@ -395,7 +395,7 @@ public class Utility {
                 "%3s \t %-10s \t %-20s \t %-10s \t %-32s \t %9s \t %-8s \t %s",
                 "No", "Product ID", "Product Name", "Flower Type", "Description", "Price", "Ouantity", "Stock Available"
         ));
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (int i = 0; i < promotionProduct.size(); i++) {
             System.out.println(
