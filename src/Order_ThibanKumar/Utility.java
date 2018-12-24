@@ -12,8 +12,6 @@ import adt.ListInterface;
 import model.PromotionCatalogue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -193,10 +191,10 @@ public class Utility {
                 if (!invoiceFound) {
                     orders.add(order);
                     invoiceList.add(new Invoice(String.format("INV%04d",
-                            invoiceList.size()),
+                            invoiceList.size() + 1),
                             customer,
                             new Date(),
-                            SIMPLE_DATE_FORMAT.parse(LocalDate.now().plusMonths(1).toString()),
+                            SIMPLE_DATE_FORMAT.parse(String.format("07-%d-%d", (new Date().getMonth() + 1), new Date().getYear())),
                             orders, 0));
                 }
                 for (int i = 0; i < invoiceList.size(); i++) {
@@ -214,7 +212,6 @@ public class Utility {
 
                 if (totalPayment > corporate.getCurrentCreditLimit()) {
                     System.out.print("\n\t\tINSUFFICIENT BALANCE...PLEASE CONTACT YOUR MANAGEMENT FOR MORE INFO\n\n");
-                    System.exit(0);
                 } else {
                     //Sales Order will Generate for each catalog order here
                     System.out.print("\n\n===========================FIORE FLOWER SHOP=============================");
@@ -251,7 +248,6 @@ public class Utility {
                     System.out.print("\nADDRESS : " + order.getAddress());
                     System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
                     System.out.print("==========================================================================\n");
-                    System.exit(0);
                 }
             }
 
