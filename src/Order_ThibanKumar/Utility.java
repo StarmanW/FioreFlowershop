@@ -12,6 +12,7 @@ import adt.ListInterface;
 import model.PromotionCatalogue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -134,7 +135,6 @@ public class Utility {
             }
         } while (continueChoice.matches("^[Yy]$"));
 
-       
         while (true) {
             // Prompt delivery date and time
             System.out.print("\n\nEnter pickUp date/time (dd-mm-yyyy hh:mm): ");
@@ -187,22 +187,30 @@ public class Utility {
                 //new object for add order for corporate customer
                 ListInterface<Order> orders = new LList<>();
 
-                //order added and sent to module B then prepare invoice
-                if (!invoiceFound) {
-                    orders.add(order);
-                    invoiceList.add(new Invoice(String.format("INV%04d",
-                            invoiceList.size() + 1),
-                            customer,
-                            new Date(),
-                            SIMPLE_DATE_FORMAT.parse(String.format("07-%d-%d", (new Date().getMonth() + 1), new Date().getYear())),
-                            orders, 0));
-                }
                 for (int i = 0; i < invoiceList.size(); i++) {
                     if (invoiceList.get(i).getCorporate().getCorporateId().equals(corporateList.get(Integer.parseInt(custIndex) - 1).getCorporateId())) {
                         invoiceList.get(i).getOrders().add(order);
                         invoiceFound = true;
                         break;
                     }
+                }
+
+                //order added and sent to module B then prepare invoice
+                if (!invoiceFound) {
+
+                    Date now = new Date();
+                    Calendar myCal = Calendar.getInstance();
+                    myCal.setTime(now);
+                    myCal.set(Calendar.DATE, 7);
+                    myCal.add(Calendar.MONTH, 1);
+
+                    orders.add(order);
+                    invoiceList.add(new Invoice(String.format("INV%04d",
+                            invoiceList.size() + 1),
+                            customer,
+                            new Date(),
+                            myCal.getTime(),
+                            orders, 0));
                 }
 
                 Corporate corporate = corporateList.get(Integer.parseInt(custIndex) - 1);
