@@ -1,6 +1,5 @@
 package CustomerAndInvoice_SamuelWKF;
 
-import adt.LList;
 import adt.ListInterface;
 import model.Consumer;
 import model.Corporate;
@@ -12,7 +11,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
  * @author Samuel Wong Kim Foong
  */
 public class Utility {
@@ -536,6 +534,7 @@ public class Utility {
     // Private method to display corporate list for invoice list
     private static void displayCorporateInvoiceList(ListInterface<Invoice> invoiceList) {
         int i = 0;
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Monthly Invoice ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("==================================================================================================================================");
         System.out.println(
                 String.format("%s %-8s \t %-20s \t %-20s \t %-30s \t %-10s",
@@ -639,5 +638,4 @@ public class Utility {
                 break;
         }
     }
-
 }

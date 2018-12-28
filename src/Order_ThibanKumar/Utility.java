@@ -81,7 +81,7 @@ public class Utility {
         while (true) {
             System.out.print("\nEnter customer no : ");
             custIndex = sc.nextLine();
-            if (custIndex.matches("^[1-5]$")) {
+            if (custIndex.matches("^[0-9]+$")) {
                 break;
             }
             System.out.println("\n\t\tPlease enter a valid choice...");
@@ -409,7 +409,7 @@ public class Utility {
                             promotionProduct.get(i).getProductName(),
                             promotionProduct.get(i).getFlowerType().getFlowerName(),
                             promotionProduct.get(i).getProductDescription(),
-                            promotionProduct.get(i).getProductPrice(),
+                            promotionProduct.get(i).getProductPrice() * (100 - promotionCatalogue.getPromotionDiscount()),
                             promotionProduct.get(i).getProductQty(),
                             promotionProduct.get(i).isInStock()));
         }
