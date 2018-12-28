@@ -11,8 +11,11 @@ import model.ProductType;
 import model.Accessory;
 import adt.LList;
 import adt.ListInterface;
+import java.time.LocalDateTime;
 import model.PromotionCatalogue;
 import java.time.Month;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -816,10 +819,51 @@ public class Utility {
             }
         }
 
-        displayProductListShort(tmpProductList);
+        displayProductListStock(tmpProductList);
+        System.out.println("\nTotal " + tmpProductList.size() + " products below " + selectionNumber + " units");
         promptEnterToContinue();
     }
 
+    public static void displayProductListStock(ListInterface<Product> catalogue) {
+        if (catalogue.isEmpty()) {
+            System.out.println("\nNo products available currently.");
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String currentDateStr = LocalDateTime.now().format(formatter);
+            
+            
+            System.out.println(
+                    "\n=======================================\n"
+                    + "=== Product Stock Report " + currentDateStr + " ===\n"
+                    + "=======================================\n"
+                    + String.format(
+                            "\n| %3s | %-25s | %-30s | %-25s | %-10s |",
+                            "No.", "Product Name", "Product Type", "Flower Type", "In Stock"
+                    )
+            );
+
+            for (int i = 0; i < catalogue.size(); i++) {
+                Product tmpProduct = catalogue.get(i);
+                
+                int productNumber = i + 1;
+                String productName = tmpProduct.getProductName();
+                String productType = tmpProduct.getProductType().getProductTypeName();
+                String productFlower = tmpProduct.getFlowerType().getFlowerName();
+                String productHasStockText = tmpProduct.isInStockToString();
+                int productStockNum = tmpProduct.getProductQty();
+
+                System.out.println(
+                        String.format(
+                                "| %3d | %-25.25s | %-30.30s | %-25.25s | %s - %-4s |",
+                                productNumber, productName, productType,
+                                productFlower, productHasStockText, productStockNum
+                        )
+                );
+            }
+            
+        }
+    }
+    
     //auto generate product ID
     public static String generateProductID(int productListEntries) {
         String productID = "";
