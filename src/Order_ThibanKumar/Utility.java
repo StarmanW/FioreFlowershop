@@ -212,52 +212,9 @@ public class Utility {
                             myCal.getTime(),
                             orders, 0));
                 }
-
-                Corporate corporate = corporateList.get(Integer.parseInt(custIndex) - 1);
-
-                displaySummaryOfOrder(productOrderList);
-                promptEnterToContinue();
-
-                if (totalPayment > corporate.getCurrentCreditLimit()) {
-                    System.out.print("\n\t\tINSUFFICIENT BALANCE...PLEASE CONTACT YOUR MANAGEMENT FOR MORE INFO\n\n");
-                } else {
-                    //Sales Order will Generate for each catalog order here
-                    System.out.print("\n\n===========================FIORE FLOWER SHOP=============================");
-                    System.out.print("\n\n\t\t\tFIORE FLOWER SHOP SALES ORDER");
-                    System.out.print("\n-------------------------------------------------------------------------");
-                    System.out.print("\nORDER ID : " + order.getOrderID());
-                    System.out.print("\n=========================================================================\n\n");
-                    System.out.println(String.format("%-15s \t %-15s \t %-10s\n", "Product Name", "Quantity", "Price"));
-                    System.out.print("--------------------------------------------------------------------------\n");
-                    for (int i = 0; i < productOrderList.size(); i++) {
-                        System.out.println(
-                                String.format("%s \t\t %d \t\t RM%.2f\n",
-                                        productOrderList.get(i).getProduct().getProductName(),
-                                        productOrderList.get(i).getQuantity(),
-                                        productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
-                                ));
-                    }
-                    System.out.print("-------------------------------------------------------------------------\n");
-                    System.out.print("***********************************\n");
-                    System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
-                    System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
-                    System.out.print("***********************************\n");
-
-                    promptEnterAfterPaymentDone();
-
-                    System.out.print("-------------------------------------------------------------------------\n");
-                    System.out.println("\n\t\tSUCCESFULLY PAIDED...");
-                    System.out.print(String.format("\nCredit Balance : RM%.2f\n ", corporate.getCurrentCreditLimit() - totalPayment));
-                    System.out.print("-------------------------------------------------------------------------\n");
-
-                    System.out.print("\n==========================================================================");
-                    System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
-                    System.out.print("\nCORPORATE NAME : " + corporate.getCorporateName());
-                    System.out.print("\nADDRESS : " + order.getAddress());
-                    System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
-                    System.out.print("==========================================================================\n");
-                }
             }
+
+            Corporate corporate = corporateList.get(Integer.parseInt(custIndex) - 1);
 
             //Sales Order will Generate for each catalog order here for consumer
             displaySummaryOfOrder(productOrderList);
@@ -279,23 +236,51 @@ public class Utility {
                                 productOrderList.get(i).getProduct().getProductPrice() * productOrderList.get(i).getQuantity()
                         ));
             }
-            System.out.print("-------------------------------------------------------------------------\n");
-            System.out.print("***********************************\n");
-            System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
-            System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
-            System.out.print("***********************************\n");
-            System.out.print("-------------------------------------------------------------------------\n");
 
-            promptEnterAfterPaymentDone();
+            if (custType == 1) {
+                System.out.print("-------------------------------------------------------------------------\n");
+                System.out.print("***********************************\n");
+                System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
+                System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
+                System.out.print("***********************************\n");
+                System.out.print("-------------------------------------------------------------------------\n");
 
-            System.out.print("\n==========================================================================");
-            System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
-            System.out.print("\nConatact NO : " + order.getCustomer().getContactNo());
-            System.out.print("\nADDRESS : " + order.getCustomer().getAddress());
-            System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
-            System.out.print("=========================================================================");
-            System.out.print("\n\tPLEASE PICK UP YOUR ORDER ON TIME,Thank you...Have a nice day\n");
-            System.out.print("=========================================================================\n");
+                promptEnterAfterPaymentDone();
+
+                System.out.print("\n==========================================================================");
+                System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
+                System.out.print("\nConatact NO : " + order.getCustomer().getContactNo());
+                System.out.print("\nADDRESS : " + order.getCustomer().getAddress());
+                System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
+                System.out.print("=========================================================================");
+                System.out.print("\n\tPLEASE PICK UP YOUR ORDER ON TIME,Thank you...Have a nice day\n");
+                System.out.print("=========================================================================\n");
+            } else if (custType == 2) {
+                if (totalPayment > corporate.getCurrentCreditLimit()) {
+                    System.out.print("\n\t\tINSUFFICIENT BALANCE...PLEASE CONTACT YOUR MANAGEMENT FOR MORE INFO\n\n");
+                } else {
+                    System.out.print("-------------------------------------------------------------------------\n");
+                    System.out.print("***********************************\n");
+                    System.out.println("\tTOTAL AMOUNT TO BE PAID\n");
+                    System.out.println(String.format("\tTotal Price : RM %.2f\n ", totalPayment));
+                    System.out.print("***********************************\n");
+                    System.out.print("-------------------------------------------------------------------------\n");
+
+                    promptEnterAfterPaymentDone();
+
+                    System.out.print("-------------------------------------------------------------------------\n");
+                    System.out.println("\n\t\tSUCCESFULLY PAIDED...");
+                    System.out.print(String.format("\nCredit Balance : RM%.2f\n ", corporate.getCurrentCreditLimit() - totalPayment));
+                    System.out.print("-------------------------------------------------------------------------\n");
+
+                    System.out.print("\n==========================================================================");
+                    System.out.print(String.format("\nORDED DATE : %s", SIMPLE_DATE_FORMAT.format(order.getOrderedOn())));
+                    System.out.print("\nCORPORATE NAME : " + corporate.getCorporateName());
+                    System.out.print("\nADDRESS : " + order.getAddress());
+                    System.out.println(String.format("\nPickUP Date and Time: %s\n", PICKUP_DATETIME.format(order.getPickUpDateTime())));
+                    System.out.print("==========================================================================\n");
+                }
+            }
         } catch (ParseException ex) {
             Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
