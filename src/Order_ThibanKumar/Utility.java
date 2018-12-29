@@ -29,12 +29,20 @@ public class Utility {
 
     public static void generateOrderReport(ListInterface<Order> orderList) {
         int i;
+        System.out.print("\n================================================================\n"
+                + "\t=== Fiore Flower Shop Monthly Sales Report ===\n"
+                + "================================================================\n");
+        System.out.print(String.format("%-10s \t %-15s \t %-10s\n", "Order ID", "Total Payment", "Ordered Date"));
+        System.out.print("----------------------------------------------------------------");
         for (i = 0; i < orderList.size(); ++i) {
-            System.out.print(String.format("\n%-10s \t %.2f",
+            System.out.print(String.format("\n%-10s \t %.2f \t %-10s",
                     orderList.get(i).getOrderID(),
-                    orderList.get(i).getTotalPayment()));
+                    orderList.get(i).getTotalPayment(),
+                    orderList.get(i).getOrderedOn()));
         }
-        System.out.print(String.format("\n\nTotal %d Orders.\n\n", i));
+        System.out.print("\n================================================================\n");
+        System.out.print(String.format("Total %d Sales Orders.\n", i));
+        System.out.print("================================================================\n\n");
     }
 
     //Main Menu
