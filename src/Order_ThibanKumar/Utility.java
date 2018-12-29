@@ -171,7 +171,7 @@ public class Utility {
             if (prodListChoice.equals("2")) {
                 // Calculate total payment for the promotion catalogue
                 for (int i = 0; i < productOrderList.size(); i++) {
-                    totalPayment += productOrderList.get(i).getQuantity() * (productOrderList.get(i).getProduct().getProductPrice() * (100 - promotionCatalogue.getPromotionDiscount()));
+                    totalPayment += productOrderList.get(i).getQuantity() * (productOrderList.get(i).getProduct().getProductPrice() * (100 - promotionCatalogue.getPromotionDiscount())) / 100;
                 }
             } else {
                 // Calculate total payment for the order made
@@ -409,7 +409,7 @@ public class Utility {
                             promotionProduct.get(i).getProductName(),
                             promotionProduct.get(i).getFlowerType().getFlowerName(),
                             promotionProduct.get(i).getProductDescription(),
-                            promotionProduct.get(i).getProductPrice() * (100 - promotionCatalogue.getPromotionDiscount()),
+                            promotionProduct.get(i).getProductPrice() * (100 - promotionCatalogue.getPromotionDiscount()) / 100,
                             promotionProduct.get(i).getProductQty(),
                             promotionProduct.get(i).isInStock()));
         }
